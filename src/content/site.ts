@@ -25,8 +25,7 @@ export const site = {
     /** Official company name (from the client's brand sheet). */
     name: {
       en: "Jordanian Advanced Laboratory Equipment",
-      /** CONFIRM — Arabic legal/trade name was not in the brand sheet; this is a translation. */
-      ar: "الأردنية للأجهزة المخبرية المتقدمة",
+      ar: "الشركة الأردنية للتجهيزات المخبرية المتطورة",
     } satisfies L,
     descriptor: {
       en: "Medical & laboratory equipment, consumables and complete laboratory fit-outs",

@@ -165,7 +165,7 @@ export const about = {
     paragraphs: [
       {
         en: "Jordanian Advanced Laboratory Equipment supplies medical equipment, laboratory instruments, consumables and laboratory furniture, and designs and installs complete laboratories for healthcare, education, research and industry.",
-        ar: "تورّد شركة الأردنية للأجهزة المخبرية المتقدمة الأجهزة الطبية، والأجهزة المخبرية، والمستهلكات، والأثاث المخبري، وتصمم المختبرات المتكاملة وتركّبها لقطاعات الرعاية الصحية والتعليم والبحث العلمي والصناعة.",
+        ar: "تورّد الشركة الأردنية للتجهيزات المخبرية المتطورة الأجهزة الطبية، والأجهزة المخبرية، والمستهلكات، والأثاث المخبري، وتصمم المختبرات المتكاملة وتركّبها لقطاعات الرعاية الصحية والتعليم والبحث العلمي والصناعة.",
       },
       {
         en: "Our work spans the full life of a laboratory: understanding how it will be used, planning the space and services, selecting the right equipment, installing and commissioning it, training the people who use it and supporting them afterwards.",

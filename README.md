@@ -47,7 +47,6 @@ Every string is `{ en, ar }` — TypeScript fails the build if a translation is 
 Everything below is a clearly marked placeholder. Nothing on the site invents clients, partners, certifications, statistics or product specifications.
 
 - [ ] `site.ts` → phone, WhatsApp number, emails, street address, hours, map link, `NEXT_PUBLIC_SITE_URL`
-- [ ] `site.ts` → confirm the Arabic company name (currently a translation: "الأردنية للأجهزة المخبرية المتقدمة")
 - [ ] Logo masters: replace `public/brand/logo-*.png` with the official vector files (same names) — current files were extracted from the brand sheet and repainted with the exact brand hex values
 - [ ] `projects.ts` → replace the six demo case studies with real, client-approved projects (`demo: false`). Demo project pages are `noindex` until then.
 - [ ] `Partners.tsx` → add only manufacturers the company is authorised to represent
