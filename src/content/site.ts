@@ -30,7 +30,7 @@ export const site = {
     } satisfies L,
     descriptor: {
       en: "Medical & laboratory equipment, consumables and complete laboratory fit-outs",
-      ar: "أجهزة ومستلزمات طبية ومخبرية، وتجهيز المختبرات المتكاملة",
+      ar: "أجهزة ومستهلكات طبية ومخبرية، وتجهيز المختبرات المتكاملة",
     } satisfies L,
     /**
      * Official logo artwork, extracted from the brand sheet and repainted with
@@ -58,7 +58,7 @@ export const site = {
     } satisfies L,
     hours: {
       en: "Sunday – Thursday, 8:00 – 17:00", // REPLACE
-      ar: "الأحد – الخميس، ٨:٠٠ – ١٧:٠٠",
+      ar: "الأحد – الخميس، 8:00 – 17:00",
     } satisfies L,
     /** REPLACE — a Google Maps / OpenStreetMap share link for the office. */
     mapUrl: null as string | null,

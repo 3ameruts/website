@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { productsPage } from "@/content/pages";
@@ -42,9 +41,7 @@ export default async function ProductsPage({ params }: PageProps<"/[locale]/prod
       />
       <section aria-label={dict.nav.products} data-theme="light" className="bg-white pb-[var(--section)] pt-14 md:pt-20">
         <div className="frame">
-          <Suspense fallback={<p className="text-slate">…</p>}>
-            <Catalog locale={locale} />
-          </Suspense>
+          <Catalog locale={locale} />
         </div>
       </section>
     </>

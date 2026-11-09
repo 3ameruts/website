@@ -10,7 +10,7 @@ export const home = {
     },
     description: {
       en: "Medical equipment, scientific instruments, consumables and laboratory furniture — specified, supplied and installed by one accountable team in Jordan.",
-      ar: "أجهزة طبية، وأجهزة علمية، ومستهلكات، وأثاث مخبري — نحددها ونوردها ونركّبها بفريق واحد مسؤول في الأردن.",
+      ar: "أجهزة طبية، وأجهزة علمية، ومستهلكات، وأثاث مخبري — نحدّد مواصفاتها ونورّدها ونركّبها بفريق واحد مسؤول في الأردن.",
     },
   },
   hero: {
@@ -75,7 +75,7 @@ export const home = {
         title: { en: "The facility is the instrument", ar: "المنشأة نفسها أداة القياس" },
         body: {
           en: "Rooms, services and equipment planned as one system, so the laboratory performs as a whole.",
-          ar: "الغرف والخدمات والأجهزة تُخطَّط كمنظومة واحدة، ليعمل المختبر بكفاءة متكاملة.",
+          ar: "تُخطَّط الغرف والتمديدات والأجهزة بوصفها منظومة واحدة، ليعمل المختبر وحدةً متكاملة.",
         },
         alt: { en: "Laboratory corridor lined with equipment cabinets", ar: "ممر مخبري تصطف على جانبيه خزائن الأجهزة" },
       },
@@ -90,7 +90,7 @@ export const home = {
       },
       {
         image: "/media/img/lab-room-bright.jpg",
-        title: { en: "Furniture built around the workflow", ar: "أثاث مصمم حول سير العمل" },
+        title: { en: "Furniture built around the workflow", ar: "أثاث مصمَّم وفق سير العمل" },
         body: {
           en: "Benches, storage and extraction placed where the work actually happens.",
           ar: "طاولات العمل والخزائن وأنظمة الشفط في المكان الذي يجري فيه العمل فعلًا.",
@@ -121,7 +121,7 @@ export const home = {
     title: { en: "Manufacturers we work with", ar: "الشركات المصنّعة التي نتعامل معها" },
     body: {
       en: "Manufacturer and partner logos will appear here once confirmed. We only list brands we are authorised to represent.",
-      ar: "ستظهر هنا شعارات الشركات المصنّعة والشركاء بعد تأكيدها. لا ندرج إلا العلامات التي نملك تفويضًا بتمثيلها.",
+      ar: "ستظهر هنا شعارات الشركات المصنّعة والشركاء بعد تأكيدها. لا ندرج إلا العلامات التجارية التي نملك تفويضًا بتمثيلها.",
     },
     slot: { en: "Partner logo", ar: "شعار الشريك" },
   },
@@ -165,11 +165,11 @@ export const about = {
     paragraphs: [
       {
         en: "Jordanian Advanced Laboratory Equipment supplies medical equipment, laboratory instruments, consumables and laboratory furniture, and designs and installs complete laboratories for healthcare, education, research and industry.",
-        ar: "تورّد الأردنية للأجهزة المخبرية المتقدمة الأجهزة الطبية، والأجهزة المخبرية، والمستهلكات، والأثاث المخبري، وتصمم المختبرات المتكاملة وتركّبها لقطاعات الرعاية الصحية والتعليم والبحث العلمي والصناعة.",
+        ar: "تورّد شركة الأردنية للأجهزة المخبرية المتقدمة الأجهزة الطبية، والأجهزة المخبرية، والمستهلكات، والأثاث المخبري، وتصمم المختبرات المتكاملة وتركّبها لقطاعات الرعاية الصحية والتعليم والبحث العلمي والصناعة.",
       },
       {
         en: "Our work spans the full life of a laboratory: understanding how it will be used, planning the space and services, selecting the right equipment, installing and commissioning it, training the people who use it and supporting them afterwards.",
-        ar: "يشمل عملنا دورة حياة المختبر كاملة: فهم طريقة استخدامه، وتخطيط المساحة والخدمات، واختيار الأجهزة المناسبة، وتركيبها وتشغيلها، وتدريب مستخدميها، ودعمهم بعد ذلك.",
+        ar: "يشمل عملنا دورة حياة المختبر كاملة: فهم طريقة استخدامه، وتخطيط المساحة والتمديدات، واختيار الأجهزة المناسبة، وتركيبها وتشغيلها، وتدريب مستخدميها، ودعمهم بعد ذلك.",
       },
     ],
   },
@@ -177,14 +177,14 @@ export const about = {
     title: { en: "Vision", ar: "الرؤية" },
     body: {
       en: "Every hospital, university and research centre we serve works in a laboratory that is safe, efficient and built for the science it does.",
-      ar: "أن تعمل كل مستشفى وجامعة ومركز أبحاث نخدمه في مختبر آمن وفعّال ومبني للعلم الذي يمارسه.",
+      ar: "أن يعمل كل مستشفى وجامعة ومركز أبحاث نخدمه في مختبر آمن وفعّال، مصمَّم لطبيعة العمل العلمي فيه.",
     },
   },
   mission: {
     title: { en: "Mission", ar: "الرسالة" },
     body: {
       en: "To specify, supply and install medical and laboratory solutions with technical care, clear communication and long-term support.",
-      ar: "تحديد الحلول الطبية والمخبرية وتوريدها وتركيبها بعناية فنية، وتواصل واضح، ودعم طويل الأمد.",
+      ar: "تحديد مواصفات الحلول الطبية والمخبرية وتوريدها وتركيبها بعناية فنية، وتواصل واضح، ودعم طويل الأمد.",
     },
   },
   values: {
@@ -192,7 +192,7 @@ export const about = {
     items: [
       {
         title: { en: "Precision", ar: "الدقة" },
-        body: { en: "We get the details right — model numbers, dimensions, utilities, documentation.", ar: "نُتقن التفاصيل — أرقام الطرازات، والأبعاد، والخدمات، والوثائق." },
+        body: { en: "We get the details right — model numbers, dimensions, utilities, documentation.", ar: "نُتقن التفاصيل — أرقام الطرازات، والأبعاد، والتمديدات، والوثائق." },
       },
       {
         title: { en: "Accountability", ar: "المسؤولية" },
@@ -224,16 +224,16 @@ export const about = {
     // CONFIRM — add certifications, registrations or quality-management standards only if the company holds them.
     body: {
       en: "Every item we supply is identified by manufacturer and model, delivered with its documentation, installed according to the manufacturer's requirements and handed over with user training. Where certification or registration details apply, they will be listed here once confirmed.",
-      ar: "يُحدَّد كل منتج نورّده باسم الشركة المصنّعة والطراز، ويُسلَّم مع وثائقه، ويُركَّب وفق متطلبات الشركة المصنّعة، ويُسلَّم مع تدريب المستخدمين. وستُدرج هنا تفاصيل الشهادات أو التسجيلات المعمول بها بعد تأكيدها.",
+      ar: "يُحدَّد كل منتج نورّده باسم الشركة المصنّعة والطراز، ويُورَّد مع وثائقه، ويُركَّب وفق متطلبات الشركة المصنّعة، ثم يُسلَّم مع تدريب المستخدمين. وستُدرج هنا تفاصيل الشهادات أو التسجيلات المعمول بها بعد تأكيدها.",
     },
   },
   capabilities: {
     title: { en: "Capabilities", ar: "القدرات" },
     items: [
       { title: { en: "Consultation", ar: "الاستشارة" }, body: { en: "Needs assessment, equipment lists and budget options.", ar: "تقييم الاحتياجات، وقوائم الأجهزة، وخيارات الميزانية." } },
-      { title: { en: "Design", ar: "التصميم" }, body: { en: "Layouts, zoning and utilities requirements.", ar: "مخططات التوزيع، وتقسيم المناطق، ومتطلبات الخدمات." } },
+      { title: { en: "Design", ar: "التصميم" }, body: { en: "Layouts, zoning and utilities requirements.", ar: "مخططات التوزيع، وتقسيم المناطق، ومتطلبات التمديدات." } },
       { title: { en: "Supply", ar: "التوريد" }, body: { en: "Equipment, consumables and furniture, documented and on schedule.", ar: "الأجهزة والمستهلكات والأثاث، موثّقة وضمن الجدول الزمني." } },
-      { title: { en: "Installation", ar: "التركيب" }, body: { en: "Installation, functional checks and commissioning.", ar: "التركيب، والفحوص الوظيفية، والتشغيل التجريبي." } },
+      { title: { en: "Installation", ar: "التركيب" }, body: { en: "Installation, functional checks and commissioning.", ar: "التركيب، والفحوص الوظيفية، والتشغيل." } },
       { title: { en: "Training", ar: "التدريب" }, body: { en: "Hands-on user training at handover.", ar: "تدريب عملي للمستخدمين عند التسليم." } },
       { title: { en: "Service", ar: "الخدمة" }, body: { en: "Maintenance planning and after-sales support.", ar: "تخطيط الصيانة ودعم ما بعد البيع." } },
     ],
@@ -286,7 +286,7 @@ export const labPage = {
       title: { en: "Design", ar: "التصميم" },
       body: {
         en: "Zoning and layout drawings place benches, equipment, storage and service points, with utilities requirements for gases, water, ventilation and power.",
-        ar: "تحدد مخططات تقسيم المناطق والتوزيع مواقع الطاولات والأجهزة والخزائن ونقاط الخدمة، مع متطلبات الغازات والمياه والتهوية والكهرباء.",
+        ar: "تحدد مخططات تقسيم المناطق والتوزيع مواقع الطاولات والأجهزة والخزائن ونقاط الخدمة، مع متطلبات التمديدات من غازات ومياه وتهوية وكهرباء.",
       },
       image: "/media/img/infrastructure-pipes.jpg",
     },
@@ -324,7 +324,7 @@ export const labPage = {
     },
   ],
   typesTitle: { en: "Laboratories we deliver", ar: "المختبرات التي ننفّذها" },
-  ctaTitle: { en: "Planning a new laboratory or a renovation?", ar: "تخطط لمختبر جديد أو لتجديد مختبر قائم؟" },
+  ctaTitle: { en: "Planning a new laboratory or a renovation?", ar: "هل تخطط لمختبر جديد أو لتجديد مختبر قائم؟" },
   ctaBody: {
     en: "Share your floor plan, or simply describe the work the lab will do. We will come back with the next steps.",
     ar: "شاركنا مخطط المساحة، أو صف ببساطة العمل الذي سيؤديه المختبر، وسنعود إليك بالخطوات التالية.",

@@ -43,7 +43,7 @@ export const solutions: Solution[] = [
     title: { en: "Laboratory equipment", ar: "الأجهزة المخبرية" },
     summary: {
       en: "Centrifuges, balances, incubators, cold storage, safety cabinets and sterilisation — the working core of every lab.",
-      ar: "أجهزة الطرد المركزي، والموازين، والحاضنات، والتبريد، وخزائن السلامة الحيوية، والتعقيم — أساس العمل في كل مختبر.",
+      ar: "أجهزة الطرد المركزي، والموازين، والحاضنات، والتخزين المبرّد، وخزائن السلامة الحيوية، والتعقيم — أساس العمل في كل مختبر.",
     },
     image: "/media/img/lab-equipment-operator.jpg",
     imageAlt: { en: "Technician operating laboratory equipment in a clean room", ar: "فنية تشغّل جهازًا مخبريًا في غرفة نظيفة" },
@@ -87,7 +87,7 @@ export const solutions: Solution[] = [
     title: { en: "Complete laboratory setup", ar: "تجهيز المختبرات المتكاملة" },
     summary: {
       en: "Clinical, research, teaching, quality-control and microbiology laboratories delivered as one coordinated package.",
-      ar: "مختبرات سريرية وبحثية وتعليمية ومختبرات ضبط الجودة والأحياء الدقيقة، تُسلَّم كحزمة واحدة متكاملة.",
+      ar: "مختبرات سريرية وبحثية وتعليمية ومختبرات ضبط الجودة والأحياء الدقيقة، تُسلَّم حزمةً واحدة متكاملة.",
     },
     image: "/media/img/facility-review.jpg",
     imageAlt: { en: "Two engineers reviewing a laboratory facility", ar: "مهندسان يراجعان منشأة مخبرية" },
@@ -98,7 +98,7 @@ export const solutions: Solution[] = [
     title: { en: "Laboratory design & installation", ar: "تصميم المختبرات وتركيبها" },
     summary: {
       en: "Layout planning, utilities coordination, installation, commissioning and user training — from drawing to first sample.",
-      ar: "تخطيط المساحات، وتنسيق الخدمات، والتركيب، والتشغيل التجريبي، وتدريب المستخدمين — من المخطط حتى أول عيّنة.",
+      ar: "تخطيط المساحات، وتنسيق التمديدات، والتركيب، والتشغيل، وتدريب المستخدمين — من المخطط حتى أول عيّنة.",
     },
     image: "/media/img/infrastructure-pipes.jpg",
     imageAlt: { en: "Engineers inspecting laboratory service pipework", ar: "مهندسون يتفقدون تمديدات الخدمات في مختبر" },
@@ -109,7 +109,7 @@ export const solutions: Solution[] = [
     title: { en: "Research & scientific solutions", ar: "حلول البحث العلمي" },
     summary: {
       en: "Equipment and workflow advice for molecular biology, cell culture and applied research groups.",
-      ar: "أجهزة واستشارات لسير العمل في مجالات البيولوجيا الجزيئية، وزراعة الخلايا، والبحث التطبيقي.",
+      ar: "أجهزة واستشارات في سير العمل لمجموعات البيولوجيا الجزيئية وزراعة الخلايا والبحث التطبيقي.",
     },
     image: "/media/img/research-team-samples.jpg",
     imageAlt: { en: "Researchers handling samples at a microscope", ar: "باحثتان تتعاملان مع العيّنات بجانب مجهر" },

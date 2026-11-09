@@ -58,7 +58,7 @@ export const projects: Project[] = [
     body: [
       {
         en: "This sample case study shows how a hospital laboratory project is documented on this site. Replace it with a real project: describe the starting point, the constraints (space, schedule, standards), the solution delivered and what the laboratory can now do.",
-        ar: "توضّح دراسة الحالة التجريبية هذه طريقة عرض مشاريع مختبرات المستشفيات في هذا الموقع. استبدلها بمشروع حقيقي: صف نقطة البداية، والقيود (المساحة، والجدول الزمني، والمعايير)، والحل المنفّذ، وما أصبح المختبر قادرًا على إنجازه.",
+        ar: "توضّح دراسة الحالة التوضيحية هذه طريقة عرض مشاريع مختبرات المستشفيات في هذا الموقع. استبدلها بمشروع حقيقي: صف نقطة البداية، والقيود (المساحة، والجدول الزمني، والمعايير)، والحل المنفّذ، وما أصبح المختبر قادرًا على إنجازه.",
       },
       {
         en: "Typical scope for this type of project: zoning of pre-analytical, analytical and post-analytical areas; benches with service spines; analyser installation and interfacing; refrigeration for reagents and samples; handover with user training.",
@@ -80,7 +80,7 @@ export const projects: Project[] = [
     title: { en: "University teaching laboratory", ar: "مختبر تعليمي جامعي" },
     summary: {
       en: "An example of a student laboratory planned for safety, supervision and durable everyday use.",
-      ar: "مثال على مختبر للطلاب مخطط للسلامة وسهولة الإشراف والاستخدام اليومي المتين.",
+      ar: "مثال على مختبر للطلاب صُمِّم ليحقق السلامة ويسهّل الإشراف ويتحمّل الاستخدام اليومي.",
     },
     client: placeholderClient,
     location: placeholderLocation,
@@ -94,7 +94,7 @@ export const projects: Project[] = [
     body: [
       {
         en: "Sample case study. Replace with a real teaching-lab project: number of student places, subjects taught, how supervision sightlines and safety were handled, and the equipment supplied.",
-        ar: "دراسة حالة تجريبية. استبدلها بمشروع مختبر تعليمي حقيقي: عدد مقاعد الطلاب، والمواد التي تُدرَّس، وكيفية مراعاة خطوط الرؤية للإشراف والسلامة، والأجهزة الموردة.",
+        ar: "دراسة حالة توضيحية. استبدلها بمشروع مختبر تعليمي حقيقي: عدد مقاعد الطلاب، والمواد التي تُدرَّس، وكيفية مراعاة خطوط الرؤية للإشراف والسلامة، والأجهزة الموردة.",
       },
     ],
     cover: I("lab-analysis"),
@@ -120,12 +120,12 @@ export const projects: Project[] = [
       { en: "Biosafety cabinets", ar: "خزائن السلامة الحيوية" },
       { en: "Cell culture", ar: "زراعة الخلايا" },
       { en: "Imaging", ar: "التصوير المجهري" },
-      { en: "Commissioning", ar: "التشغيل التجريبي" },
+      { en: "Commissioning", ar: "التشغيل" },
     ],
     body: [
       {
         en: "Sample case study. Replace with a real research facility: the research groups served, the workflows the space supports, and how equipment was selected and commissioned.",
-        ar: "دراسة حالة تجريبية. استبدلها بمرفق بحثي حقيقي: المجموعات البحثية المستفيدة، وسير العمل الذي تدعمه المساحة، وكيفية اختيار الأجهزة وتشغيلها.",
+        ar: "دراسة حالة توضيحية. استبدلها بمرفق بحثي حقيقي: المجموعات البحثية المستفيدة، وسير العمل الذي تدعمه المساحة، وكيفية اختيار الأجهزة وتشغيلها.",
       },
     ],
     cover: I("microscope-navy"),
@@ -151,13 +151,13 @@ export const projects: Project[] = [
     scope: [
       { en: "Analytical instruments", ar: "أجهزة التحليل" },
       { en: "Balances", ar: "الموازين" },
-      { en: "Utilities coordination", ar: "تنسيق الخدمات" },
+      { en: "Utilities coordination", ar: "تنسيق التمديدات" },
       { en: "Furniture", ar: "الأثاث" },
     ],
     body: [
       {
         en: "Sample case study. Replace with a real QC laboratory: products tested, methods supported, and the infrastructure delivered.",
-        ar: "دراسة حالة تجريبية. استبدلها بمختبر ضبط جودة حقيقي: المنتجات التي تُفحص، والطرق المدعومة، والبنية التحتية المنفّذة.",
+        ar: "دراسة حالة توضيحية. استبدلها بمختبر ضبط جودة حقيقي: المنتجات التي تُفحص، والطرق المدعومة، والبنية التحتية المنفّذة.",
       },
     ],
     cover: I("infrastructure-pipes"),
@@ -187,7 +187,7 @@ export const projects: Project[] = [
     body: [
       {
         en: "Sample case study. Replace with a real medical-equipment supply project: rooms equipped, devices supplied, training and service arrangements.",
-        ar: "دراسة حالة تجريبية. استبدلها بمشروع توريد أجهزة طبية حقيقي: الغرف المجهزة، والأجهزة الموردة، وترتيبات التدريب والصيانة.",
+        ar: "دراسة حالة توضيحية. استبدلها بمشروع توريد أجهزة طبية حقيقي: الغرف المجهزة، والأجهزة الموردة، وترتيبات التدريب والصيانة.",
       },
     ],
     cover: I("medical-monitor"),
@@ -218,7 +218,7 @@ export const projects: Project[] = [
     body: [
       {
         en: "Sample case study. Replace with a real microbiology project and describe how the workflow was separated from clean to dirty areas.",
-        ar: "دراسة حالة تجريبية. استبدلها بمشروع حقيقي للأحياء الدقيقة، ووضّح كيف فُصل سير العمل بين المناطق النظيفة والملوثة.",
+        ar: "دراسة حالة توضيحية. استبدلها بمشروع حقيقي للأحياء الدقيقة، ووضّح كيف فُصل سير العمل بين المناطق النظيفة والملوثة.",
       },
     ],
     cover: I("petri-dish"),

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { AmbientVideo } from "@/components/ui/AmbientVideo";
 
 /** Inner-page hero: navy chapter with optional photograph or ambient video. */
 export function PageHero({
@@ -14,7 +15,7 @@ export function PageHero({
   title: string;
   body?: string;
   image?: string;
-  video?: { src: string; poster: string };
+  video?: { src: string; poster: string; playLabel: string; pauseLabel: string };
   crumbs?: { href: string; label: string }[];
   chapter?: string;
   children?: React.ReactNode;
@@ -28,23 +29,9 @@ export function PageHero({
       aria-labelledby="page-title"
       className={`on-dark relative isolate flex flex-col justify-end overflow-hidden bg-navy text-white ${media ? "min-h-[78svh] md:min-h-[86svh]" : "min-h-[56svh]"}`}
     >
-      {image && <Image src={image} alt="" fill priority sizes="100vw" quality={70} className="-z-20 object-cover" />}
-      {video && (
-        <video
-          className="absolute inset-0 -z-20 h-full w-full object-cover motion-reduce:hidden"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster={video.poster}
-          aria-hidden
-          tabIndex={-1}
-        >
-          <source src={video.src} type="video/mp4" />
-        </video>
-      )}
-      {video && <Image src={video.poster} alt="" fill priority sizes="100vw" className="-z-30 object-cover" />}
+      {image && <Image src={image} alt="" fill preload sizes="100vw" quality={70} className="-z-20 object-cover" />}
+      {video && <AmbientVideo src={video.src} poster={video.poster} playLabel={video.playLabel} pauseLabel={video.pauseLabel} />}
+      {video && <Image src={video.poster} alt="" fill preload sizes="100vw" className="-z-30 object-cover" />}
       {media && (
         <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgb(8_34_79/0.94)_0%,rgb(8_34_79/0.6)_40%,rgb(8_34_79/0.15)_75%)]" />
       )}

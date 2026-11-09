@@ -17,7 +17,8 @@
   --color-teal-ink: #00786f;
   --color-teal-light: #5cd6cb;
   --color-slate: #4a5670;
-  --color-line: #cdd3db;
+  --color-line: #cdd3db; /* decorative hairlines only */
+  --color-control: #7f8a9e; /* form-control & chip borders, 3.5:1 (WCAG 1.4.11) */
   --color-mist: #f5f7f9;
   --color-error: #b42318;
   --color-error-light: #ffb4a8;
@@ -233,7 +234,7 @@
     --btn-bg: var(--color-navy);
     --btn-fg: var(--color-white);
     --btn-fill: var(--color-teal);
-    --btn-fill-fg: var(--color-navy);
+    --btn-fill-fg: var(--color-navy-deep);
     position: relative;
     isolation: isolate;
     display: inline-flex;
@@ -283,7 +284,7 @@
     --btn-bg: var(--color-white);
     --btn-fg: var(--color-navy);
     --btn-fill: var(--color-teal);
-    --btn-fill-fg: var(--color-navy);
+    --btn-fill-fg: var(--color-navy-deep);
   }
   .btn-outline {
     --btn-bg: transparent;
@@ -363,7 +364,7 @@
     padding: 0.8rem 1rem;
     border-radius: 2px;
     background: var(--color-white);
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-control);
     color: var(--color-navy);
     transition: border-color 0.2s, box-shadow 0.2s;
   }
@@ -371,7 +372,7 @@
     color: #6b7487;
   }
   .field:hover {
-    border-color: #9aa4b4;
+    border-color: var(--color-navy);
   }
   .field:focus {
     outline: none;
@@ -432,27 +433,36 @@
   animation: page-in 0.7s var(--ease-out-expo) both;
 }
 
-/* Hero entrance initial state — only when motion is allowed (class set pre-paint). */
-.js-motion [data-hero-word] > span {
-  transform: translateY(110%);
-  animation: hero-failsafe 0.01s 2.6s forwards;
+/* Hero entrance — pure CSS so it starts at first paint (good LCP) and never
+   depends on JavaScript. Only runs when the visitor allows motion. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-hero-word] > span {
+    animation: hero-rise 1.3s var(--ease-out-expo) both;
+    animation-delay: calc(0.12s + var(--i, 0) * 0.045s);
+  }
+  [data-hero-fade] {
+    animation: hero-fade 1s var(--ease-out-expo) both;
+    animation-delay: calc(0.65s + var(--i, 0) * 0.1s);
+  }
+  [data-hero-scale] > span {
+    animation: hero-scale 0.6s var(--ease-out-expo) both;
+    animation-delay: calc(1s + var(--i, 0) * 0.03s);
+  }
 }
-.js-motion [data-hero-fade] {
-  opacity: 0;
-  visibility: hidden;
-  animation: hero-failsafe 0.01s 2.6s forwards;
+@keyframes hero-rise {
+  from {
+    transform: translateY(110%);
+  }
 }
-.js-motion [data-hero-scale] > span {
-  transform: scaleX(0);
-  animation: hero-failsafe 0.01s 2.6s forwards;
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
 }
-/* Failsafe: if scripts fail to load, entrance states release on their own.
-   GSAP finishes before this fires and ends in the same state, so it is invisible when JS works. */
-@keyframes hero-failsafe {
-  to {
-    transform: none;
-    opacity: 1;
-    visibility: visible;
+@keyframes hero-scale {
+  from {
+    transform: scaleX(0);
   }
 }
 

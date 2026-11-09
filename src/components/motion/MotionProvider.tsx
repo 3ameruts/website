@@ -29,18 +29,22 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
+    let alive = true;
+    const teardown = () => {
+      if (!alive) return;
+      alive = false;
+      gsap.ticker.remove(tick);
+      lenis.destroy();
+      delete (window as unknown as { __lenis?: Lenis }).__lenis;
+      document.documentElement.classList.remove("js-motion");
+    };
     const onChange = () => {
-      if (reduce.matches) {
-        lenis.destroy();
-        document.documentElement.classList.remove("js-motion");
-      }
+      if (reduce.matches) teardown();
     };
     reduce.addEventListener("change", onChange);
     return () => {
       reduce.removeEventListener("change", onChange);
-      gsap.ticker.remove(tick);
-      lenis.destroy();
-      delete (window as unknown as { __lenis?: Lenis }).__lenis;
+      teardown();
     };
   }, []);
 

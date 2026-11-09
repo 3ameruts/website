@@ -107,7 +107,7 @@ export function Header({ locale }: { locale: Locale }) {
     <>
       <header
         className={[
-          "fixed inset-x-0 top-0 z-50 transition-[transform,background-color,box-shadow,color] duration-500 ease-[var(--ease-out-expo)]",
+          "fixed inset-x-0 top-0 z-50 transition-[translate,transform,background-color,box-shadow,color] duration-500 ease-[var(--ease-out-expo)]",
           hidden && !open ? "-translate-y-full" : "",
           solid
             ? "bg-white text-navy shadow-[0_1px_0_var(--color-line)]"
@@ -129,7 +129,7 @@ export function Header({ locale }: { locale: Locale }) {
             <Logo
               locale={locale}
               reversed={!solid}
-              priority
+              preload
               className="h-10 w-auto lg:h-12"
               sizes="(min-width: 1024px) 160px, 132px"
             />
@@ -165,7 +165,7 @@ export function Header({ locale }: { locale: Locale }) {
               href={switchLocalePath(pathname, otherLocale)}
               hrefLang={otherLocale}
               lang={otherLocale}
-              aria-label={dict.nav.switchToLabel}
+              title={dict.nav.switchToLabel}
               onClick={() => {
                 try {
                   document.cookie = `NEXT_LOCALE=${otherLocale};path=/;max-age=31536000;samesite=lax`;
@@ -181,7 +181,7 @@ export function Header({ locale }: { locale: Locale }) {
             >
               {dict.nav.requestQuote}
               {count > 0 && (
-                <span className="tabular grid h-5 min-w-5 place-items-center rounded-full bg-teal px-1 text-xs font-bold text-navy">
+                <span className="tabular grid h-5 min-w-5 place-items-center rounded-full bg-teal px-1 text-xs font-bold text-navy-deep">
                   <span className="sr-only">, </span>
                   {count}
                 </span>

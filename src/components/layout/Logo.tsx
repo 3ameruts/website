@@ -11,14 +11,14 @@ export function Logo({
   variant = "full",
   reversed = false,
   className,
-  priority,
+  preload,
   sizes = "180px",
 }: {
   locale: Locale;
   variant?: "full" | "mark";
   reversed?: boolean;
   className?: string;
-  priority?: boolean;
+  preload?: boolean;
   sizes?: string;
 }) {
   const key = variant === "full" ? (reversed ? "fullReversed" : "full") : reversed ? "markReversed" : "mark";
@@ -30,7 +30,7 @@ export function Logo({
       height={asset.height}
       alt={site.brand.name[locale]}
       className={className}
-      priority={priority}
+      preload={preload}
       sizes={sizes}
       unoptimized={false}
     />

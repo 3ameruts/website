@@ -20,6 +20,7 @@ export function Gallery({ images, locale }: { images: Img[]; locale: Locale }) {
   const [index, setIndex] = useState<number | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const wasOpen = useRef(false);
   const rtl = typeof document !== "undefined" && document.documentElement.dir === "rtl";
 
   const open = (i: number, el: HTMLButtonElement) => {
@@ -32,10 +33,22 @@ export function Gallery({ images, locale }: { images: Img[]; locale: Locale }) {
   useEffect(() => {
     const dlg = dialogRef.current;
     if (!dlg) return;
-    if (index !== null && !dlg.open) dlg.showModal();
-    if (index === null && dlg.open) {
-      dlg.close();
-      triggerRef.current?.focus();
+    const lenis = (window as unknown as { __lenis?: { stop: () => void; start: () => void } }).__lenis;
+    if (index !== null) {
+      if (!dlg.open) dlg.showModal();
+      if (!wasOpen.current) {
+        lenis?.stop();
+        document.documentElement.style.overflow = "hidden";
+        wasOpen.current = true;
+      }
+    } else {
+      if (dlg.open) dlg.close(); // Escape closes natively; this covers our own buttons
+      if (wasOpen.current) {
+        lenis?.start();
+        document.documentElement.style.overflow = "";
+        triggerRef.current?.focus();
+        wasOpen.current = false;
+      }
     }
   }, [index]);
 
@@ -79,6 +92,7 @@ export function Gallery({ images, locale }: { images: Img[]; locale: Locale }) {
         onClose={close}
         onClick={(e) => e.target === dialogRef.current && close()}
         aria-label={labels.title}
+        data-lenis-prevent
         className="on-dark m-0 h-full max-h-none w-full max-w-none bg-navy/97 p-0 text-white backdrop:bg-navy/80"
       >
         {index !== null && (

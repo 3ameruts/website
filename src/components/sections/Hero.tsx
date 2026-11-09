@@ -28,7 +28,7 @@ function MaskedWords({ text }: { text: string }) {
   return (
     <>
       {text.split(" ").map((word, i) => (
-        <span key={i} data-hero-word className="inline-block overflow-hidden pb-[0.08em] align-top">
+        <span key={i} data-hero-word style={{ "--i": i } as React.CSSProperties} className="inline-block overflow-hidden pb-[0.08em] align-top">
           <span className="inline-block will-change-transform">{word}</span>
           {" "}
         </span>
@@ -56,15 +56,10 @@ export function Hero({ title, body, primary, secondary, scrollLabel, playLabel, 
     });
   }, [mobile, allowVideo]);
 
-  // The page's one orchestrated moment.
+  // Entrance is CSS (globals.css). GSAP only adds the gentle scroll parallax.
   useEffect(() => {
-    if (!document.documentElement.classList.contains("js-motion")) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
-      // y:0 explicitly — the pre-paint CSS offset must not be read back as a pixel offset.
-      tl.fromTo("[data-hero-word] > span", { yPercent: 110, y: 0 }, { yPercent: 0, y: 0, duration: 1.3, stagger: 0.045 }, 0.15)
-        .fromTo("[data-hero-fade]", { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 1, stagger: 0.1 }, 0.7)
-        .fromTo("[data-hero-scale] span", { scaleX: 0 }, { scaleX: 1, duration: 0.6, stagger: 0.03 }, 1.0);
       gsap.to("[data-hero-media]", {
         yPercent: 8,
         ease: "none",
@@ -137,10 +132,10 @@ export function Hero({ title, body, primary, secondary, scrollLabel, playLabel, 
           <h1 id="hero-title" className="t-display">
             <MaskedWords text={title} />
           </h1>
-          <p data-hero-fade className="t-lead mt-7 max-w-[52ch] text-white/85">
+          <p data-hero-fade style={{ "--i": 0 } as React.CSSProperties} className="t-lead mt-7 max-w-[52ch] text-white/85">
             {body}
           </p>
-          <div data-hero-fade className="mt-9 flex flex-wrap gap-3">
+          <div data-hero-fade style={{ "--i": 1 } as React.CSSProperties} className="mt-9 flex flex-wrap gap-3">
             <Link href={primary.href} className="btn btn-light">
               {primary.label}
               <Arrow />
@@ -154,6 +149,7 @@ export function Hero({ title, body, primary, secondary, scrollLabel, playLabel, 
         {/* Scroll cue: the gauge in miniature */}
         <div
           data-hero-fade
+          style={{ "--i": 2 } as React.CSSProperties}
           className="col-span-4 mt-12 flex items-end justify-between md:col-span-2 md:col-start-11 md:mt-0 md:flex-col md:items-end md:justify-end md:gap-8"
         >
           <button
@@ -161,7 +157,6 @@ export function Hero({ title, body, primary, secondary, scrollLabel, playLabel, 
             onClick={toggle}
             className="flex h-11 items-center gap-2 text-sm text-white/80 hover:text-white"
             aria-label={playing ? pauseLabel : playLabel}
-            aria-pressed={!playing}
           >
             <span aria-hidden className="grid h-8 w-8 place-items-center rounded-full border border-white/40">
               {playing ? (
@@ -177,6 +172,7 @@ export function Hero({ title, body, primary, secondary, scrollLabel, playLabel, 
               {Array.from({ length: 8 }).map((_, i) => (
                 <span
                   key={i}
+                  style={{ "--i": i } as React.CSSProperties}
                   className={`block h-px origin-[100%_50%] bg-current rtl:origin-[0%_50%] ${i === 7 ? "w-5 bg-teal" : i % 4 === 0 ? "w-4" : "w-2"}`}
                 />
               ))}

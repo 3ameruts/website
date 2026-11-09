@@ -38,6 +38,14 @@ function persist() {
   }
 }
 
+/** Other tabs changed the list: reload once, notify everyone once. */
+function onStorage(e: StorageEvent) {
+  if (e.key !== KEY) return;
+  loaded = false;
+  load();
+  listeners.forEach((l) => l());
+}
+
 function emit() {
   persist();
   listeners.forEach((l) => l());
@@ -47,17 +55,10 @@ export const quoteStore = {
   subscribe(listener: () => void) {
     load();
     listeners.add(listener);
-    const onStorage = (e: StorageEvent) => {
-      if (e.key === KEY) {
-        loaded = false;
-        load();
-        listeners.forEach((l) => l());
-      }
-    };
-    window.addEventListener("storage", onStorage);
+    if (listeners.size === 1) window.addEventListener("storage", onStorage);
     return () => {
       listeners.delete(listener);
-      window.removeEventListener("storage", onStorage);
+      if (listeners.size === 0) window.removeEventListener("storage", onStorage);
     };
   },
   get: () => {

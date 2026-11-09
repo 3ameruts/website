@@ -18,12 +18,17 @@ export function ScrollGauge({ label }: { label: string }) {
   const [active, setActive] = useState(0);
   const [theme, setTheme] = useState<"light" | "dark">("dark");
   const fillRef = useRef<HTMLDivElement>(null);
+  const themeBands = useRef<{ top: number; bottom: number; theme: "light" | "dark" }[]>([]);
 
   useEffect(() => {
     const measure = () => {
       const els = Array.from(document.querySelectorAll<HTMLElement>("[data-chapter]"));
       const total = document.documentElement.scrollHeight - window.innerHeight;
       if (els.length < 3 || total <= 0) return setChapters([]);
+      themeBands.current = Array.from(document.querySelectorAll<HTMLElement>("[data-theme]")).map((el) => {
+        const r = el.getBoundingClientRect();
+        return { top: r.top + window.scrollY, bottom: r.bottom + window.scrollY, theme: el.dataset.theme === "dark" ? "dark" : "light" };
+      });
       setChapters(
         els.map((el) => ({
           id: el.id,
@@ -55,14 +60,10 @@ export function ScrollGauge({ label }: { label: string }) {
         if (p + 0.0001 >= c.start - 0.02) idx = i;
       });
       setActive(idx);
-      // theme of whatever sits under the gauge (vertical centre of viewport)
-      const els = document.querySelectorAll<HTMLElement>("[data-theme]");
-      const mid = window.innerHeight / 2;
+      // Theme under the gauge, from cached document positions (no layout reads per frame).
+      const mid = window.scrollY + window.innerHeight / 2;
       let th: "light" | "dark" = "light";
-      els.forEach((el) => {
-        const r = el.getBoundingClientRect();
-        if (r.top <= mid && r.bottom >= mid) th = el.dataset.theme === "dark" ? "dark" : "light";
-      });
+      for (const b of themeBands.current) if (b.top <= mid && b.bottom >= mid) th = b.theme;
       setTheme(th);
     };
     const onScroll = () => {
@@ -117,7 +118,7 @@ export function ScrollGauge({ label }: { label: string }) {
               <button
                 type="button"
                 onClick={() => go(c.id)}
-                aria-current={i === active ? "true" : undefined}
+                aria-current={i === active ? "location" : undefined}
                 className="group flex items-center gap-3 py-1.5 ps-2"
               >
                 <span

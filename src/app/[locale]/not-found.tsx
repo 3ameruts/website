@@ -15,7 +15,7 @@ export default function NotFound() {
           <Link href="/en" className="btn btn-light mt-8">{en.home}</Link>
         </div>
         <div lang="ar" dir="rtl" className="font-[family-name:var(--font-arabic)]">
-          <p className="t-label tabular">٤٠٤</p>
+          <p className="t-label tabular">404</p>
           <p className="t-h2 mt-4 max-w-[20ch]">{ar.title}</p>
           <p className="mt-5 max-w-[44ch] text-white/80">{ar.body}</p>
           <Link href="/ar" className="btn btn-light mt-8">{ar.home}</Link>

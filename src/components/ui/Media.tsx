@@ -11,7 +11,7 @@ export function Media({
   className = "",
   imgClassName = "",
   reveal = false,
-  priority = false,
+  preload = false,
   ratio,
 }: {
   src: string;
@@ -20,7 +20,7 @@ export function Media({
   className?: string;
   imgClassName?: string;
   reveal?: boolean;
-  priority?: boolean;
+  preload?: boolean;
   ratio?: string;
 }) {
   return (
@@ -33,7 +33,7 @@ export function Media({
         alt={alt}
         fill
         sizes={sizes}
-        priority={priority}
+        preload={preload}
         quality={70}
         className={`object-cover ${imgClassName}`}
       />

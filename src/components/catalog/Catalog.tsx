@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useDeferredValue, useEffect, useId, useMemo, useState } from "react";
+import { useDeferredValue, useEffect, useId, useMemo, useRef, useState } from "react";
 import type { Locale } from "@/i18n/config";
 import { getDictionary, type Dictionary } from "@/i18n/dictionaries";
 import { solutions, type SolutionId } from "@/content/solutions";
@@ -25,27 +24,38 @@ const normalize = (s: string) =>
 export function Catalog({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
   const c = dict.catalog;
-  const router = useRouter();
-  const pathname = usePathname();
-  const params = useSearchParams();
-  const initialCat = params.get("category");
-  const [category, setCategory] = useState<SolutionId | "all">(
-    solutions.some((s) => s.id === initialCat) ? (initialCat as SolutionId) : "all",
-  );
+  const [category, setCategory] = useState<SolutionId | "all">("all");
   const [sub, setSub] = useState<string>("all");
-  const [query, setQuery] = useState(params.get("q") ?? "");
+  const [query, setQuery] = useState("");
   const deferred = useDeferredValue(query);
   const quote = useQuoteList();
   const searchId = useId();
+  const hydrated = useRef(false);
 
-  // Keep the URL shareable (category + query) without adding history entries.
+  // The page is static, so the full list is server-rendered; deep-link filters
+  // (?category=, ?q=) are applied once after mount.
   useEffect(() => {
-    const sp = new URLSearchParams();
-    if (category !== "all") sp.set("category", category);
-    if (query.trim()) sp.set("q", query.trim());
-    const qs = sp.toString();
-    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-  }, [category, query, pathname, router]);
+    const sp = new URLSearchParams(window.location.search);
+    const cat = sp.get("category");
+    /* eslint-disable react-hooks/set-state-in-effect -- one-time sync from the URL, an external source */
+    if (cat && solutions.some((s) => s.id === cat)) setCategory(cat as SolutionId);
+    if (sp.get("q")) setQuery(sp.get("q") ?? "");
+    /* eslint-enable react-hooks/set-state-in-effect */
+    hydrated.current = true;
+  }, []);
+
+  // Keep the URL shareable without router navigation (no server round-trips), debounced.
+  useEffect(() => {
+    if (!hydrated.current) return;
+    const t = window.setTimeout(() => {
+      const sp = new URLSearchParams();
+      if (category !== "all") sp.set("category", category);
+      if (query.trim()) sp.set("q", query.trim());
+      const qs = sp.toString();
+      window.history.replaceState(window.history.state, "", qs ? `?${qs}` : window.location.pathname);
+    }, 350);
+    return () => window.clearTimeout(t);
+  }, [category, query]);
 
   const subs = subcategories.filter((s) => s.category === category);
 
@@ -68,7 +78,7 @@ export function Catalog({ locale }: { locale: Locale }) {
 
   const chip = (active: boolean) =>
     `inline-flex min-h-10 items-center rounded-[2px] border px-4 text-sm font-medium transition-colors ${
-      active ? "border-navy bg-navy text-white" : "border-line bg-white text-navy hover:border-navy"
+      active ? "border-navy bg-navy text-white" : "border-control bg-white text-navy hover:border-navy"
     }`;
 
   return (
@@ -138,6 +148,7 @@ export function Catalog({ locale }: { locale: Locale }) {
 
       {/* Results */}
       <div className="col-span-4 min-w-0 md:col-span-12 lg:col-span-9">
+        <h2 className="sr-only">{c.resultsHeading}</h2>
         <div className="mb-6 flex items-center justify-between gap-4 border-b border-line pb-4">
           <p className="tabular font-semibold" role="status" aria-live="polite">
             {c.results(results.length)}

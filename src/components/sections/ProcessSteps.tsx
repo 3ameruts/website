@@ -39,7 +39,7 @@ export function ProcessSteps({ steps }: { steps: Step[] }) {
               fill
               sizes="50vw"
               quality={70}
-              className={`object-cover transition-[opacity,transform] duration-[900ms] ease-[var(--ease-out-expo)] ${
+              className={`object-cover transition-[opacity,scale] duration-[900ms] ease-[var(--ease-out-expo)] ${
                 i === active ? "scale-100 opacity-100" : "scale-[1.05] opacity-0"
               }`}
             />

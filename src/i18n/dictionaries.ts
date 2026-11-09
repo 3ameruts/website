@@ -38,6 +38,8 @@ const en = {
     previous: "Previous",
     next: "Next",
     close: "Close",
+    mapPlaceholder: "Map will appear here once the address is confirmed.",
+    openMap: "Open in maps",
   },
   gauge: {
     label: "Page sections",
@@ -81,6 +83,8 @@ const en = {
       consent: "Confirm we may contact you about this request.",
     },
     required: "required",
+    other: "Other",
+    quantity: "Quantity",
     orReach: "Prefer to talk?",
     whatsappCta: "Message us on WhatsApp",
   },
@@ -89,6 +93,7 @@ const en = {
     searchPlaceholder: "Search by product or keyword",
     allCategories: "All categories",
     allSub: "All",
+    resultsHeading: "Results",
     results: (n: number) => (n === 1 ? "1 product" : `${n} products`),
     empty: "No products match your search.",
     emptyHint: "Try a broader term, or ask us — we source beyond this list.",
@@ -147,7 +152,7 @@ const ar: Dictionary = {
   common: {
     demo: "محتوى تجريبي",
     demoHint: "محتوى مؤقت — يُستبدل قبل الإطلاق",
-    viewProducts: "عرض المنتجات",
+    viewProducts: "تصفّح المنتجات",
     learnMore: "اعرف المزيد",
     requestQuote: "اطلب عرض سعر",
     discussProject: "ناقش مشروعك معنا",
@@ -165,6 +170,8 @@ const ar: Dictionary = {
     previous: "السابق",
     next: "التالي",
     close: "إغلاق",
+    mapPlaceholder: "ستظهر الخريطة هنا بعد تأكيد العنوان.",
+    openMap: "افتح في الخرائط",
   },
   gauge: {
     label: "أقسام الصفحة",
@@ -174,7 +181,7 @@ const ar: Dictionary = {
     explore: "تصفّح",
     contact: "تواصل",
     imagery: "الصور: لقطات مرخّصة من مكتبة Mixkit. تُستبدل بصور الشركة عند توفرها.",
-    cta: "تخطط لإنشاء مختبر أو تبحث عن أجهزة؟",
+    cta: "هل تخطط لإنشاء مختبر أو تبحث عن أجهزة؟",
     ctaBody: "أخبرنا بما تحتاجه، وسيرد عليك أحد المختصين بالخيارات المناسبة وعرض السعر.",
   },
   form: {
@@ -190,25 +197,27 @@ const ar: Dictionary = {
     messagePlaceholder: "الكميات، المواصفات، الجدول الزمني، تفاصيل الموقع…",
     quoteList: "المنتجات المضافة إلى قائمة عرض السعر",
     consent: "أوافق على التواصل معي بخصوص هذا الطلب.",
-    submit: "إرسال الطلب",
+    submit: "أرسل الطلب",
     sending: "جارٍ الإرسال…",
     successTitle: "تم إرسال طلبك",
     successBody: "شكرًا لك. سيراجع أحد المختصين طلبك ويتواصل معك بالخطوات التالية.",
-    sendAnother: "إرسال طلب آخر",
-    errorTitle: "لم يُرسل طلبك",
-    errorBody: "راجع الحقول المحددة ثم أعد المحاولة.",
+    sendAnother: "أرسل طلبًا آخر",
+    errorTitle: "تعذّر إرسال طلبك",
+    errorBody: "راجع الحقول المشار إليها ثم أعد المحاولة.",
     errorNetwork: "تعذّر وصول الطلب إلى الخادم. أعد المحاولة، أو تواصل معنا عبر البريد الإلكتروني أو واتساب.",
     errorNotConfigured: "استقبال الطلبات عبر الموقع غير متاح مؤقتًا. يُرجى التواصل عبر البريد الإلكتروني أو واتساب.",
     errors: {
       name: "أدخل اسمك الكامل.",
       email: "أدخل بريدًا إلكترونيًا صحيحًا، مثل name@institution.org.",
-      phone: "أدخل رقم هاتف صحيحًا بالأرقام فقط مع علامة + اختيارية.",
+      phone: "أدخل رقم هاتف صحيحًا بالأرقام فقط، ويمكن أن يبدأ بعلامة +.",
       interest: "اختر المجال الذي تهتم به.",
-      message: "صف طلبك في ١٠ أحرف على الأقل.",
+      message: "صف طلبك في 10 أحرف على الأقل.",
       consent: "أكّد موافقتك على التواصل معك بخصوص هذا الطلب.",
     },
     required: "مطلوب",
-    orReach: "تفضّل التحدث مباشرة؟",
+    other: "أخرى",
+    quantity: "الكمية",
+    orReach: "هل تفضّل التحدث إلينا مباشرة؟",
     whatsappCta: "راسلنا عبر واتساب",
   },
   catalog: {
@@ -216,20 +225,29 @@ const ar: Dictionary = {
     searchPlaceholder: "ابحث باسم المنتج أو كلمة مفتاحية",
     allCategories: "جميع الفئات",
     allSub: "الكل",
-    results: (n: number) =>
-      n === 0 ? "لا توجد منتجات" : n === 1 ? "منتج واحد" : n === 2 ? "منتجان" : n <= 10 ? `${n} منتجات` : `${n} منتجًا`,
+    resultsHeading: "النتائج",
+    // Arabic number agreement: 1, 2, 3–10 (plural), 11–99 (accusative singular), hundreds reset on n % 100.
+    results: (n: number) => {
+      if (n === 0) return "لا توجد منتجات";
+      if (n === 1) return "منتج واحد";
+      if (n === 2) return "منتجان";
+      const m = n % 100;
+      if (n >= 100 && m <= 2) return `${n} منتج`;
+      if (m >= 3 && m <= 10) return `${n} منتجات`;
+      return `${n} منتجًا`;
+    },
     empty: "لا توجد منتجات مطابقة لبحثك.",
     emptyHint: "جرّب كلمة أعم، أو اسألنا مباشرة — نوفّر منتجات خارج هذه القائمة أيضًا.",
     clear: "مسح عوامل التصفية",
-    addToQuote: "أضف إلى عرض السعر",
-    added: "أُضيف إلى عرض السعر",
+    addToQuote: "أضف إلى قائمة عرض السعر",
+    added: "أُضيف إلى القائمة",
     remove: "إزالة",
     quoteList: "قائمة عرض السعر",
-    quoteEmpty: "قائمتك فارغة. أضف المنتجات لتطلب أسعارها في رسالة واحدة.",
+    quoteEmpty: "قائمة عرض السعر فارغة. أضف المنتجات لتطلب أسعارها في رسالة واحدة.",
     requestForList: "اطلب عرض سعر لهذه المنتجات",
     specs: "المواصفات",
     specsNote: "تختلف المواصفات الدقيقة حسب الشركة المصنّعة والطراز، وتُؤكَّد في عرض السعر.",
-    specPending: "تُحدَّد حسب الطراز",
+    specPending: "تُؤكَّد حسب الطراز",
     details: "التفاصيل",
     filters: "التصفية",
     category: "الفئة",
@@ -249,7 +267,7 @@ const ar: Dictionary = {
   notFound: {
     title: "تعذّر العثور على هذه الصفحة",
     body: "ربما يكون الرابط قديمًا. استخدم قائمة التنقل، أو عُد إلى الصفحة الرئيسية.",
-    home: "الذهاب إلى الصفحة الرئيسية",
+    home: "انتقل إلى الصفحة الرئيسية",
   },
 };
 

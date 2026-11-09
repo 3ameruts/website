@@ -40,7 +40,7 @@ export default async function LabSolutionsPage({ params }: PageProps<"/[locale]/
       <PageHero
         title={labPage.hero.title[locale]}
         body={labPage.hero.body[locale]}
-        video={{ src: "/media/video/lab-corridor.mp4", poster: "/media/img/lab-corridor-poster.jpg" }}
+        video={{ src: "/media/video/lab-corridor.mp4", poster: "/media/img/lab-corridor-poster.jpg", playLabel: dict.common.playVideo, pauseLabel: dict.common.pauseVideo }}
         chapter={dict.nav.labSolutions}
         crumbs={[{ href: lp(locale), label: dict.nav.home }, { href: lp(locale, "/laboratory-solutions"), label: dict.nav.labSolutions }]}
       >

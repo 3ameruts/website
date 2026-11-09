@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { validateQuote, type QuoteInput } from "@/lib/quote-validation";
+import { toWesternDigits, validateQuote, type QuoteInput } from "@/lib/quote-validation";
+import { products } from "@/content/products";
 
 /**
  * Quote / contact submissions.
@@ -23,22 +24,34 @@ function rateLimited(ip: string) {
   return recent.length > MAX_PER_WINDOW;
 }
 
+const productById = new Map(products.map((p) => [p.id, p]));
 const clip = (v: unknown, max: number) => (typeof v === "string" ? v.trim().slice(0, max) : "");
 
 export async function POST(request: Request) {
-  const type = request.headers.get("content-type") ?? "";
-  if (!type.includes("application/json")) {
+  // Exact JSON MIME type: also forces a CORS preflight for cross-site posts.
+  const type = (request.headers.get("content-type") ?? "").split(";")[0].trim().toLowerCase();
+  if (type !== "application/json") {
     return NextResponse.json({ ok: false, error: "unsupported" }, { status: 415 });
   }
-  const length = Number(request.headers.get("content-length") ?? 0);
-  if (length > 20_000) return NextResponse.json({ ok: false, error: "too_large" }, { status: 413 });
+  // Same-origin only (browsers always send Origin on POST).
+  const origin = request.headers.get("origin");
+  const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
+  if (origin && host && new URL(origin).host !== host) {
+    return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
+  }
 
-  const ip = (request.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || "unknown";
+  // Best-effort key. Behind a proxy that overwrites these headers this is reliable;
+  // for strict limits use the platform's rate limiting (e.g. edge/WAF rules).
+  const ip = request.headers.get("x-real-ip") ?? ((request.headers.get("x-forwarded-for") ?? "").split(",").pop()?.trim() || "unknown");
   if (rateLimited(ip)) return NextResponse.json({ ok: false, error: "rate_limited" }, { status: 429 });
 
+  // Read with a hard cap — content-length can be absent (chunked) or wrong.
   let raw: Record<string, unknown>;
   try {
-    raw = await request.json();
+    const text = await request.text();
+    if (text.length > 20_000) return NextResponse.json({ ok: false, error: "too_large" }, { status: 413 });
+    raw = JSON.parse(text);
+    if (!raw || typeof raw !== "object" || Array.isArray(raw)) throw new Error("shape");
   } catch {
     return NextResponse.json({ ok: false, error: "invalid_json" }, { status: 400 });
   }
@@ -50,15 +63,18 @@ export async function POST(request: Request) {
     name: clip(raw.name, 120),
     company: clip(raw.company, 160),
     email: clip(raw.email, 160),
-    phone: clip(raw.phone, 30),
+    phone: toWesternDigits(clip(raw.phone, 30)),
     interest: clip(raw.interest, 40),
     message: clip(raw.message, 5000),
     consent: raw.consent === true,
     locale: raw.locale === "ar" ? "ar" : "en",
     items: Array.isArray(raw.items)
-      ? raw.items.slice(0, 60).map((it) => {
+      ? raw.items.slice(0, 60).flatMap((it) => {
+          // Names come from the catalog on the server, never from the browser.
           const o = (it ?? {}) as Record<string, unknown>;
-          return { id: clip(o.id, 80), name: clip(o.name, 160), qty: Math.max(1, Math.min(9999, Math.round(Number(o.qty) || 1))) };
+          const product = productById.get(clip(o.id, 80));
+          if (!product) return [];
+          return [{ id: product.id, name: product.name.en, qty: Math.max(1, Math.min(9999, Math.round(Number(o.qty) || 1))) }];
         })
       : [],
   };

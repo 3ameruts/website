@@ -21,7 +21,7 @@ export const specLabels = {
   volume: { en: "Volume range", ar: "نطاق الحجم" },
   dimensions: { en: "Dimensions", ar: "الأبعاد" },
   material: { en: "Material", ar: "المادة" },
-  power: { en: "Power supply", ar: "مصدر الطاقة" },
+  power: { en: "Power supply", ar: "التغذية الكهربائية" },
   parameters: { en: "Measured parameters", ar: "المؤشرات المقاسة" },
   display: { en: "Display", ar: "الشاشة" },
   connectivity: { en: "Connectivity", ar: "الاتصال" },
@@ -30,12 +30,12 @@ export const specLabels = {
   optics: { en: "Optics", ar: "البصريات" },
   magnification: { en: "Magnification", ar: "التكبير" },
   wavelength: { en: "Wavelength range", ar: "نطاق الطول الموجي" },
-  sterility: { en: "Sterility", ar: "التعقيم" },
+  sterility: { en: "Sterility", ar: "حالة التعقيم" },
   packSize: { en: "Pack size", ar: "حجم العبوة" },
   grade: { en: "Grade", ar: "الدرجة" },
   certification: { en: "Certification", ar: "الشهادات" },
   loadRating: { en: "Load rating", ar: "الحمولة القصوى" },
-  finish: { en: "Worktop finish", ar: "سطح العمل" },
+  finish: { en: "Worktop finish", ar: "تشطيب سطح العمل" },
   throughput: { en: "Throughput", ar: "الإنتاجية" },
   chambers: { en: "Chamber size", ar: "حجم الحجرة" },
   cycles: { en: "Cycle programmes", ar: "برامج الدورات" },
@@ -61,8 +61,8 @@ export const subcategories: Subcategory[] = [
   { id: "microscopy", category: "instruments", title: { en: "Microscopy", ar: "المجاهر" } },
   { id: "analytical", category: "instruments", title: { en: "Analytical instruments", ar: "أجهزة التحليل" } },
 
-  { id: "liquid-handling", category: "consumables", title: { en: "Liquid handling", ar: "نقل السوائل" } },
-  { id: "labware", category: "consumables", title: { en: "Labware & glassware", ar: "الأدوات والزجاجيات" } },
+  { id: "liquid-handling", category: "consumables", title: { en: "Liquid handling", ar: "مناولة السوائل" } },
+  { id: "labware", category: "consumables", title: { en: "Labware & glassware", ar: "الأدوات المخبرية والزجاجيات" } },
   { id: "reagents", category: "consumables", title: { en: "Reagents & media", ar: "الكواشف والأوساط" } },
   { id: "ppe", category: "consumables", title: { en: "Protective equipment", ar: "معدات الوقاية" } },
 
@@ -124,7 +124,7 @@ export const products: Product[] = [
     id: "ecg",
     category: "medical",
     subcategory: "diagnostic",
-    name: { en: "Electrocardiographs (ECG)", ar: "أجهزة تخطيط القلب" },
+    name: { en: "Electrocardiographs (ECG)", ar: "أجهزة تخطيط القلب الكهربائي (ECG)" },
     summary: {
       en: "Resting ECG systems for clinics and hospital departments, with reporting and data export options.",
       ar: "أجهزة تخطيط القلب أثناء الراحة للعيادات وأقسام المستشفيات، مع خيارات التقارير وتصدير البيانات.",
@@ -137,10 +137,10 @@ export const products: Product[] = [
     id: "infusion-pumps",
     category: "medical",
     subcategory: "diagnostic",
-    name: { en: "Infusion & syringe pumps", ar: "مضخات التسريب والحقن" },
+    name: { en: "Infusion & syringe pumps", ar: "مضخات التسريب الوريدي ومضخات المحاقن" },
     summary: {
       en: "Volumetric and syringe pumps for controlled delivery of fluids and medication.",
-      ar: "مضخات حجمية ومضخات حقن لإيصال السوائل والأدوية بدقة وتحكم.",
+      ar: "مضخات حجمية ومضخات محاقن لإعطاء السوائل والأدوية بمعدل مضبوط.",
     },
     image: I("medical-monitor"),
     specFields: ["volume", "display", "power", "connectivity"],
@@ -166,7 +166,7 @@ export const products: Product[] = [
     name: { en: "Medical disposables", ar: "المستهلكات الطبية" },
     summary: {
       en: "Syringes, needles, IV sets, dressings and other single-use items for daily clinical work.",
-      ar: "المحاقن، والإبر، وأطقم التسريب الوريدي، والضمادات، وغيرها من المستلزمات أحادية الاستخدام.",
+      ar: "المحاقن، والإبر، وأطقم التسريب الوريدي، والضمادات، وغيرها من المستلزمات أحادية الاستخدام للعمل السريري اليومي.",
     },
     image: I("droplet"),
     specFields: ["sterility", "packSize", "certification"],
@@ -181,7 +181,7 @@ export const products: Product[] = [
     name: { en: "Centrifuges", ar: "أجهزة الطرد المركزي" },
     summary: {
       en: "Benchtop, micro and refrigerated centrifuges for clinical, research and teaching laboratories.",
-      ar: "أجهزة طرد مركزي مكتبية ودقيقة ومبرّدة للمختبرات السريرية والبحثية والتعليمية.",
+      ar: "أجهزة طرد مركزي مكتبية وميكروية (Micro) ومبرّدة للمختبرات السريرية والبحثية والتعليمية.",
     },
     image: I("research-team-samples"),
     specFields: ["capacity", "speed", "rotors", "temperature"],
@@ -233,7 +233,7 @@ export const products: Product[] = [
     name: { en: "Biological safety cabinets", ar: "خزائن السلامة الحيوية" },
     summary: {
       en: "Class II cabinets and laminar-flow hoods for safe handling of biological samples.",
-      ar: "خزائن من الفئة الثانية وخزائن التدفق الصفائحي للتعامل الآمن مع العيّنات البيولوجية.",
+      ar: "خزائن من الفئة الثانية وخزائن التدفق الهوائي الطبقي (Laminar Flow) للتعامل الآمن مع العيّنات البيولوجية.",
     },
     image: I("lab-equipment-operator"),
     specFields: ["classification", "airflow", "dimensions", "certification"],
@@ -287,7 +287,7 @@ export const products: Product[] = [
     name: { en: "Spectrophotometers", ar: "أجهزة القياس الطيفي" },
     summary: {
       en: "UV-Vis and visible spectrophotometers for quantitative analysis in teaching, QC and research.",
-      ar: "أجهزة قياس طيفي للأشعة فوق البنفسجية والمرئية للتحليل الكمّي في التعليم وضبط الجودة والبحث.",
+      ar: "مطيافات ضوئية للأشعة فوق البنفسجية والمرئية (UV-Vis) وأخرى للأشعة المرئية فقط، للتحليل الكمّي في التعليم وضبط الجودة والبحث.",
     },
     image: I("reagents-blue"),
     specFields: ["wavelength", "display", "connectivity", "power"],
@@ -297,7 +297,7 @@ export const products: Product[] = [
     id: "meters",
     category: "instruments",
     subcategory: "analytical",
-    name: { en: "pH, conductivity & multiparameter meters", ar: "أجهزة قياس الحموضة والتوصيل ومتعددة المؤشرات" },
+    name: { en: "pH, conductivity & multiparameter meters", ar: "أجهزة قياس الرقم الهيدروجيني (pH) والتوصيلية الكهربائية، والأجهزة متعددة المعايير" },
     summary: {
       en: "Benchtop and portable meters for water, environmental and quality-control testing.",
       ar: "أجهزة قياس مكتبية ومحمولة لفحوص المياه والبيئة وضبط الجودة.",
@@ -313,7 +313,7 @@ export const products: Product[] = [
     name: { en: "Clinical laboratory analysers", ar: "المحلّلات المخبرية السريرية" },
     summary: {
       en: "Chemistry, haematology and immunoassay analysers sized to your daily sample volume.",
-      ar: "محلّلات الكيمياء وأمراض الدم والمناعة، بسعة تناسب عدد العيّنات اليومي لديك.",
+      ar: "محلّلات الكيمياء السريرية وأمراض الدم (الهيماتولوجي) والمقايسات المناعية، بسعة تناسب عدد العيّنات اليومي لديك.",
     },
     image: I("lab-bench-microscopy"),
     specFields: ["throughput", "parameters", "connectivity", "power"],
@@ -447,7 +447,7 @@ export const products: Product[] = [
     name: { en: "Fume hoods & extraction", ar: "خزائن شفط الأبخرة وأنظمة الشفط" },
     summary: {
       en: "Ducted and ductless fume cupboards and local extraction arms.",
-      ar: "خزائن شفط أبخرة موصولة بمجارٍ أو بدونها، وأذرع شفط موضعية.",
+      ar: "خزائن شفط أبخرة موصولة بمجاري تهوية وأخرى غير موصولة (Ductless)، وأذرع شفط موضعية.",
     },
     image: I("infrastructure-pipes"),
     specFields: ["dimensions", "airflow", "certification"],
@@ -460,7 +460,7 @@ export const products: Product[] = [
     name: { en: "Sinks, eyewash & safety showers", ar: "المغاسل ومحطات غسل العين ودشات الطوارئ" },
     summary: {
       en: "Laboratory sinks, emergency eyewash stations and safety showers.",
-      ar: "مغاسل مخبرية، ومحطات غسل العين للطوارئ، ودشات السلامة.",
+      ar: "مغاسل مخبرية، ومحطات غسل العين للطوارئ، ودشات الطوارئ.",
     },
     image: I("lab-room-bright"),
     specFields: ["material", "dimensions", "certification"],
@@ -501,7 +501,7 @@ export const products: Product[] = [
     name: { en: "Teaching laboratory", ar: "المختبر التعليمي" },
     summary: {
       en: "Robust student workstations, demonstration equipment and safe storage for schools and universities.",
-      ar: "محطات عمل متينة للطلاب، وأجهزة عرض توضيحي، وتخزين آمن للمدارس والجامعات.",
+      ar: "محطات عمل متينة للطلاب، وأجهزة للتجارب التوضيحية، وتخزين آمن للمدارس والجامعات.",
     },
     image: I("lab-analysis"),
     specFields: ["scope", "deliverables", "duration"],
@@ -552,7 +552,7 @@ export const products: Product[] = [
     id: "svc-utilities",
     category: "design",
     subcategory: "services",
-    name: { en: "Utilities coordination", ar: "تنسيق الخدمات والتمديدات" },
+    name: { en: "Utilities coordination", ar: "تنسيق التمديدات" },
     summary: {
       en: "Gases, water, drainage, ventilation and power requirements coordinated with your contractors.",
       ar: "تنسيق متطلبات الغازات والمياه والصرف والتهوية والكهرباء مع المقاولين لديك.",
@@ -565,7 +565,7 @@ export const products: Product[] = [
     id: "svc-installation",
     category: "design",
     subcategory: "services",
-    name: { en: "Installation & commissioning", ar: "التركيب والتشغيل التجريبي" },
+    name: { en: "Installation & commissioning", ar: "التركيب والتشغيل" },
     summary: {
       en: "Delivery, installation, functional checks and documented handover of every item.",
       ar: "التوريد، والتركيب، والفحوص الوظيفية، والتسليم الموثّق لكل جهاز.",
@@ -596,7 +596,7 @@ export const products: Product[] = [
     name: { en: "Molecular biology equipment", ar: "أجهزة البيولوجيا الجزيئية" },
     summary: {
       en: "PCR and real-time PCR systems, electrophoresis, gel documentation and nucleic-acid workflows.",
-      ar: "أجهزة PCR والـ PCR اللحظي، والرحلان الكهربائي، وتوثيق الهلام، وسير عمل الأحماض النووية.",
+      ar: "أجهزة PCR التقليدي والآني (Real-Time PCR)، والرحلان الكهربائي، وأنظمة تصوير الهلام (Gel Documentation)، وسير عمل الأحماض النووية.",
     },
     image: I("research-team-samples"),
     specFields: ["throughput", "temperature", "connectivity"],
@@ -609,7 +609,7 @@ export const products: Product[] = [
     name: { en: "Cell culture equipment", ar: "أجهزة زراعة الخلايا" },
     summary: {
       en: "CO₂ incubators, biosafety cabinets, inverted microscopes and cell counters for culture labs.",
-      ar: "حاضنات ثاني أكسيد الكربون، وخزائن السلامة الحيوية، والمجاهر المقلوبة، وعدّادات الخلايا.",
+      ar: "حاضنات ثاني أكسيد الكربون، وخزائن السلامة الحيوية، والمجاهر المقلوبة، وعدّادات الخلايا لمختبرات زراعة الخلايا.",
     },
     image: I("microscope-navy"),
     specFields: ["chambers", "temperature", "classification"],
@@ -619,7 +619,7 @@ export const products: Product[] = [
     id: "workflow-advisory",
     category: "research",
     subcategory: "advisory",
-    name: { en: "Method & workflow advisory", ar: "استشارات طرق العمل وسيره" },
+    name: { en: "Method & workflow advisory", ar: "استشارات المنهجيات وسير العمل" },
     summary: {
       en: "Help translating a research method or grant budget into an equipment list you can procure.",
       ar: "مساعدة في تحويل طريقة بحثية أو ميزانية منحة إلى قائمة أجهزة قابلة للشراء.",

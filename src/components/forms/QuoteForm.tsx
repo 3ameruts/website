@@ -6,7 +6,7 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { solutions } from "@/content/solutions";
 import { products } from "@/content/products";
 import { quoteStore, useQuoteList } from "@/lib/quote-store";
-import { INTERESTS, validateQuote, type FieldErrors } from "@/lib/quote-validation";
+import { INTERESTS, toWesternDigits, validateQuote, type FieldErrors } from "@/lib/quote-validation";
 import { Arrow } from "@/components/ui/Arrow";
 
 type Status = "idle" | "sending" | "success" | "error";
@@ -148,18 +148,9 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
                   <span className="min-w-0 flex-1 font-medium">{p.name[locale]}</span>
                   <span className="flex items-center gap-3">
                     <label className="sr-only" htmlFor={id(`qty-${it.id}`)}>
-                      {p.name[locale]} — qty
+                      {f.quantity}: {p.name[locale]}
                     </label>
-                    <input
-                      id={id(`qty-${it.id}`)}
-                      type="number"
-                      min={1}
-                      max={9999}
-                      inputMode="numeric"
-                      value={it.qty}
-                      onChange={(e) => quoteStore.setQty(it.id, Number(e.target.value))}
-                      className="field tabular !min-h-10 w-20 !py-1.5 text-center"
-                    />
+                    <QtyInput id={id(`qty-${it.id}`)} value={it.qty} onCommit={(n) => quoteStore.setQty(it.id, n)} />
                     <button type="button" onClick={() => quoteStore.remove(it.id)} className="link text-sm">
                       {dict.catalog.remove}
                       <span className="sr-only"> {p.name[locale]}</span>
@@ -208,7 +199,7 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
             <option value="">{f.interestPlaceholder}</option>
             {INTERESTS.map((k) => (
               <option key={k} value={k}>
-                {k === "other" ? (locale === "en" ? "Other" : "أخرى") : solutions.find((s) => s.id === k)?.title[locale]}
+                {k === "other" ? f.other : solutions.find((s) => s.id === k)?.title[locale]}
               </option>
             ))}
           </select>
@@ -251,5 +242,25 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
         </button>
       </div>
     </form>
+  );
+}
+
+/** Quantity field that can be cleared while typing; commits a valid number on blur. */
+function QtyInput({ id, value, onCommit }: { id: string; value: number; onCommit: (n: number) => void }) {
+  const [draft, setDraft] = useState<string | null>(null);
+  return (
+    <input
+      id={id}
+      type="text"
+      inputMode="numeric"
+      pattern="[0-9]*"
+      value={draft ?? String(value)}
+      onChange={(e) => setDraft(toWesternDigits(e.target.value).replace(/[^0-9]/g, "").slice(0, 4))}
+      onBlur={() => {
+        if (draft !== null) onCommit(Number(draft) || 1);
+        setDraft(null);
+      }}
+      className="field tabular !min-h-10 w-20 !py-1.5 text-center"
+    />
   );
 }

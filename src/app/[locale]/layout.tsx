@@ -17,12 +17,15 @@ const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-jakarta",
+  preload: true,
   display: "swap",
 });
 const plexArabic = IBM_Plex_Sans_Arabic({
   subsets: ["arabic"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   variable: "--font-plex-arabic",
+  // Arabic glyphs load only when Arabic text renders (unicode-range); no preload on English pages.
+  preload: false,
   display: "swap",
 });
 
@@ -54,19 +57,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   const { dir, htmlLang } = localeMeta[locale];
 
   return (
-    <html lang={htmlLang} dir={dir} className={`${jakarta.variable} ${plexArabic.variable}`} suppressHydrationWarning>
-      <head>
-        {/* Pre-paint: enable entrance states only when motion is allowed. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('js-motion')}catch(e){}",
-          }}
-        />
-        <noscript>
-          <style>{`[data-hero-fade]{opacity:1!important;visibility:visible!important}[data-hero-word]>span,[data-hero-scale]>span{transform:none!important}`}</style>
-        </noscript>
-      </head>
+    <html lang={htmlLang} dir={dir} className={`${jakarta.variable} ${plexArabic.variable}`}>
       <body>
         <a
           href="#main"

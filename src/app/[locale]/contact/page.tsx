@@ -72,10 +72,10 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
               </svg>
               <div className="relative">
                 <svg aria-hidden viewBox="0 0 24 32" width="24" height="32" className="mx-auto text-teal"><path d="M12 0C5.4 0 0 5.3 0 11.9 0 20.8 12 32 12 32s12-11.2 12-20.1C24 5.3 18.6 0 12 0z" fill="currentColor" /><circle cx="12" cy="12" r="4.5" fill="#fff" /></svg>
-                <p className="mt-4 font-semibold">{locale === "en" ? "Map will appear here once the address is confirmed." : "ستظهر الخريطة هنا بعد تأكيد العنوان."}</p>
+                <p className="mt-4 font-semibold">{dict.common.mapPlaceholder}</p>
                 {site.contact.mapUrl && (
                   <a href={site.contact.mapUrl} target="_blank" rel="noopener noreferrer" className="link mt-3 inline-block">
-                    {locale === "en" ? "Open in maps" : "افتح في الخرائط"}
+                    {dict.common.openMap}
                   </a>
                 )}
               </div>

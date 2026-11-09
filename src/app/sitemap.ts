@@ -3,7 +3,7 @@ import { locales, localeMeta } from "@/i18n/config";
 import { projects } from "@/content/projects";
 import { site } from "@/content/site";
 
-const paths = ["/", "/about", "/products", "/laboratory-solutions", "/projects", "/contact", ...projects.map((p) => `/projects/${p.slug}`)];
+const paths = ["/", "/about", "/products", "/laboratory-solutions", "/projects", "/contact", ...projects.filter((p) => !p.demo).map((p) => `/projects/${p.slug}`)]; // demo case studies are noindex
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

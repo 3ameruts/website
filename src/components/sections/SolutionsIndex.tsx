@@ -71,7 +71,7 @@ export function SolutionsIndex({ locale, cta, ctaLab }: { locale: Locale; cta: s
                 fill
                 sizes="32vw"
                 quality={70}
-                className={`object-cover transition-[opacity,transform] duration-700 ease-[var(--ease-out-expo)] ${
+                className={`object-cover transition-[opacity,scale] duration-700 ease-[var(--ease-out-expo)] ${
                   active === i ? "scale-100 opacity-100" : "scale-[1.04] opacity-0"
                 }`}
               />

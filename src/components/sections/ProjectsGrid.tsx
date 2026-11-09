@@ -13,7 +13,7 @@ export function ProjectsGrid({ locale }: { locale: Locale }) {
   const sectors = Object.keys(projectSectors) as ProjectSector[];
   const chip = (active: boolean) =>
     `inline-flex min-h-10 items-center rounded-[2px] border px-4 text-sm font-medium transition-colors ${
-      active ? "border-navy bg-navy text-white" : "border-line text-navy hover:border-navy"
+      active ? "border-navy bg-navy text-white" : "border-control text-navy hover:border-navy"
     }`;
   return (
     <>
