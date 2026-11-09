@@ -42,3 +42,5 @@ next-env.d.ts
 
 # QA side-by-side build
 /.next-qa/
+/.next-preview/
+/preview-screens/
