@@ -1,26 +1,462 @@
 @import "tailwindcss";
 
+/* ──────────────────────────────────────────────────────────────────────────
+   Design tokens — Jordanian Advanced Laboratory Equipment
+   Brand colours are used exactly; "derived" tokens exist only for contrast.
+   See docs/DESIGN.md.
+   ────────────────────────────────────────────────────────────────────────── */
+@theme {
+  /* Brand */
+  --color-navy: #0b2d6b;
+  --color-teal: #00a99d;
+  --color-gray: #e6e9ed;
+  --color-white: #ffffff;
+  /* Derived (accessibility) */
+  --color-navy-deep: #08224f;
+  --color-navy-soft: #1a3d7c;
+  --color-teal-ink: #00786f;
+  --color-teal-light: #5cd6cb;
+  --color-slate: #4a5670;
+  --color-line: #cdd3db;
+  --color-mist: #f5f7f9;
+  --color-error: #b42318;
+  --color-error-light: #ffb4a8;
+
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: var(--font-plex-arabic), var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --breakpoint-3xl: 1720px;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --gutter: clamp(1rem, 2vw, 2rem);
+  --margin: clamp(1.25rem, 5vw, 5rem);
+  --section: clamp(5rem, 11vw, 9.5rem);
+  --header-h: 4.5rem;
+  --maxw: 90rem;
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ── Base ─────────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    background: var(--color-white);
+    color: var(--color-navy);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    font-feature-settings: "ss01" on;
+  }
+  html[dir="rtl"] body {
+    font-family: var(--font-arabic);
+    font-size: 1.125rem;
+    line-height: 1.8;
+    font-feature-settings: normal;
+  }
+  ::selection {
+    background: var(--color-teal);
+    color: var(--color-navy);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-teal-ink);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+  .on-dark :focus-visible,
+  .on-dark:focus-visible {
+    outline-color: var(--color-teal-light);
+  }
+  img,
+  video {
+    max-width: 100%;
+  }
+  [hidden] {
+    display: none !important;
+  }
+  /* Lenis */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── Layout primitives ────────────────────────────────────────────────── */
+@utility frame {
+  width: 100%;
+  max-width: calc(var(--maxw) + var(--margin) * 2);
+  margin-inline: auto;
+  padding-inline: var(--margin);
+}
+@utility grid-12 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  @media (width >= 48rem) {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+@utility section-y {
+  padding-block: var(--section);
+}
+
+/* ── Type scale ───────────────────────────────────────────────────────── */
+@utility t-display {
+  font-size: clamp(2.375rem, 6.6vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  text-wrap: balance;
+  :where(html[dir="rtl"]) & {
+    font-size: clamp(2.125rem, 6vw, 6rem);
+    line-height: 1.22;
+    letter-spacing: 0;
+    font-weight: 600;
+  }
+}
+@utility t-h1 {
+  font-size: clamp(2.375rem, 4.6vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+  text-wrap: balance;
+  :where(html[dir="rtl"]) & {
+    font-size: clamp(2.125rem, 4.2vw, 4.125rem);
+    line-height: 1.28;
+    letter-spacing: 0;
+  }
+}
+@utility t-h2 {
+  font-size: clamp(1.875rem, 3.4vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  text-wrap: balance;
+  :where(html[dir="rtl"]) & {
+    font-size: clamp(1.75rem, 3.1vw, 2.75rem);
+    line-height: 1.35;
+    letter-spacing: 0;
+  }
+}
+@utility t-h3 {
+  font-size: clamp(1.25rem, 1.8vw, 1.625rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+  :where(html[dir="rtl"]) & {
+    line-height: 1.45;
+    letter-spacing: 0;
+  }
+}
+@utility t-lead {
+  font-size: clamp(1.125rem, 1.35vw, 1.3125rem);
+  line-height: 1.55;
+  :where(html[dir="rtl"]) & {
+    line-height: 1.8;
+  }
+}
+@utility t-small {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  :where(html[dir="rtl"]) & {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+  }
+}
+@utility t-label {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--color-slate);
+  :where(.on-dark) & {
+    color: rgb(255 255 255 / 0.72);
+  }
+}
+@utility measure {
+  max-width: 64ch;
+}
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Brand device: the stationery band (navy + angled teal segment) ───── */
+@utility band {
+  position: relative;
+  height: 0.875rem;
+  background: var(--color-navy);
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    width: 46%;
+    background: var(--color-teal);
+    clip-path: polygon(0.9rem 0, 100% 0, 100% 100%, 0 100%);
+    :where(html[dir="rtl"]) & {
+      clip-path: polygon(0 0, calc(100% - 0.9rem) 0, 100% 100%, 0 100%);
+    }
+  }
+}
+@utility band-light {
+  &::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: calc(46% + 0.35rem);
+    width: 0.5rem;
+    background: white;
+    transform: skewX(-38deg);
+    :where(html[dir="rtl"]) & {
+      transform: skewX(38deg);
+    }
+  }
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────── */
+@layer components {
+  .btn {
+    --btn-bg: var(--color-navy);
+    --btn-fg: var(--color-white);
+    --btn-fill: var(--color-teal);
+    --btn-fill-fg: var(--color-navy);
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-height: 3rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2px;
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    font-weight: 600;
+    font-size: 0.975rem;
+    line-height: 1.2;
+    overflow: hidden;
+    transition: color 0.35s var(--ease-out-expo);
+    white-space: nowrap;
+  }
+  .btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--btn-fill);
+    /* angled leading edge = the stationery band cut */
+    clip-path: polygon(0 0, 0 0, -1.5rem 100%, 0 100%);
+    transition: clip-path 0.55s var(--ease-out-expo);
+  }
+  html[dir="rtl"] .btn::before {
+    clip-path: polygon(100% 0, 100% 0, calc(100% + 1.5rem) 100%, 100% 100%);
+  }
+  @media (hover: hover) {
+    .btn:hover::before {
+      clip-path: polygon(0 0, calc(100% + 1.5rem) 0, 100% 100%, 0 100%);
+    }
+    html[dir="rtl"] .btn:hover::before {
+      clip-path: polygon(-1.5rem 0, 100% 0, 100% 100%, 0 100%);
+    }
+    .btn:hover {
+      color: var(--btn-fill-fg);
+    }
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn-light {
+    --btn-bg: var(--color-white);
+    --btn-fg: var(--color-navy);
+    --btn-fill: var(--color-teal);
+    --btn-fill-fg: var(--color-navy);
+  }
+  .btn-outline {
+    --btn-bg: transparent;
+    --btn-fg: currentColor;
+    --btn-fill: var(--color-navy);
+    --btn-fill-fg: var(--color-white);
+    box-shadow: inset 0 0 0 1px currentColor;
+  }
+  .on-dark .btn-outline,
+  .btn-outline.on-dark {
+    --btn-fill: var(--color-white);
+    --btn-fill-fg: var(--color-navy);
+    color: var(--color-white);
+  }
+  .btn-sm {
+    min-height: 2.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  .btn[disabled],
+  .btn[aria-disabled="true"] {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  /* Text link with drawing underline */
+  .link {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 100% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    padding-bottom: 2px;
+    transition: background-size 0.45s var(--ease-out-expo), color 0.2s;
+  }
+  html[dir="rtl"] .link {
+    background-position: 100% 100%;
+  }
+  @media (hover: hover) {
+    .link:hover {
+      background-size: 0% 1px;
+    }
+  }
+
+  /* Directional arrow that mirrors in RTL */
+  .arrow {
+    display: inline-block;
+    transition: transform 0.4s var(--ease-out-expo);
+  }
+  html[dir="rtl"] .arrow {
+    transform: scaleX(-1);
+  }
+
+  /* Demo-content tag (dashed slate — deliberately not a brand colour) */
+  .demo-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.15rem 0.55rem;
+    border: 1px dashed currentColor;
+    border-radius: 2px;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    font-weight: 500;
+    color: var(--color-slate);
+    background: rgb(255 255 255 / 0.85);
+    white-space: nowrap;
+  }
+  .on-dark .demo-tag {
+    color: rgb(255 255 255 / 0.85);
+    background: rgb(8 34 79 / 0.7);
+  }
+
+  /* Form fields */
+  .field {
+    width: 100%;
+    min-height: 3.25rem;
+    padding: 0.8rem 1rem;
+    border-radius: 2px;
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
+    color: var(--color-navy);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .field::placeholder {
+    color: #6b7487;
+  }
+  .field:hover {
+    border-color: #9aa4b4;
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--color-navy);
+    box-shadow: 0 0 0 3px rgb(0 169 157 / 0.35);
+  }
+  .field[aria-invalid="true"] {
+    border-color: var(--color-error);
+    box-shadow: 0 0 0 1px var(--color-error);
+  }
+  select.field {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%230B2D6B' stroke-width='1.6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-inline-end: 2.75rem;
+  }
+  html[dir="rtl"] select.field {
+    background-position: left 1rem center;
+  }
+
+  /* Image that "fills" upward on reveal (graduated cylinder metaphor) */
+  .fill-reveal {
+    clip-path: inset(0 0 0 0);
+  }
+  .js-motion .fill-reveal[data-reveal="pending"] {
+    clip-path: inset(100% 0 0 0);
+  }
+}
+
+/* ── Reduced motion: everything is simply present ─────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .js-motion .fill-reveal[data-reveal="pending"] {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Page enter transition (template.tsx) */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.page-enter {
+  animation: page-in 0.7s var(--ease-out-expo) both;
+}
+
+/* Hero entrance initial state — only when motion is allowed (class set pre-paint). */
+.js-motion [data-hero-word] > span {
+  transform: translateY(110%);
+  animation: hero-failsafe 0.01s 2.6s forwards;
+}
+.js-motion [data-hero-fade] {
+  opacity: 0;
+  visibility: hidden;
+  animation: hero-failsafe 0.01s 2.6s forwards;
+}
+.js-motion [data-hero-scale] > span {
+  transform: scaleX(0);
+  animation: hero-failsafe 0.01s 2.6s forwards;
+}
+/* Failsafe: if scripts fail to load, entrance states release on their own.
+   GSAP finishes before this fires and ends in the same state, so it is invisible when JS works. */
+@keyframes hero-failsafe {
+  to {
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* The footer CTA repeats the quote invitation — skip it where the form is already on the page. */
+body:has(#quote) .footer-cta {
+  display: none;
 }
