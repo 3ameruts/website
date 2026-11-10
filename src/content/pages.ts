@@ -61,11 +61,12 @@ export const home = {
     ],
   },
   solutions: {
-    title: { en: "Eight areas, one supplier", ar: "ثمانية مجالات، ومورّد واحد" },
+    title: { en: "Everything your laboratory needs", ar: "كل ما يحتاجه مختبرك" },
     body: {
-      en: "Source a single instrument or an entire laboratory. Select an area to see what we supply.",
-      ar: "اطلب جهازًا واحدًا أو مختبرًا كاملًا. اختر مجالًا لتعرف ما نورّده.",
+      en: "From glassware and consumables to complete school and hospital laboratories — select a category to learn more or request a quote.",
+      ar: "من الزجاجيات والمستهلكات إلى مختبرات المدارس والمستشفيات المتكاملة — اختر فئة لتعرف المزيد أو تطلب عرض سعر.",
     },
+    viewAll: { en: "All categories", ar: "جميع الفئات" },
   },
   showcase: {
     title: { en: "Inside the laboratories we equip", ar: "داخل المختبرات التي نجهّزها" },
@@ -244,16 +245,21 @@ export const productsPage = {
   meta: {
     title: { en: "Products & solutions", ar: "المنتجات والحلول" },
     description: {
-      en: "Browse medical equipment, laboratory equipment, scientific instruments, consumables, furniture and laboratory packages. Build a quote list and request pricing in one message.",
-      ar: "تصفّح الأجهزة الطبية والمخبرية، والأجهزة العلمية، والمستهلكات، والأثاث، وحزم المختبرات. أنشئ قائمة عرض سعر واطلب الأسعار في رسالة واحدة.",
+      en: "Laboratory glassware, equipment, consumables, furniture, school science laboratories, cell culture media, blood & tissue, assay kits, reagents, clinical laboratories, robotics, safety and maintenance.",
+      ar: "الزجاجيات والأجهزة والمستهلكات والأثاث المخبري، ومختبرات العلوم المدرسية، وأوساط زراعة الخلايا، والدم والأنسجة، وأطقم الفحوصات، والكواشف، والمختبرات السريرية، والروبوتات، والسلامة، والصيانة.",
     },
   },
   hero: {
     title: { en: "Products & solutions", ar: "المنتجات والحلول" },
     body: {
-      en: "The range below shows the product types we supply. Exact models and specifications are confirmed in your quotation, matched to your methods and budget.",
-      ar: "تعرض القائمة التالية أنواع المنتجات التي نورّدها. وتُؤكَّد الطرازات والمواصفات الدقيقة في عرض السعر بما يتوافق مع طرق عملك وميزانيتك.",
+      en: "Thirteen categories, one supplier. Choose a category to request a quotation — exact products, models and specifications are confirmed with you, matched to your work and budget.",
+      ar: "ثلاث عشرة فئة، ومورّد واحد. اختر الفئة لتطلب عرض سعر — ونؤكّد معك المنتجات والطرازات والمواصفات بما يناسب عملك وميزانيتك.",
     },
+  },
+  setupTitle: { en: "Need a complete laboratory?", ar: "تحتاج مختبرًا متكاملًا؟" },
+  setupBody: {
+    en: "We plan, equip, furnish and install complete laboratories — from an empty room to the first sample.",
+    ar: "نخطّط المختبرات المتكاملة ونجهّزها ونؤثّثها ونركّبها — من غرفة فارغة حتى أول عيّنة.",
   },
 };
 
@@ -324,6 +330,33 @@ export const labPage = {
     },
   ],
   typesTitle: { en: "Laboratories we deliver", ar: "المختبرات التي ننفّذها" },
+  types: [
+    {
+      title: { en: "Clinical & hospital laboratories", ar: "المختبرات السريرية ومختبرات المستشفيات" },
+      body: { en: "Diagnostic laboratories planned around sample flow, safety and staff.", ar: "مختبرات تشخيص مخطّطة وفق مسار العيّنات والسلامة والكوادر." },
+      image: "/media/img/lab-bench-microscopy.jpg",
+    },
+    {
+      title: { en: "School science laboratories", ar: "مختبرات العلوم المدرسية" },
+      body: { en: "Safe, durable laboratories for hands-on science teaching.", ar: "مختبرات آمنة ومتينة لتعليم العلوم عمليًا." },
+      image: "/media/img/cat-school-lab.jpg",
+    },
+    {
+      title: { en: "University & research laboratories", ar: "المختبرات الجامعية والبحثية" },
+      body: { en: "Flexible spaces for teaching, research groups and core facilities.", ar: "مساحات مرنة للتعليم والمجموعات البحثية والمرافق المركزية." },
+      image: "/media/img/microscope-navy.jpg",
+    },
+    {
+      title: { en: "Quality-control laboratories", ar: "مختبرات ضبط الجودة" },
+      body: { en: "Controlled, well-organised laboratories for industry and food testing.", ar: "مختبرات منظّمة ومضبوطة للصناعة وفحص الأغذية." },
+      image: "/media/img/chemist-bench.jpg",
+    },
+    {
+      title: { en: "Microbiology & cell culture", ar: "الأحياء الدقيقة وزراعة الخلايا" },
+      body: { en: "Containment, incubation and sterilisation in one planned workflow.", ar: "الاحتواء والحضانة والتعقيم ضمن سير عمل واحد مخطط." },
+      image: "/media/img/petri-dish.jpg",
+    },
+  ],
   ctaTitle: { en: "Planning a new laboratory or a renovation?", ar: "هل تخطط لمختبر جديد أو لتجديد مختبر قائم؟" },
   ctaBody: {
     en: "Share your floor plan, or simply describe the work the lab will do. We will come back with the next steps.",

@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { toWesternDigits, validateQuote, type QuoteInput } from "@/lib/quote-validation";
-import { products } from "@/content/products";
 
 /**
  * Quote / contact submissions.
@@ -24,7 +23,6 @@ function rateLimited(ip: string) {
   return recent.length > MAX_PER_WINDOW;
 }
 
-const productById = new Map(products.map((p) => [p.id, p]));
 const clip = (v: unknown, max: number) => (typeof v === "string" ? v.trim().slice(0, max) : "");
 
 export async function POST(request: Request) {
@@ -68,15 +66,6 @@ export async function POST(request: Request) {
     message: clip(raw.message, 5000),
     consent: raw.consent === true,
     locale: raw.locale === "ar" ? "ar" : "en",
-    items: Array.isArray(raw.items)
-      ? raw.items.slice(0, 60).flatMap((it) => {
-          // Names come from the catalog on the server, never from the browser.
-          const o = (it ?? {}) as Record<string, unknown>;
-          const product = productById.get(clip(o.id, 80));
-          if (!product) return [];
-          return [{ id: product.id, name: product.name.en, qty: Math.max(1, Math.min(9999, Math.round(Number(o.qty) || 1))) }];
-        })
-      : [],
   };
 
   const errors = validateQuote(input);

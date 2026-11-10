@@ -19,9 +19,9 @@ Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL` and `QUOTE_WE
 
 | Route | Page |
 |---|---|
-| `/{en,ar}` | Home — video hero, introduction, solutions index, laboratory showcase, commitments, partners, featured projects, quote form |
+| `/{en,ar}` | Home — video hero, introduction, product-category mosaic, laboratory showcase, commitments, partners, featured projects, quote form |
 | `/{locale}/about` | Overview, vision, mission, values, expertise, quality commitment, capabilities |
-| `/{locale}/products` | Catalog — category & type filters, search (Arabic-normalised), spec disclosures, quote list |
+| `/{locale}/products` | 13 product categories as an image mosaic; each opens the quote form with the category preselected (`/contact?interest=<id>`) |
 | `/{locale}/laboratory-solutions` | Six-stage process (planning → handover), laboratory types |
 | `/{locale}/projects`, `/{locale}/projects/[slug]` | Portfolio with sector filter; detail pages with gallery lightbox |
 | `/{locale}/contact` | Quote form, WhatsApp, email, phone, location |
@@ -33,8 +33,7 @@ Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL` and `QUOTE_WE
 |---|---|
 | Company name, logo files, brand colours, contact details, WhatsApp, address, social links, **demo mode** | `src/content/site.ts` |
 | Page copy (EN + AR) | `src/content/pages.ts` |
-| The eight solution areas + "what you can expect" commitments | `src/content/solutions.ts` |
-| Product catalog (types, categories, spec fields) | `src/content/products.ts` |
+| The 13 product categories (title, description, image) + "what you can expect" commitments | `src/content/solutions.ts` |
 | Projects / case studies | `src/content/projects.ts` |
 | Manufacturer / partner logos | `partners` array in `src/components/sections/Partners.tsx` |
 | UI strings (buttons, form, errors) | `src/i18n/dictionaries.ts` |
@@ -52,7 +51,6 @@ Everything below is a clearly marked placeholder. Nothing on the site invents cl
 - [ ] `Partners.tsx` → add only manufacturers the company is authorised to represent
 - [ ] `solutions.ts` → confirm each "commitment" describes actual practice
 - [ ] `pages.ts` → `about.overview` / `about.quality`: add company history, registrations or certifications **only if held**
-- [ ] `products.ts` → add real models/specs per product via `specs: [{ key, value: { en, ar } }]` (until then each field reads "Confirmed per model")
 - [ ] Imagery: licensed Mixkit stock footage stills. Replace with company photography when available (same file names in `public/media/img/`)
 - [ ] Set `demoMode: false` in `site.ts` → removes every "Demo content" tag and the partner placeholder slots
 - [ ] Set `QUOTE_WEBHOOK_URL` and send a test request

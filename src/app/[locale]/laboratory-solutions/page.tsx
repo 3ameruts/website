@@ -4,7 +4,6 @@ import Image from "next/image";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { labPage } from "@/content/pages";
-import { products } from "@/content/products";
 import { site } from "@/content/site";
 import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { lp } from "@/lib/i18n";
@@ -23,7 +22,6 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/laborato
 export default async function LabSolutionsPage({ params }: PageProps<"/[locale]/laboratory-solutions">) {
   const locale = (await params).locale as Locale;
   const dict = getDictionary(locale);
-  const packages = products.filter((p) => p.category === "setup");
   const service = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -63,17 +61,17 @@ export default async function LabSolutionsPage({ params }: PageProps<"/[locale]/
         <div className="frame">
           <SectionHead id="types-title" title={labPage.typesTitle[locale]} />
           <ul className="mt-14 border-t border-navy/20">
-            {packages.map((p) => (
-              <li key={p.id} className="border-b border-navy/20">
+            {labPage.types.map((t) => (
+              <li key={t.title.en} className="border-b border-navy/20">
                 <Link
-                  href={`${lp(locale, "/products")}?category=setup`}
+                  href={`${lp(locale, "/contact")}?interest=lab-setup#quote`}
                   className="group grid grid-cols-[4.5rem_1fr_auto] items-center gap-5 py-6 md:grid-cols-[8rem_minmax(0,1fr)_minmax(0,1.2fr)_auto] md:gap-8"
                 >
                   <span className="relative block aspect-square overflow-hidden bg-white md:aspect-[4/3]">
-                    <Image src={p.image} alt="" fill sizes="128px" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <Image src={t.image} alt="" fill sizes="128px" className="object-cover transition-[scale] duration-700 group-hover:scale-105" />
                   </span>
-                  <span className="t-h3">{p.name[locale]}</span>
-                  <span className="col-span-3 hidden text-slate md:col-span-1 md:block">{p.summary[locale]}</span>
+                  <span className="t-h3">{t.title[locale]}</span>
+                  <span className="col-span-3 hidden text-slate md:col-span-1 md:block">{t.body[locale]}</span>
                   <Arrow className="transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
                 </Link>
               </li>

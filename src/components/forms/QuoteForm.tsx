@@ -1,18 +1,15 @@
 "use client";
 
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { solutions } from "@/content/solutions";
-import { products } from "@/content/products";
-import { quoteStore, useQuoteList } from "@/lib/quote-store";
-import { INTERESTS, toWesternDigits, validateQuote, type FieldErrors } from "@/lib/quote-validation";
+import { INTERESTS, validateQuote, type FieldErrors } from "@/lib/quote-validation";
 import { Arrow } from "@/components/ui/Arrow";
 
 type Status = "idle" | "sending" | "success" | "error";
 type FieldName = keyof FieldErrors;
 
-const productById = Object.fromEntries(products.map((p) => [p.id, p]));
 
 export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "light" | "dark" }) {
   const dict = getDictionary(locale);
@@ -21,17 +18,22 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
   const id = (n: string) => `${uid}-${n}`;
   const formRef = useRef<HTMLFormElement>(null);
   const statusRef = useRef<HTMLDivElement>(null);
-  const items = useQuoteList();
   const [values, setValues] = useState({ name: "", company: "", email: "", phone: "", interest: "", message: "", consent: false, website: "" });
   const [errors, setErrors] = useState<FieldErrors>({});
   const [touched, setTouched] = useState<Partial<Record<FieldName, boolean>>>({});
   const [status, setStatus] = useState<Status>("idle");
   const [serverError, setServerError] = useState<string>("");
 
-  // Preselect the interest from the first quote-list item.
-  const interest = values.interest || (items[0] ? productById[items[0].id]?.category ?? "" : "");
+  // Preselect the category from links such as /contact?interest=glassware#quote.
+  useEffect(() => {
+    const fromUrl = new URLSearchParams(window.location.search).get("interest");
+    if (fromUrl && (INTERESTS as readonly string[]).includes(fromUrl)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time sync from the URL (external source)
+      setValues((v) => (v.interest ? v : { ...v, interest: fromUrl }));
+    }
+  }, []);
 
-  const current = { ...values, interest };
+  const current = values;
   const set = (name: keyof typeof values, value: string | boolean) => {
     const next = { ...current, [name]: value };
     setValues(next);
@@ -63,13 +65,11 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
         body: JSON.stringify({
           ...current,
           locale,
-          items: items.map((it) => ({ id: it.id, name: productById[it.id]?.name.en ?? it.id, qty: it.qty })),
         }),
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.ok) {
         setStatus("success");
-        quoteStore.clear();
         setValues({ name: "", company: "", email: "", phone: "", interest: "", message: "", consent: false, website: "" });
         setTouched({});
         requestAnimationFrame(() => statusRef.current?.focus());
@@ -136,32 +136,6 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
         )}
       </div>
 
-      {items.length > 0 && (
-        <fieldset className={`mb-8 border p-5 ${dark ? "border-white/25" : "border-line bg-mist"}`}>
-          <legend className="px-2 text-[0.95rem] font-semibold">{f.quoteList}</legend>
-          <ul className="divide-y divide-line/60">
-            {items.map((it) => {
-              const p = productById[it.id];
-              if (!p) return null;
-              return (
-                <li key={it.id} className="flex flex-wrap items-center justify-between gap-3 py-3">
-                  <span className="min-w-0 flex-1 font-medium">{p.name[locale]}</span>
-                  <span className="flex items-center gap-3">
-                    <label className="sr-only" htmlFor={id(`qty-${it.id}`)}>
-                      {f.quantity}: {p.name[locale]}
-                    </label>
-                    <QtyInput id={id(`qty-${it.id}`)} value={it.qty} onCommit={(n) => quoteStore.setQty(it.id, n)} />
-                    <button type="button" onClick={() => quoteStore.remove(it.id)} className="link text-sm">
-                      {dict.catalog.remove}
-                      <span className="sr-only"> {p.name[locale]}</span>
-                    </button>
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
-        </fieldset>
-      )}
 
       <div className="grid gap-x-5 gap-y-6 sm:grid-cols-2">
         <div>
@@ -199,7 +173,7 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
             <option value="">{f.interestPlaceholder}</option>
             {INTERESTS.map((k) => (
               <option key={k} value={k}>
-                {k === "other" ? f.other : solutions.find((s) => s.id === k)?.title[locale]}
+                {k === "other" ? f.other : k === "lab-setup" ? f.labSetup : solutions.find((s) => s.id === k)?.title[locale]}
               </option>
             ))}
           </select>
@@ -245,22 +219,3 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
   );
 }
 
-/** Quantity field that can be cleared while typing; commits a valid number on blur. */
-function QtyInput({ id, value, onCommit }: { id: string; value: number; onCommit: (n: number) => void }) {
-  const [draft, setDraft] = useState<string | null>(null);
-  return (
-    <input
-      id={id}
-      type="text"
-      inputMode="numeric"
-      pattern="[0-9]*"
-      value={draft ?? String(value)}
-      onChange={(e) => setDraft(toWesternDigits(e.target.value).replace(/[^0-9]/g, "").slice(0, 4))}
-      onBlur={() => {
-        if (draft !== null) onCommit(Number(draft) || 1);
-        setDraft(null);
-      }}
-      className="field tabular !min-h-10 w-20 !py-1.5 text-center"
-    />
-  );
-}

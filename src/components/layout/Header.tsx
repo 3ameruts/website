@@ -6,7 +6,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { lp, switchLocalePath } from "@/lib/i18n";
-import { useQuoteList } from "@/lib/quote-store";
 import { Logo } from "./Logo";
 
 type Lenisish = { stop: () => void; start: () => void };
@@ -26,7 +25,6 @@ export function Header({ locale }: { locale: Locale }) {
       return next ? window.location.pathname : null;
     });
   }, []);
-  const quote = useQuoteList();
   const panelRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
@@ -101,7 +99,6 @@ export function Header({ locale }: { locale: Locale }) {
   }, [open, close]);
 
   const solid = scrolled && !open;
-  const count = quote.length;
 
   return (
     <>
@@ -180,12 +177,6 @@ export function Header({ locale }: { locale: Locale }) {
               className={`btn btn-sm hidden sm:inline-flex ${solid ? "" : "btn-light"}`}
             >
               {dict.nav.requestQuote}
-              {count > 0 && (
-                <span className="tabular grid h-5 min-w-5 place-items-center rounded-full bg-teal px-1 text-xs font-bold text-navy-deep">
-                  <span className="sr-only">, </span>
-                  {count}
-                </span>
-              )}
             </Link>
             <button
               ref={toggleRef}
@@ -255,7 +246,6 @@ export function Header({ locale }: { locale: Locale }) {
             className="btn btn-light w-full"
           >
             {dict.nav.requestQuote}
-            {count > 0 && <span className="tabular">({count})</span>}
           </Link>
         </div>
         <div className="band band-light" aria-hidden />

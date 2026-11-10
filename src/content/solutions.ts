@@ -1,20 +1,26 @@
 import type { L } from "@/i18n/config";
 
 /**
- * The eight solution areas. They drive the home "Solutions index", the
- * catalog categories and the quote-form "interest" options.
- * Order matters: medical sits in the first rows so hospital buyers see
- * themselves immediately.
+ * PRODUCT CATEGORIES (client-supplied list).
+ * Drives the home "categories" mosaic, the Products & Solutions page and the
+ * quote-form options. No individual items or specifications are listed:
+ * each category is quoted on request.
+ * To add / reorder / rename a category, edit this array only.
  */
 export type SolutionId =
-  | "medical"
-  | "lab-equipment"
-  | "instruments"
+  | "glassware"
+  | "equipment"
   | "consumables"
+  | "school-lab"
   | "furniture"
-  | "setup"
-  | "design"
-  | "research";
+  | "cell-culture"
+  | "blood-tissue"
+  | "assay-kits"
+  | "reagents"
+  | "clinical-lab"
+  | "robotics"
+  | "safety"
+  | "maintenance";
 
 export type Solution = {
   id: SolutionId;
@@ -22,98 +28,140 @@ export type Solution = {
   summary: L;
   image: string;
   imageAlt: L;
-  /** Where the row links to. */
-  href: "/products" | "/laboratory-solutions";
 };
+
+const I = (n: string) => `/media/img/${n}.jpg`;
 
 export const solutions: Solution[] = [
   {
-    id: "medical",
-    title: { en: "Medical equipment & supplies", ar: "الأجهزة والمستلزمات الطبية" },
+    id: "glassware",
+    title: { en: "Laboratory glassware", ar: "الزجاجيات المخبرية" },
     summary: {
-      en: "Patient monitoring, diagnostic devices, clinical instruments and medical disposables for hospitals and clinics.",
-      ar: "أجهزة مراقبة المرضى، وأجهزة التشخيص، والأدوات السريرية، والمستهلكات الطبية للمستشفيات والعيادات.",
+      en: "Glassware for everyday laboratory work and precise volumetric measurement.",
+      ar: "زجاجيات للعمل المخبري اليومي وللقياسات الحجمية الدقيقة.",
     },
-    image: "/media/img/medical-monitor.jpg",
-    imageAlt: { en: "Patient monitor at a hospital bedside", ar: "جهاز مراقبة مريض بجانب سرير في مستشفى" },
-    href: "/products",
+    image: I("cat-glassware"),
+    imageAlt: { en: "Laboratory glassware with a dropper", ar: "زجاجيات مخبرية مع قطّارة" },
   },
   {
-    id: "lab-equipment",
+    id: "equipment",
     title: { en: "Laboratory equipment", ar: "الأجهزة المخبرية" },
     summary: {
-      en: "Centrifuges, balances, incubators, cold storage, safety cabinets and sterilisation — the working core of every lab.",
-      ar: "أجهزة الطرد المركزي، والموازين، والحاضنات، والتخزين المبرّد، وخزائن السلامة الحيوية، والتعقيم — أساس العمل في كل مختبر.",
+      en: "Instruments and equipment for research, teaching, diagnostic and quality-control laboratories.",
+      ar: "أجهزة ومعدات لمختبرات البحث والتعليم والتشخيص وضبط الجودة.",
     },
-    image: "/media/img/lab-equipment-operator.jpg",
-    imageAlt: { en: "Technician operating laboratory equipment in a clean room", ar: "فنية تشغّل جهازًا مخبريًا في غرفة نظيفة" },
-    href: "/products",
-  },
-  {
-    id: "instruments",
-    title: { en: "Scientific instruments", ar: "الأجهزة العلمية" },
-    summary: {
-      en: "Microscopy, spectrophotometry, analytical meters and diagnostic analysers, matched to the methods you run.",
-      ar: "المجاهر، وأجهزة القياس الطيفي، وأجهزة التحليل والقياس، والمحلّلات التشخيصية، بما يتوافق مع طرق العمل لديك.",
-    },
-    image: "/media/img/instrument-microscope.jpg",
-    imageAlt: { en: "Laboratory microscope with a sample being prepared", ar: "مجهر مخبري أثناء تحضير عيّنة" },
-    href: "/products",
+    image: I("instrument-microscope"),
+    imageAlt: { en: "Laboratory microscope in use", ar: "مجهر مخبري قيد الاستخدام" },
   },
   {
     id: "consumables",
     title: { en: "Laboratory consumables", ar: "المستهلكات المخبرية" },
     summary: {
-      en: "Pipettes and tips, tubes, culture media, glassware, reagents and protective equipment — supplied on a schedule you can plan around.",
-      ar: "الماصّات ورؤوسها، والأنابيب، والأوساط الزرعية، والزجاجيات، والكواشف، ومعدات الوقاية — بتوريد منتظم يمكنك التخطيط له.",
+      en: "The everyday supplies a laboratory runs on, delivered on a schedule you can plan around.",
+      ar: "المستلزمات اليومية التي يعتمد عليها المختبر، بتوريد منتظم يمكنك التخطيط له.",
     },
-    image: "/media/img/consumables-tubes.jpg",
-    imageAlt: { en: "Rows of sample tubes being filled with a pipette", ar: "صفوف من أنابيب العيّنات تُملأ بالماصّة" },
-    href: "/products",
+    image: I("consumables-tubes"),
+    imageAlt: { en: "Sample tubes being filled with a pipette", ar: "أنابيب عيّنات تُملأ بالماصّة" },
+  },
+  {
+    id: "school-lab",
+    title: { en: "School science laboratory", ar: "مختبرات العلوم المدرسية" },
+    summary: {
+      en: "Equipment, supplies and furniture for safe, hands-on science teaching in schools.",
+      ar: "أجهزة ومستلزمات وأثاث لتعليم العلوم عمليًا وبأمان في المدارس.",
+    },
+    image: I("cat-school-lab"),
+    imageAlt: { en: "Students and teachers in a school chemistry laboratory", ar: "طلاب ومعلمون في مختبر كيمياء مدرسي" },
   },
   {
     id: "furniture",
     title: { en: "Laboratory furniture", ar: "الأثاث المخبري" },
     summary: {
-      en: "Benches, workstations, storage, fume extraction and wash stations, sized to your rooms and your workflow.",
-      ar: "طاولات العمل، ومحطات العمل، والخزائن، وأنظمة شفط الأبخرة، ومحطات الغسيل، بمقاسات تناسب مساحتك وسير عملك.",
+      en: "Benches, storage and fume extraction sized to your rooms and your workflow.",
+      ar: "طاولات عمل وخزائن وأنظمة شفط أبخرة بمقاسات تناسب مساحتك وسير عملك.",
     },
-    image: "/media/img/lab-room-bright.jpg",
-    imageAlt: { en: "Bright laboratory with benches and a microscope workstation", ar: "مختبر مضيء بطاولات عمل ومحطة مجهر" },
-    href: "/products",
+    image: I("lab-room-bright"),
+    imageAlt: { en: "Bright laboratory with workbenches", ar: "مختبر مضيء بطاولات عمل" },
   },
   {
-    id: "setup",
-    title: { en: "Complete laboratory setup", ar: "تجهيز المختبرات المتكاملة" },
+    id: "cell-culture",
+    title: { en: "Cell culture media", ar: "أوساط زراعة الخلايا" },
     summary: {
-      en: "Clinical, research, teaching, quality-control and microbiology laboratories delivered as one coordinated package.",
-      ar: "مختبرات سريرية وبحثية وتعليمية ومختبرات ضبط الجودة والأحياء الدقيقة، تُسلَّم حزمةً واحدة متكاملة.",
+      en: "Media and supplies for cell culture and microbiology work.",
+      ar: "أوساط ومستلزمات لأعمال زراعة الخلايا والأحياء الدقيقة.",
     },
-    image: "/media/img/facility-review.jpg",
-    imageAlt: { en: "Two engineers reviewing a laboratory facility", ar: "مهندسان يراجعان منشأة مخبرية" },
-    href: "/laboratory-solutions",
+    image: I("petri-dish"),
+    imageAlt: { en: "Culture plates being prepared", ar: "تحضير أطباق الزراعة" },
   },
   {
-    id: "design",
-    title: { en: "Laboratory design & installation", ar: "تصميم المختبرات وتركيبها" },
+    id: "blood-tissue",
+    title: { en: "Blood & tissue", ar: "الدم والأنسجة" },
     summary: {
-      en: "Layout planning, utilities coordination, installation, commissioning and user training — from drawing to first sample.",
-      ar: "تخطيط المساحات، وتنسيق التمديدات، والتركيب، والتشغيل، وتدريب المستخدمين — من المخطط حتى أول عيّنة.",
+      en: "Products for the collection, processing and analysis of blood and tissue samples.",
+      ar: "منتجات لجمع عيّنات الدم والأنسجة ومعالجتها وتحليلها.",
     },
-    image: "/media/img/infrastructure-pipes.jpg",
-    imageAlt: { en: "Engineers inspecting laboratory service pipework", ar: "مهندسون يتفقدون تمديدات الخدمات في مختبر" },
-    href: "/laboratory-solutions",
+    image: I("research-team-samples"),
+    imageAlt: { en: "Specialists handling sample tubes", ar: "مختصتان تتعاملان مع أنابيب العيّنات" },
   },
   {
-    id: "research",
-    title: { en: "Research & scientific solutions", ar: "حلول البحث العلمي" },
+    id: "assay-kits",
+    title: { en: "Assay kits", ar: "أطقم الفحوصات (Assay Kits)" },
     summary: {
-      en: "Equipment and workflow advice for molecular biology, cell culture and applied research groups.",
-      ar: "أجهزة واستشارات في سير العمل لمجموعات البيولوجيا الجزيئية وزراعة الخلايا والبحث التطبيقي.",
+      en: "Ready-to-use kits for diagnostic and research assays.",
+      ar: "أطقم جاهزة للاستخدام للفحوصات التشخيصية والبحثية.",
     },
-    image: "/media/img/research-team-samples.jpg",
-    imageAlt: { en: "Researchers handling samples at a microscope", ar: "باحثتان تتعاملان مع العيّنات بجانب مجهر" },
-    href: "/products",
+    image: I("reagents-blue"),
+    imageAlt: { en: "Test tubes in a rack on a laboratory bench", ar: "أنابيب اختبار في حامل على طاولة مخبرية" },
+  },
+  {
+    id: "reagents",
+    title: { en: "Reagents & chemicals", ar: "الكواشف والمواد الكيميائية" },
+    summary: {
+      en: "Analytical and laboratory-grade reagents and chemicals.",
+      ar: "كواشف ومواد كيميائية بدرجات تحليلية ومخبرية.",
+    },
+    image: I("chemist-bench"),
+    imageAlt: { en: "Chemist working with reagents at a bench", ar: "كيميائي يعمل بالكواشف على طاولة مخبرية" },
+  },
+  {
+    id: "clinical-lab",
+    title: { en: "Clinical & hospital laboratory", ar: "المختبرات السريرية ومختبرات المستشفيات" },
+    summary: {
+      en: "Equipment and supplies for diagnostic laboratories in hospitals and clinics.",
+      ar: "أجهزة ومستلزمات لمختبرات التشخيص في المستشفيات والعيادات.",
+    },
+    image: I("lab-bench-microscopy"),
+    imageAlt: { en: "Laboratory specialist at a microscope", ar: "مختصة مخبرية أمام المجهر" },
+  },
+  {
+    id: "robotics",
+    title: { en: "Robotics & electronics", ar: "الروبوتات والإلكترونيات" },
+    summary: {
+      en: "Robotics and electronics kits for STEM education and hands-on learning.",
+      ar: "أطقم روبوتات وإلكترونيات لتعليم العلوم والتكنولوجيا والتعلّم العملي.",
+    },
+    image: I("cat-robotics"),
+    imageAlt: { en: "Teacher explaining a robotic arm to students", ar: "معلم يشرح آلية ذراع روبوتية للطلاب" },
+  },
+  {
+    id: "safety",
+    title: { en: "Safety kits", ar: "أدوات ومعدات السلامة" },
+    summary: {
+      en: "Personal protective equipment and safety supplies for laboratory work.",
+      ar: "معدات الوقاية الشخصية ومستلزمات السلامة للعمل المخبري.",
+    },
+    image: I("cat-safety"),
+    imageAlt: { en: "Researcher in full protective clothing", ar: "باحث يرتدي لباس الوقاية الكامل" },
+  },
+  {
+    id: "maintenance",
+    title: { en: "Maintenance", ar: "الصيانة" },
+    summary: {
+      en: "Installation, preventive maintenance and after-sales service for laboratory equipment.",
+      ar: "التركيب والصيانة الوقائية وخدمة ما بعد البيع للأجهزة المخبرية.",
+    },
+    image: I("lab-equipment-operator"),
+    imageAlt: { en: "Technician operating laboratory equipment", ar: "فنية تشغّل جهازًا مخبريًا" },
   },
 ];
 

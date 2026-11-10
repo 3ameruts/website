@@ -1,15 +1,8 @@
 /** Shared by the client form and the API route — one source of truth. */
-export const INTERESTS = [
-  "medical",
-  "lab-equipment",
-  "instruments",
-  "consumables",
-  "furniture",
-  "setup",
-  "design",
-  "research",
-  "other",
-] as const;
+import { solutions } from "@/content/solutions";
+
+/** Product categories + complete laboratory setup + other. */
+export const INTERESTS = [...solutions.map((s) => s.id), "lab-setup", "other"] as const;
 
 export type QuoteInput = {
   name: string;
@@ -19,7 +12,6 @@ export type QuoteInput = {
   interest: string;
   message: string;
   consent: boolean;
-  items: { id: string; name: string; qty: number }[];
   locale: string;
   website?: string; // honeypot
 };

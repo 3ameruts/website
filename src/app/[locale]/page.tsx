@@ -6,7 +6,9 @@ import { buildMetadata } from "@/lib/seo";
 import { lp } from "@/lib/i18n";
 import { Hero } from "@/components/sections/Hero";
 import { Intro } from "@/components/sections/Intro";
-import { SolutionsIndex } from "@/components/sections/SolutionsIndex";
+import { CategoryMosaic } from "@/components/sections/CategoryMosaic";
+import Link from "next/link";
+import { Arrow } from "@/components/ui/Arrow";
 import { Showcase } from "@/components/sections/Showcase";
 import { Commitments } from "@/components/sections/Commitments";
 import { Partners } from "@/components/sections/Partners";
@@ -46,9 +48,19 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         className="section-y border-t border-line bg-white"
       >
         <div className="frame">
-          <SectionHead id="solutions-title" title={home.solutions.title[locale]} body={home.solutions.body[locale]} />
-          <div className="mt-14 md:mt-20">
-            <SolutionsIndex locale={locale} cta={dict.common.viewProducts} ctaLab={dict.nav.labSolutions} />
+          <SectionHead
+            id="solutions-title"
+            title={home.solutions.title[locale]}
+            body={home.solutions.body[locale]}
+            aside={
+              <Link href={lp(locale, "/products")} className="link mt-5 inline-flex items-center gap-2 font-semibold">
+                {home.solutions.viewAll[locale]}
+                <Arrow />
+              </Link>
+            }
+          />
+          <div className="mt-12 md:mt-16">
+            <CategoryMosaic locale={locale} variant="compact" ctaLabel={dict.common.learnMore} />
           </div>
         </div>
       </section>

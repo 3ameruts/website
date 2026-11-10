@@ -8,7 +8,7 @@ A complete, production-built, bilingual (English LTR / Arabic RTL) website — 6
 |---|---|
 | Home | 15s graded hero film (3 shots: scientist at the microscope → equipment operation → laboratory facility), editorial introduction, interactive solutions index (8 areas), 4-panel laboratory showcase, "what you can expect" specification sheet, partner slots (demo only), featured projects, quote form |
 | About | Overview, vision, mission, values, expertise, quality commitment, capabilities |
-| Products & solutions | 40 product types across 8 categories / 19 types; search (Arabic-normalised), filters, spec disclosures (no invented values), quote list that pre-fills the form |
+| Products & solutions | The client's 13 product categories as an image mosaic; each category opens the quote form preselected. No individual items or specifications are listed. |
 | Laboratory solutions | Ambient corridor film, 6-stage process with sticky image swap, laboratory types, CTA |
 | Projects | Sector filter, editorial grid, 6 demo case studies with gallery lightbox (marked demo, `noindex`) |
 | Contact | Quote form, WhatsApp / email / phone channels, location and map placeholder |

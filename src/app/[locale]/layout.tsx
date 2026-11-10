@@ -11,7 +11,6 @@ import { MotionProvider } from "@/components/motion/MotionProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollGauge } from "@/components/layout/ScrollGauge";
-import { MobileQuoteBar } from "@/components/layout/MobileQuoteBar";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -72,7 +71,6 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
           </main>
           <Footer locale={locale} dict={dict} />
           <ScrollGauge label={dict.gauge.label} />
-          <MobileQuoteBar locale={locale} />
         </MotionProvider>
         <JsonLd data={organizationJsonLd(locale)} />
       </body>
