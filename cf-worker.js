@@ -41,7 +41,7 @@ async function serveVideo(request, env) {
   return new Response(request.method === "HEAD" ? null : body.slice(start, end + 1), { status: 206, headers });
 }
 
-export default {
+const worker = {
   async fetch(request, env, ctx) {
     const { pathname } = new URL(request.url);
     if (pathname.startsWith(VIDEO_PREFIX) && (request.method === "GET" || request.method === "HEAD")) {
@@ -50,3 +50,5 @@ export default {
     return openNext.fetch(request, env, ctx);
   },
 };
+
+export default worker;
