@@ -76,6 +76,10 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           <p>
             © {year} {site.brand.name[locale]}. {dict.footer.rights}
           </p>
+          {/* Studio credit — kept in English in both languages. */}
+          <p className="text-white/55">
+            <span lang="en" dir="ltr">Created By UTS</span>
+          </p>
         </div>
       </div>
       <div className="band band-light" aria-hidden />
