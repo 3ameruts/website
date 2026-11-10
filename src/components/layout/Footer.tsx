@@ -32,7 +32,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           </div>
         </div>
 
-        <div className="col-span-4 sm:col-span-2 md:col-span-4 lg:col-span-2 lg:col-start-8">
+        <div className="footer-explore col-span-4 sm:col-span-2 md:col-span-4 lg:col-span-2 lg:col-start-8">
           <h2 className="t-label">{dict.footer.explore}</h2>
           <ul className="mt-4 space-y-2.5">
             {links.map((l) => (
@@ -45,7 +45,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           </ul>
         </div>
 
-        <div className="col-span-4 sm:col-span-2 md:col-span-6 lg:col-span-3 lg:col-start-10">
+        <div className="footer-contact col-span-4 sm:col-span-2 md:col-span-6 lg:col-span-3 lg:col-start-10">
           <h2 className="t-label flex flex-wrap items-center gap-2">
             {dict.footer.contact}
             {site.demoMode && <DemoTag label={dict.common.demo} />}
