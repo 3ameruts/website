@@ -39,6 +39,7 @@ const en = {
     next: "Next",
     close: "Close",
     mapPlaceholder: "Map will appear here once the address is confirmed.",
+    mapTitle: "Our location on the map",
     openMap: "Open in maps",
   },
   gauge: {
@@ -88,6 +89,7 @@ const en = {
     quantity: "Quantity",
     orReach: "Prefer to talk?",
     whatsappCta: "Message us on WhatsApp",
+    whatsappGreeting: "Hello, I would like to ask about your products and services.",
   },
   catalog: {
     search: "Search products",
@@ -175,6 +177,7 @@ const ar: Dictionary = {
     next: "التالي",
     close: "إغلاق",
     mapPlaceholder: "ستظهر الخريطة هنا بعد تأكيد العنوان.",
+    mapTitle: "موقعنا على الخريطة",
     openMap: "افتح في الخرائط",
   },
   gauge: {
@@ -224,6 +227,7 @@ const ar: Dictionary = {
     quantity: "الكمية",
     orReach: "هل تفضّل التحدث إلينا مباشرة؟",
     whatsappCta: "راسلنا عبر واتساب",
+    whatsappGreeting: "مرحبًا، أودّ الاستفسار عن منتجاتكم وخدماتكم.",
   },
   catalog: {
     search: "ابحث في المنتجات",

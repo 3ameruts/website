@@ -138,7 +138,7 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
                 <a href={`mailto:${site.contact.salesEmail}`} className="link" dir="ltr">
                   {site.contact.salesEmail}
                 </a>
-                <a href={whatsappLink()} className="link" target="_blank" rel="noopener noreferrer">
+                <a href={whatsappLink(f.whatsappGreeting)} className="link" target="_blank" rel="noopener noreferrer">
                   {f.whatsappCta}
                 </a>
               </p>

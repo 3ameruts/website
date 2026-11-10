@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { contactPage } from "@/content/pages";
-import { site, whatsappLink } from "@/content/site";
+import { mapEmbedUrl, site, whatsappLink } from "@/content/site";
 import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo";
 import { lp } from "@/lib/i18n";
 import { ContactSection } from "@/components/sections/ContactSection";
@@ -19,7 +19,7 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
   const locale = (await params).locale as Locale;
   const dict = getDictionary(locale);
   const channels = [
-    { title: dict.common.whatsapp, value: dict.form.whatsappCta, href: whatsappLink(), external: true },
+    { title: dict.common.whatsapp, value: dict.form.whatsappCta, href: whatsappLink(dict.form.whatsappGreeting), external: true },
     { title: dict.common.email, value: site.contact.salesEmail, href: `mailto:${site.contact.salesEmail}`, ltr: true },
     { title: dict.common.phone, value: site.contact.phoneDisplay, href: `tel:${site.contact.phoneHref}`, ltr: true },
   ];
@@ -60,26 +60,33 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
               <p className="t-h3 mt-4">{site.contact.address[locale]}</p>
               <p className="mt-3 text-slate">{site.contact.hours[locale]}</p>
             </div>
-            {/* Map placeholder — set site.contact.mapUrl and replace with an embed when the address is confirmed. */}
-            <div className="relative grid min-h-64 place-items-center overflow-hidden bg-white p-8 text-center">
-              <svg aria-hidden className="absolute inset-0 h-full w-full text-navy/[0.07]" preserveAspectRatio="none">
-                <defs>
-                  <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
-                    <path d="M32 0H0V32" fill="none" stroke="currentColor" strokeWidth="1" />
-                  </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#grid)" />
-              </svg>
-              <div className="relative">
-                <svg aria-hidden viewBox="0 0 24 32" width="24" height="32" className="mx-auto text-teal"><path d="M12 0C5.4 0 0 5.3 0 11.9 0 20.8 12 32 12 32s12-11.2 12-20.1C24 5.3 18.6 0 12 0z" fill="currentColor" /><circle cx="12" cy="12" r="4.5" fill="#fff" /></svg>
-                <p className="mt-4 font-semibold">{dict.common.mapPlaceholder}</p>
+            {/* Office map — building pin by coordinates (site.contact.geo). */}
+            {mapEmbedUrl(locale) ? (
+              <div className="relative min-h-72 bg-white md:min-h-80">
+                <iframe
+                  src={mapEmbedUrl(locale)!}
+                  title={dict.common.mapTitle}
+                  className="absolute inset-0 h-full w-full border-0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
                 {site.contact.mapUrl && (
-                  <a href={site.contact.mapUrl} target="_blank" rel="noopener noreferrer" className="link mt-3 inline-block">
+                  <a
+                    href={site.contact.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-sm absolute bottom-4 start-4 shadow-sm"
+                  >
                     {dict.common.openMap}
                   </a>
                 )}
               </div>
-            </div>
+            ) : (
+              <div className="relative grid min-h-64 place-items-center bg-white p-8 text-center">
+                <p className="font-semibold">{dict.common.mapPlaceholder}</p>
+              </div>
+            )}
           </div>
         </div>
       </section>

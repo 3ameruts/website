@@ -10,7 +10,7 @@ export function ContactDetails({ locale, dict }: { locale: Locale; dict: Diction
   const rows = [
     { label: dict.common.email, value: c.email, href: `mailto:${c.email}`, ltr: true },
     { label: dict.common.phone, value: c.phoneDisplay, href: `tel:${c.phoneHref}`, ltr: true },
-    { label: dict.common.whatsapp, value: dict.form.whatsappCta, href: whatsappLink(), external: true },
+    { label: dict.common.whatsapp, value: dict.form.whatsappCta, href: whatsappLink(dict.form.whatsappGreeting), external: true },
     { label: dict.common.location, value: c.address[locale], href: c.mapUrl ?? undefined, external: true },
     { label: dict.common.hours, value: c.hours[locale] },
   ];

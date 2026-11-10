@@ -26,7 +26,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               {dict.common.requestQuote}
               <Arrow />
             </Link>
-            <a href={whatsappLink()} className="btn btn-outline" target="_blank" rel="noopener noreferrer">
+            <a href={whatsappLink(dict.form.whatsappGreeting)} className="btn btn-outline" target="_blank" rel="noopener noreferrer">
               {dict.form.whatsappCta}
             </a>
           </div>

@@ -48,7 +48,7 @@ export const site = {
     /** REPLACE — all of the following. Format phone numbers in E.164 for links. */
     phoneDisplay: "+000 00 000 0000",
     phoneHref: "+000000000000",
-    whatsappNumber: "000000000000", // digits only, international format, no "+"
+    whatsappNumber: "962786629939", // TEMPORARY test number (+962 7 8662 9939) — digits only, no "+"
     email: "info@example.com",
     salesEmail: "sales@example.com",
     address: {
@@ -59,8 +59,12 @@ export const site = {
       en: "Sunday – Thursday, 8:00 – 17:00", // REPLACE
       ar: "الأحد – الخميس، 8:00 – 17:00",
     } satisfies L,
-    /** REPLACE — a Google Maps / OpenStreetMap share link for the office. */
-    mapUrl: null as string | null,
+    /**
+     * Office location (building pin by coordinates only — no business listing).
+     * Used for the contact-page map and "Open in maps" links.
+     */
+    geo: { lat: 32.0220711, lng: 35.7996477 } as { lat: number; lng: number } | null,
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=32.0220711,35.7996477" as string | null,
   },
 
   social: {
@@ -70,6 +74,12 @@ export const site = {
     x: "",
   },
 } as const;
+
+/** Google Maps embed for the office pin (no API key needed). */
+export function mapEmbedUrl(locale: string) {
+  const g = site.contact.geo;
+  return g ? `https://www.google.com/maps?q=${g.lat},${g.lng}&z=17&hl=${locale}&output=embed` : null;
+}
 
 export function whatsappLink(message?: string) {
   const base = `https://wa.me/${site.contact.whatsappNumber}`;
