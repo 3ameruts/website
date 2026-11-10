@@ -29,8 +29,9 @@ export default async function ProjectsPage({ params }: PageProps<"/[locale]/proj
       >
         <DemoTag label={dict.common.demoHint} className="mt-6" />
       </PageHero>
-      <section aria-label={dict.nav.projects} data-theme="light" className="section-y bg-white">
+      <section aria-labelledby="project-list-title" data-theme="light" className="section-y bg-white">
         <div className="frame">
+          <h2 id="project-list-title" className="sr-only">{dict.projects.listHeading}</h2>
           <ProjectsGrid locale={locale} />
         </div>
       </section>

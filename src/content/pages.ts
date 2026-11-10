@@ -5,8 +5,8 @@ import type { L } from "@/i18n/config";
 export const home = {
   meta: {
     title: {
-      en: "Medical & laboratory equipment and complete laboratory fit-outs",
-      ar: "أجهزة طبية ومخبرية وتجهيز المختبرات المتكاملة",
+      en: "Laboratory supplies & fit-outs",
+      ar: "المستلزمات المخبرية وتجهيز المختبرات",
     },
     description: {
       en: "Medical equipment, scientific instruments, consumables and laboratory furniture — specified, supplied and installed by one accountable team in Jordan.",
@@ -245,7 +245,7 @@ export const productsPage = {
   meta: {
     title: { en: "Products & solutions", ar: "المنتجات والحلول" },
     description: {
-      en: "Laboratory glassware, equipment, consumables, furniture, school science laboratories, cell culture media, blood & tissue, assay kits, reagents, clinical laboratories, robotics, safety and maintenance.",
+      en: "Laboratory glassware, equipment, consumables, furniture, reagents, assay kits, cell culture, school and clinical laboratories, robotics, safety and maintenance.",
       ar: "الزجاجيات والأجهزة والمستهلكات والأثاث المخبري، ومختبرات العلوم المدرسية، وأوساط زراعة الخلايا، والدم والأنسجة، وأطقم الفحوصات، والكواشف، والمختبرات السريرية، والروبوتات، والسلامة، والصيانة.",
     },
   },

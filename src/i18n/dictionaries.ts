@@ -123,9 +123,12 @@ const en = {
     gallery: "Gallery",
     openImage: (n: number) => `Open image ${n}`,
     more: "More projects",
+    listHeading: "Project list",
+    count: (n: number) => (n === 1 ? "1 project shown" : `${n} projects shown`),
   },
   notFound: {
     title: "This page could not be found",
+    metaTitle: "Page not found",
     body: "The link may be out of date. Use the navigation, or go back to the home page.",
     home: "Go to the home page",
   },
@@ -265,9 +268,18 @@ const ar: Dictionary = {
     gallery: "معرض الصور",
     openImage: (n: number) => `فتح الصورة ${n}`,
     more: "مشاريع أخرى",
+    listHeading: "قائمة المشاريع",
+    count: (n: number) => {
+      if (n === 1) return "يُعرض مشروع واحد";
+      if (n === 2) return "يُعرض مشروعان";
+      const m = n % 100;
+      if (m >= 3 && m <= 10) return `يُعرض ${n} مشاريع`;
+      return `يُعرض ${n} مشروعًا`;
+    },
   },
   notFound: {
     title: "تعذّر العثور على هذه الصفحة",
+    metaTitle: "الصفحة غير موجودة",
     body: "ربما يكون الرابط قديمًا. استخدم قائمة التنقل، أو عُد إلى الصفحة الرئيسية.",
     home: "انتقل إلى الصفحة الرئيسية",
   },

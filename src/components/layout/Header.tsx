@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -13,6 +13,7 @@ type Lenisish = { stop: () => void; start: () => void };
 export function Header({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
   const pathname = usePathname();
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   // The menu is "open at" a pathname: navigating elsewhere closes it without an effect.
@@ -103,6 +104,8 @@ export function Header({ locale }: { locale: Locale }) {
   return (
     <>
       <header
+        // Keyboard users: never leave a focused link hidden off-screen (WCAG 2.4.11).
+        onFocus={() => setHidden(false)}
         className={[
           "fixed inset-x-0 top-0 z-50 transition-[translate,transform,background-color,box-shadow,color] duration-500 ease-[var(--ease-out-expo)]",
           hidden && !open ? "-translate-y-full" : "",
@@ -163,10 +166,16 @@ export function Header({ locale }: { locale: Locale }) {
               hrefLang={otherLocale}
               lang={otherLocale}
               title={dict.nav.switchToLabel}
-              onClick={() => {
+              onClick={(e) => {
                 try {
                   document.cookie = `NEXT_LOCALE=${otherLocale};path=/;max-age=31536000;samesite=lax`;
                 } catch {}
+                // Keep ?query and #hash (e.g. a preselected quote category) when switching language.
+                const { search, hash } = window.location;
+                if (search || hash) {
+                  e.preventDefault();
+                  router.push(`${switchLocalePath(pathname, otherLocale)}${search}${hash}`);
+                }
               }}
               className="grid h-10 min-w-10 place-items-center px-2 text-[0.95rem] font-semibold"
             >

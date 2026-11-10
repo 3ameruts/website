@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: now,
         changeFrequency: path.startsWith("/projects/") ? "yearly" : "monthly",
         priority: path === "/" ? 1 : path.startsWith("/projects/") ? 0.5 : 0.8,
-        alternates: { languages: Object.fromEntries(locales.map((l) => [localeMeta[l].htmlLang, url(l)])) },
+        alternates: { languages: { ...Object.fromEntries(locales.map((l) => [localeMeta[l].htmlLang, url(l)])), "x-default": url("en") } },
       };
     }),
   );

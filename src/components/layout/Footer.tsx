@@ -19,7 +19,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   return (
     <footer className="on-dark bg-navy text-white" data-chapter-end>
       <div className="frame grid-12 gap-y-14 pb-14 pt-20 md:pt-28">
-        <div className="footer-cta col-span-4 md:col-span-7">
+        <div className="footer-cta col-span-4 md:col-span-12 lg:col-span-6">
           <p className="t-h2 max-w-[18ch]">{dict.footer.cta}</p>
           <p className="t-lead mt-5 max-w-[46ch] text-white/75">{dict.footer.ctaBody}</p>
           <div className="mt-9 flex flex-wrap gap-3">
@@ -33,7 +33,7 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           </div>
         </div>
 
-        <div className="col-span-2 md:col-span-2 md:col-start-9">
+        <div className="col-span-4 sm:col-span-2 md:col-span-4 lg:col-span-2 lg:col-start-8">
           <h2 className="t-label">{dict.footer.explore}</h2>
           <ul className="mt-4 space-y-2.5">
             {links.map((l) => (
@@ -46,19 +46,19 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           </ul>
         </div>
 
-        <div className="col-span-2 md:col-span-2">
+        <div className="col-span-4 sm:col-span-2 md:col-span-6 lg:col-span-3 lg:col-start-10">
           <h2 className="t-label flex flex-wrap items-center gap-2">
             {dict.footer.contact}
             {site.demoMode && <DemoTag label={dict.common.demo} />}
           </h2>
           <ul className="mt-4 space-y-2.5">
             <li>
-              <a href={`mailto:${site.contact.email}`} className="break-all hover:text-teal-light">
+              <a href={`mailto:${site.contact.email}`} className="[overflow-wrap:anywhere] hover:text-teal-light">
                 {site.contact.email}
               </a>
             </li>
             <li>
-              <a href={`tel:${site.contact.phoneHref}`} dir="ltr" className="tabular hover:text-teal-light">
+              <a href={`tel:${site.contact.phoneHref}`} dir="ltr" className="tabular whitespace-nowrap hover:text-teal-light">
                 {site.contact.phoneDisplay}
               </a>
             </li>

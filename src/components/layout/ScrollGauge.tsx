@@ -84,7 +84,10 @@ export function ScrollGauge({ label }: { label: string }) {
     if (!el) return;
     const lenis = (window as unknown as { __lenis?: Lenisish }).__lenis;
     if (lenis) lenis.scrollTo(el, { offset: -8 });
-    else el.scrollIntoView({ behavior: "smooth", block: "start" });
+    else {
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    }
     el.setAttribute("tabindex", "-1");
     el.focus({ preventScroll: true });
   };

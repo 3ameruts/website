@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { solutions } from "@/content/solutions";
+import { site, whatsappLink } from "@/content/site";
 import { INTERESTS, validateQuote, type FieldErrors } from "@/lib/quote-validation";
 import { Arrow } from "@/components/ui/Arrow";
 
@@ -127,11 +128,21 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
         {f.intro}
       </p>
 
-      <div ref={statusRef} tabIndex={-1} aria-live="assertive" className="outline-none">
+      <div ref={statusRef} tabIndex={-1} className="outline-none">
         {status === "error" && serverError && (
           <div role="alert" className={`mb-8 border-s-4 p-4 ${dark ? "border-error-light bg-white/10" : "border-error bg-[#fdf1ef]"}`}>
             <p className="font-semibold">{f.errorTitle}</p>
             <p className="t-small mt-1">{serverError}</p>
+            {serverError !== f.errorBody && (
+              <p className="t-small mt-3 flex flex-wrap gap-x-5 gap-y-1 font-semibold">
+                <a href={`mailto:${site.contact.salesEmail}`} className="link" dir="ltr">
+                  {site.contact.salesEmail}
+                </a>
+                <a href={whatsappLink()} className="link" target="_blank" rel="noopener noreferrer">
+                  {f.whatsappCta}
+                </a>
+              </p>
+            )}
           </div>
         )}
       </div>

@@ -28,7 +28,7 @@ export function ProjectsGrid({ locale }: { locale: Locale }) {
         ))}
       </div>
       <p className="sr-only" role="status" aria-live="polite">
-        {list.length}
+        {dict.projects.count(list.length)}
       </p>
       <ul className="grid-12 mt-12 gap-y-16 md:mt-16">
         {list.map((p, i) => {
