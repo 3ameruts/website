@@ -118,21 +118,6 @@ export const home = {
     colCommitment: { en: "Commitment", ar: "الالتزام" },
     colPractice: { en: "In practice", ar: "على أرض الواقع" },
   },
-  partners: {
-    title: { en: "Manufacturers we work with", ar: "الشركات المصنّعة التي نتعامل معها" },
-    body: {
-      en: "Manufacturer and partner logos will appear here once confirmed. We only list brands we are authorised to represent.",
-      ar: "ستظهر هنا شعارات الشركات المصنّعة والشركاء بعد تأكيدها. لا ندرج إلا العلامات التجارية التي نملك تفويضًا بتمثيلها.",
-    },
-    slot: { en: "Partner logo", ar: "شعار الشريك" },
-  },
-  projects: {
-    title: { en: "Projects & applications", ar: "المشاريع والتطبيقات" },
-    body: {
-      en: "How a laboratory comes together, from first drawing to first sample.",
-      ar: "كيف يكتمل المختبر، من المخطط الأول حتى أول عيّنة.",
-    },
-  },
   contact: {
     title: { en: "Tell us what you need to equip", ar: "أخبرنا بما تحتاج إلى تجهيزه" },
     body: {
@@ -207,17 +192,6 @@ export const about = {
         title: { en: "Partnership", ar: "الشراكة" },
         body: { en: "Laboratories evolve. We stay available as methods, teams and needs change.", ar: "المختبرات تتطور، ونبقى إلى جانبك مع تغيّر طرق العمل والفرق والاحتياجات." },
       },
-    ],
-  },
-  expertise: {
-    title: { en: "Expertise", ar: "مجالات الخبرة" },
-    items: [
-      { en: "Clinical and hospital laboratories", ar: "المختبرات السريرية ومختبرات المستشفيات" },
-      { en: "Medical equipment for wards, clinics and theatres", ar: "الأجهزة الطبية للأقسام والعيادات وغرف العمليات" },
-      { en: "University teaching and research laboratories", ar: "المختبرات التعليمية والبحثية في الجامعات" },
-      { en: "Microbiology and containment", ar: "الأحياء الدقيقة وأنظمة الاحتواء" },
-      { en: "Industrial and food quality control", ar: "ضبط الجودة الصناعية والغذائية" },
-      { en: "Laboratory furniture and infrastructure", ar: "الأثاث المخبري والبنية التحتية" },
     ],
   },
   quality: {
@@ -361,23 +335,6 @@ export const labPage = {
   ctaBody: {
     en: "Share your floor plan, or simply describe the work the lab will do. We will come back with the next steps.",
     ar: "شاركنا مخطط المساحة، أو صف ببساطة العمل الذي سيؤديه المختبر، وسنعود إليك بالخطوات التالية.",
-  },
-};
-
-export const projectsPage = {
-  meta: {
-    title: { en: "Projects", ar: "المشاريع" },
-    description: {
-      en: "Laboratory and medical equipment projects: clinical laboratories, teaching laboratories, research facilities and quality-control laboratories.",
-      ar: "مشاريع المختبرات والأجهزة الطبية: مختبرات سريرية، ومختبرات تعليمية، ومرافق بحثية، ومختبرات ضبط جودة.",
-    },
-  },
-  hero: {
-    title: { en: "Projects", ar: "المشاريع" },
-    body: {
-      en: "Selected laboratory and medical equipment projects. The entries currently shown are illustrative examples and will be replaced with completed, client-approved case studies.",
-      ar: "مختارات من مشاريع المختبرات والأجهزة الطبية. المشاريع المعروضة حاليًا أمثلة توضيحية، وستُستبدل بدراسات حالة منجزة ومعتمدة من العملاء.",
-    },
   },
 };
 

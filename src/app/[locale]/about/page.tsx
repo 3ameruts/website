@@ -84,26 +84,15 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
         </div>
       </section>
 
-      {/* Expertise + quality */}
-      <section id="expertise" data-chapter={a.expertise.title[locale]} data-theme="light" className="section-y bg-gray" aria-labelledby="expertise-title">
-        <div className="frame grid-12 gap-y-14">
-          <div className="col-span-4 md:col-span-5">
-            <h2 id="expertise-title" className="t-h1">{a.expertise.title[locale]}</h2>
-            <ul className="mt-10 border-t border-navy/20">
-              {a.expertise.items.map((item) => (
-                <li key={item.en} className="flex items-start gap-4 border-b border-navy/20 py-4 text-lg">
-                  <span aria-hidden className="mt-[0.8em] h-[2px] w-4 shrink-0 bg-teal" />
-                  {item[locale]}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="col-span-4 md:col-span-6 md:col-start-7">
+      {/* Quality commitment */}
+      <section id="quality" data-chapter={a.quality.title[locale]} data-theme="light" className="section-y bg-gray" aria-labelledby="quality-title">
+        <div className="frame grid-12 items-center gap-y-10">
+          <div className="col-span-4 md:col-span-6">
             <Media src="/media/img/microscope-detail.jpg" alt={locale === "en" ? "Microscope objectives" : "عدسات مجهر"} sizes="(min-width: 768px) 48vw, 100vw" ratio="16 / 11" reveal />
-            <div className="mt-10">
-              <h2 className="t-h3">{a.quality.title[locale]}</h2>
-              <p className="t-lead mt-4 text-slate">{a.quality.body[locale]}</p>
-            </div>
+          </div>
+          <div className="col-span-4 md:col-span-5 md:col-start-8">
+            <h2 id="quality-title" className="t-h1">{a.quality.title[locale]}</h2>
+            <p className="t-lead mt-6 text-slate">{a.quality.body[locale]}</p>
           </div>
         </div>
       </section>

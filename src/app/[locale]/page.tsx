@@ -11,8 +11,6 @@ import Link from "next/link";
 import { Arrow } from "@/components/ui/Arrow";
 import { Showcase } from "@/components/sections/Showcase";
 import { Commitments } from "@/components/sections/Commitments";
-import { Partners } from "@/components/sections/Partners";
-import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { SectionHead } from "@/components/ui/SectionHead";
 
@@ -66,8 +64,6 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       </section>
       <Showcase locale={locale} />
       <Commitments locale={locale} />
-      <Partners locale={locale} demoLabel={dict.common.demo} />
-      <FeaturedProjects locale={locale} dict={dict} />
       <ContactSection
         locale={locale}
         dict={dict}

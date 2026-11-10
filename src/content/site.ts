@@ -7,7 +7,7 @@
  *  client before launch.
  *
  *  `demoMode: true` shows small dashed "Demo content" tags on every block that
- *  still contains placeholder material (projects, partners, contact details).
+ *  still contains placeholder material (contact details).
  *  Set it to `false` once real content is in place.
  */
 import type { L } from "@/i18n/config";

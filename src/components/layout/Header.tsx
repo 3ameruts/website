@@ -33,7 +33,6 @@ export function Header({ locale }: { locale: Locale }) {
     { href: lp(locale, "/about"), label: dict.nav.about },
     { href: lp(locale, "/products"), label: dict.nav.products },
     { href: lp(locale, "/laboratory-solutions"), label: dict.nav.labSolutions },
-    { href: lp(locale, "/projects"), label: dict.nav.projects },
     { href: lp(locale, "/contact"), label: dict.nav.contact },
   ];
   const otherLocale: Locale = locale === "en" ? "ar" : "en";

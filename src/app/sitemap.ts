@@ -1,9 +1,8 @@
 import type { MetadataRoute } from "next";
 import { locales, localeMeta } from "@/i18n/config";
-import { projects } from "@/content/projects";
 import { site } from "@/content/site";
 
-const paths = ["/", "/about", "/products", "/laboratory-solutions", "/projects", "/contact", ...projects.filter((p) => !p.demo).map((p) => `/projects/${p.slug}`)]; // demo case studies are noindex
+const paths = ["/", "/about", "/products", "/laboratory-solutions", "/contact"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -13,8 +12,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       return {
         url: url(locale),
         lastModified: now,
-        changeFrequency: path.startsWith("/projects/") ? "yearly" : "monthly",
-        priority: path === "/" ? 1 : path.startsWith("/projects/") ? 0.5 : 0.8,
+        changeFrequency: "monthly",
+        priority: path === "/" ? 1 : 0.8,
         alternates: { languages: { ...Object.fromEntries(locales.map((l) => [localeMeta[l].htmlLang, url(l)])), "x-default": url("en") } },
       };
     }),
