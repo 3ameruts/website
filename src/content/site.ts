@@ -13,10 +13,11 @@
 import type { L } from "@/i18n/config";
 
 export const site = {
-  demoMode: true,
+  demoMode: false,
 
   /** REPLACE — production URL, used for canonical links, sitemap and Open Graph. */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.example.com",
+  // Temporary Cloudflare address until the company domain is connected.
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://jor-advanced.young-lake-be44.workers.dev",
 
   /** Official brand colours (brand sheet). Mirrored as CSS tokens in globals.css. */
   colors: { navy: "#0B2D6B", teal: "#00A99D", gray: "#E6E9ED", white: "#FFFFFF" },
@@ -45,20 +46,19 @@ export const site = {
   },
 
   contact: {
-    /** REPLACE — all of the following. Format phone numbers in E.164 for links. */
-    phoneDisplay: "+000 00 000 0000",
-    phoneHref: "+000000000000",
-    whatsappNumber: "962786629939", // TEMPORARY test number (+962 7 8662 9939) — digits only, no "+"
-    email: "info@example.com",
-    salesEmail: "sales@example.com",
+    /** Phone numbers in E.164 for links. Temporary number — client will confirm. */
+    phoneDisplay: "+962 7 8662 9939",
+    phoneHref: "+962786629939",
+    whatsappNumber: "962786629939", // digits only, no "+"
+    /** Set when the company mailboxes exist (e.g. "Info@JorAdvanced.com"). Hidden while null. */
+    email: null as string | null,
+    salesEmail: null as string | null,
     address: {
-      en: "Street, District, Amman, Jordan", // REPLACE — street/district
-      ar: "الشارع، الحي، عمّان، الأردن",
+      en: "Prince Faisal Bin Al-Hussein Street, Fuheis, Amman, Jordan",
+      ar: "شارع الأمير فيصل بن الحسين، الفحيص، عمّان، الأردن",
     } satisfies L,
-    hours: {
-      en: "Sunday – Thursday, 8:00 – 17:00", // REPLACE
-      ar: "الأحد – الخميس، 8:00 – 17:00",
-    } satisfies L,
+    /** Opening hours — hidden while null. */
+    hours: null as L | null,
     /**
      * Office location (building pin by coordinates only — no business listing).
      * Used for the contact-page map and "Open in maps" links.

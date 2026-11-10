@@ -73,8 +73,8 @@ const en = {
     sendAnother: "Send another request",
     errorTitle: "Your request was not sent",
     errorBody: "Check the highlighted fields and try again.",
-    errorNetwork: "The request could not reach our server. Try again, or contact us by email or WhatsApp.",
-    errorNotConfigured: "Online requests are temporarily unavailable. Please contact us by email or WhatsApp.",
+    errorNetwork: "The request could not reach our server. Try again, or contact us directly by phone or WhatsApp.",
+    errorNotConfigured: "Online requests are temporarily unavailable. Please contact us directly by phone or WhatsApp.",
     errors: {
       name: "Enter your full name.",
       email: "Enter a valid email address, like name@institution.org.",
@@ -211,8 +211,8 @@ const ar: Dictionary = {
     sendAnother: "أرسل طلبًا آخر",
     errorTitle: "تعذّر إرسال طلبك",
     errorBody: "راجع الحقول المشار إليها ثم أعد المحاولة.",
-    errorNetwork: "تعذّر وصول الطلب إلى الخادم. أعد المحاولة، أو تواصل معنا عبر البريد الإلكتروني أو واتساب.",
-    errorNotConfigured: "استقبال الطلبات عبر الموقع غير متاح مؤقتًا. يُرجى التواصل عبر البريد الإلكتروني أو واتساب.",
+    errorNetwork: "تعذّر وصول الطلب إلى الخادم. أعد المحاولة، أو تواصل معنا مباشرة عبر الهاتف أو واتساب.",
+    errorNotConfigured: "استقبال الطلبات عبر الموقع غير متاح مؤقتًا. يُرجى التواصل معنا مباشرة عبر الهاتف أو واتساب.",
     errors: {
       name: "أدخل اسمك الكامل.",
       email: "أدخل بريدًا إلكترونيًا صحيحًا، مثل name@institution.org.",

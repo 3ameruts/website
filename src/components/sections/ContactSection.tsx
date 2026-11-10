@@ -7,12 +7,13 @@ import { DemoTag } from "@/components/ui/DemoTag";
 
 export function ContactDetails({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const c = site.contact;
-  const rows = [
-    { label: dict.common.email, value: c.email, href: `mailto:${c.email}`, ltr: true },
+  type Row = { label: string; value: string; href?: string; ltr?: boolean; external?: boolean };
+  const rows: Row[] = [
     { label: dict.common.phone, value: c.phoneDisplay, href: `tel:${c.phoneHref}`, ltr: true },
     { label: dict.common.whatsapp, value: dict.form.whatsappCta, href: whatsappLink(dict.form.whatsappGreeting), external: true },
+    ...(c.email ? [{ label: dict.common.email, value: c.email, href: `mailto:${c.email}`, ltr: true }] : []),
     { label: dict.common.location, value: c.address[locale], href: c.mapUrl ?? undefined, external: true },
-    { label: dict.common.hours, value: c.hours[locale] },
+    ...(c.hours ? [{ label: dict.common.hours, value: c.hours[locale] }] : []),
   ];
   return (
     <div>

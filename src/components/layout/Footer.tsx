@@ -51,11 +51,13 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             {site.demoMode && <DemoTag label={dict.common.demo} />}
           </h2>
           <ul className="mt-4 space-y-2.5">
-            <li>
-              <a href={`mailto:${site.contact.email}`} className="[overflow-wrap:anywhere] hover:text-teal-light">
-                {site.contact.email}
-              </a>
-            </li>
+            {site.contact.email && (
+              <li>
+                <a href={`mailto:${site.contact.email}`} className="[overflow-wrap:anywhere] hover:text-teal-light">
+                  {site.contact.email}
+                </a>
+              </li>
+            )}
             <li>
               <a href={`tel:${site.contact.phoneHref}`} dir="ltr" className="tabular whitespace-nowrap hover:text-teal-light">
                 {site.contact.phoneDisplay}
@@ -74,7 +76,6 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           <p>
             © {year} {site.brand.name[locale]}. {dict.footer.rights}
           </p>
-          <p>{dict.footer.imagery}</p>
         </div>
       </div>
       <div className="band band-light" aria-hidden />

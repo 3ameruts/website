@@ -69,12 +69,13 @@ Every string is `{ en, ar }` — TypeScript fails the build if a translation is 
 
 Everything below is a clearly marked placeholder. Nothing on the site invents clients, partners, certifications, statistics or product specifications.
 
-- [ ] `site.ts` → phone, WhatsApp number, emails, street address, hours, map link, `NEXT_PUBLIC_SITE_URL`
+- [x] `site.ts` → phone / WhatsApp (+962 7 8662 9939 — temporary, to confirm), street address (Fuheis), map pin
+- [ ] `site.ts` → `email` / `salesEmail` (hidden while null), `hours` (hidden while null), `NEXT_PUBLIC_SITE_URL` once the domain is live
 - [ ] Logo masters: replace `public/brand/logo-*.png` with the official vector files (same names) — current files were extracted from the brand sheet and repainted with the exact brand hex values
 - [ ] `solutions.ts` → confirm each "commitment" describes actual practice
 - [ ] `pages.ts` → `about.overview` / `about.quality`: add company history, registrations or certifications **only if held**
 - [ ] Imagery: licensed Mixkit stock footage stills. Replace with company photography when available (same file names in `public/media/img/`)
-- [ ] Set `demoMode: false` in `site.ts` → removes every "Demo content" tag
+- [x] `demoMode: false` — demo tags removed
 - [ ] Set `QUOTE_WEBHOOK_URL` and send a test request
 
 ## Media

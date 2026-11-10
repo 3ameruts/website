@@ -135,9 +135,14 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
             <p className="t-small mt-1">{serverError}</p>
             {serverError !== f.errorBody && (
               <p className="t-small mt-3 flex flex-wrap gap-x-5 gap-y-1 font-semibold">
-                <a href={`mailto:${site.contact.salesEmail}`} className="link" dir="ltr">
-                  {site.contact.salesEmail}
+                <a href={`tel:${site.contact.phoneHref}`} className="link tabular" dir="ltr">
+                  {site.contact.phoneDisplay}
                 </a>
+                {(site.contact.salesEmail ?? site.contact.email) && (
+                  <a href={`mailto:${site.contact.salesEmail ?? site.contact.email}`} className="link" dir="ltr">
+                    {site.contact.salesEmail ?? site.contact.email}
+                  </a>
+                )}
                 <a href={whatsappLink(f.whatsappGreeting)} className="link" target="_blank" rel="noopener noreferrer">
                   {f.whatsappCta}
                 </a>

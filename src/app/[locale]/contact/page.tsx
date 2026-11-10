@@ -18,10 +18,11 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/contact"
 export default async function ContactPage({ params }: PageProps<"/[locale]/contact">) {
   const locale = (await params).locale as Locale;
   const dict = getDictionary(locale);
+  const salesEmail = site.contact.salesEmail ?? site.contact.email;
   const channels = [
-    { title: dict.common.whatsapp, value: dict.form.whatsappCta, href: whatsappLink(dict.form.whatsappGreeting), external: true },
-    { title: dict.common.email, value: site.contact.salesEmail, href: `mailto:${site.contact.salesEmail}`, ltr: true },
-    { title: dict.common.phone, value: site.contact.phoneDisplay, href: `tel:${site.contact.phoneHref}`, ltr: true },
+    { title: dict.common.whatsapp, value: dict.form.whatsappCta, href: whatsappLink(dict.form.whatsappGreeting), external: true, ltr: false },
+    { title: dict.common.phone, value: site.contact.phoneDisplay, href: `tel:${site.contact.phoneHref}`, external: false, ltr: true },
+    ...(salesEmail ? [{ title: dict.common.email, value: salesEmail, href: `mailto:${salesEmail}`, external: false, ltr: true }] : []),
   ];
   return (
     <>
@@ -40,7 +41,7 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
             <h2 id="channels-title" className="t-h2">{dict.form.orReach}</h2>
             <DemoTag label={dict.common.demoHint} />
           </div>
-          <ul className="mt-12 grid gap-px bg-navy/15 md:grid-cols-3">
+          <ul className={`mt-12 grid gap-px bg-navy/15 ${channels.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2"}`}>
             {channels.map((c) => (
               <li key={c.title} className="bg-gray">
                 <a
@@ -58,7 +59,7 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
             <div className="bg-white p-8">
               <p className="t-label">{dict.common.location}</p>
               <p className="t-h3 mt-4">{site.contact.address[locale]}</p>
-              <p className="mt-3 text-slate">{site.contact.hours[locale]}</p>
+              {site.contact.hours && <p className="mt-3 text-slate">{site.contact.hours[locale]}</p>}
             </div>
             {/* Office map — building pin by coordinates (site.contact.geo). */}
             {mapEmbedUrl(locale) ? (
