@@ -44,3 +44,7 @@ next-env.d.ts
 /.next-qa/
 /.next-preview/
 /preview-screens/
+
+# Cloudflare / OpenNext build output
+/.open-next/
+/.wrangler/

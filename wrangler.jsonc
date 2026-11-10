@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Cloudflare Workers deployment (OpenNext). The site is fully static (SSG),
+  // so no R2/KV cache is needed — prerendered pages are served from static assets.
+  "name": "jor-advanced",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "images": {
+    // Next/Image optimisation via Cloudflare Images (free monthly allowance).
+    // If unavailable, original images are served unchanged.
+    "binding": "IMAGES"
+  },
+  "observability": { "enabled": true }
+}

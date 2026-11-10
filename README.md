@@ -15,6 +15,33 @@ npm run build && npm start
 
 Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL` and `QUOTE_WEBHOOK_URL` before going live.
 
+## Deploy — Cloudflare Workers (production host)
+
+The site runs on Cloudflare Workers through the OpenNext adapter (`wrangler.jsonc`, `open-next.config.ts`).
+Every page is prerendered, so no R2/KV storage is needed (free plan).
+
+**Automatic deploys (Workers Builds, recommended):** Cloudflare dashboard → Workers & Pages → Create → *Import a repository* → select this repo, then:
+
+| Setting | Value |
+|---|---|
+| Project / Worker name | `jor-advanced` (must match `name` in `wrangler.jsonc`) |
+| Build command | `npx opennextjs-cloudflare build` |
+| Deploy command | `npx opennextjs-cloudflare deploy` |
+| Root directory | `/` |
+| Variables (later) | `NEXT_PUBLIC_SITE_URL`, `QUOTE_WEBHOOK_URL` |
+
+Every push to `main` then builds and deploys automatically.
+
+**Manual / local:**
+
+```bash
+npm run cf:preview   # build + run locally on the Workers runtime (http://localhost:8787)
+npm run cf:deploy    # build + deploy (needs `wrangler login` or CLOUDFLARE_API_TOKEN)
+```
+
+Notes: locale routing uses `redirects()` in `next.config.ts` (no middleware), so it works identically on any host.
+Static-asset cache headers for Cloudflare live in `public/_headers`. Image optimisation uses the Cloudflare Images binding (free monthly allowance); without it, original images are served.
+
 ## Pages
 
 | Route | Page |
@@ -64,7 +91,7 @@ Everything below is a clearly marked placeholder. Nothing on the site invents cl
 ## Architecture notes
 
 - Fully static per locale (`generateStaticParams`, `dynamicParams = false`); only `/api/quote` is dynamic. Cache Components is intentionally off: no per-request data.
-- `src/proxy.ts` (Next 16's replacement for middleware) redirects locale-less URLs using the `NEXT_LOCALE` cookie, then `Accept-Language`.
+- Locale routing: `redirects()` in `next.config.ts` sends locale-less URLs to the saved choice (`NEXT_LOCALE` cookie), then the browser language (`Accept-Language`), else English — no middleware.
 - Layouts use logical CSS properties throughout (`ms/me/ps/pe/start/end`), so Arabic mirrors automatically; arrows and the brand band flip via `[dir=rtl]`.
 - Motion: one orchestrated entrance per page (hero), scroll-linked gauge, image "fill" reveals, process image swap. Lenis + ScrollTrigger only run without reduced motion; a CSS failsafe releases the hero entrance state if scripts fail to load.
 - SEO: per-page metadata with hreflang alternates, Open Graph image, `sitemap.xml`, `robots.txt`, JSON-LD (Organization, WebSite, BreadcrumbList, ItemList, Service).

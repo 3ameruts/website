@@ -23,6 +23,25 @@ const nextConfig: NextConfig = {
     qualities: [70, 80],
     deviceSizes: [480, 768, 1080, 1440, 1920],
   },
+  /**
+   * Locale routing without middleware (fully supported on every host, incl.
+   * Cloudflare Workers): saved choice (NEXT_LOCALE cookie) → browser language
+   * → English. Applies to "/" and to any path without a locale prefix.
+   */
+  async redirects() {
+    const localeLess = "/:path((?!en(?:/|$)|ar(?:/|$)|_next/|api/|media/|brand/|[^/]*\\.[^/]*$).*)";
+    const rules = [];
+    for (const source of ["/", localeLess]) {
+      const dest = (l: string) => (source === "/" ? `/${l}` : `/${l}/:path`);
+      rules.push(
+        { source, has: [{ type: "cookie" as const, key: "NEXT_LOCALE", value: "ar" }], destination: dest("ar"), permanent: false },
+        { source, has: [{ type: "cookie" as const, key: "NEXT_LOCALE", value: "en" }], destination: dest("en"), permanent: false },
+        { source, has: [{ type: "header" as const, key: "accept-language", value: "^\\s*ar.*" }], destination: dest("ar"), permanent: false },
+        { source, destination: dest("en"), permanent: false },
+      );
+    }
+    return rules;
+  },
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },
