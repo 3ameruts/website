@@ -25,8 +25,9 @@ const nextConfig: NextConfig = {
   },
   /**
    * Locale routing without middleware (fully supported on every host, incl.
-   * Cloudflare Workers): saved choice (NEXT_LOCALE cookie) → browser language
-   * → English. Applies to "/" and to any path without a locale prefix.
+   * Cloudflare Workers): English by default; a visitor who chose Arabic
+   * (NEXT_LOCALE cookie) is sent to Arabic. Applies to "/" and to any path
+   * without a locale prefix.
    */
   async redirects() {
     const localeLess = "/:path((?!en(?:/|$)|ar(?:/|$)|_next/|api/|media/|brand/|[^/]*\\.[^/]*$).*)";
@@ -36,7 +37,6 @@ const nextConfig: NextConfig = {
       rules.push(
         { source, has: [{ type: "cookie" as const, key: "NEXT_LOCALE", value: "ar" }], destination: dest("ar"), permanent: false },
         { source, has: [{ type: "cookie" as const, key: "NEXT_LOCALE", value: "en" }], destination: dest("en"), permanent: false },
-        { source, has: [{ type: "header" as const, key: "accept-language", value: "^\\s*ar.*" }], destination: dest("ar"), permanent: false },
         { source, destination: dest("en"), permanent: false },
       );
     }

@@ -7,6 +7,7 @@ import { solutions } from "@/content/solutions";
 import { site, whatsappLink } from "@/content/site";
 import { INTERESTS, validateQuote, type FieldErrors } from "@/lib/quote-validation";
 import { Arrow } from "@/components/ui/Arrow";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 
 type Status = "idle" | "sending" | "success" | "error";
 type FieldName = keyof FieldErrors;
@@ -24,6 +25,7 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
   const [touched, setTouched] = useState<Partial<Record<FieldName, boolean>>>({});
   const [status, setStatus] = useState<Status>("idle");
   const [serverError, setServerError] = useState<string>("");
+  const [waUrl, setWaUrl] = useState<string>("");
 
   // Preselect the category from links such as /contact?interest=glassware#quote.
   useEffect(() => {
@@ -57,6 +59,36 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
       if (first) document.getElementById(id(first))?.focus();
       return;
     }
+    // WhatsApp delivery: compose the request and open the chat (synchronous → not blocked as a pop-up).
+    if (site.quoteDelivery === "whatsapp") {
+      const interestLabel =
+        current.interest === "other"
+          ? f.other
+          : current.interest === "lab-setup"
+            ? f.labSetup
+            : solutions.find((s) => s.id === current.interest)?.title[locale] ?? current.interest;
+      const lines = [
+        f.waIntro,
+        "",
+        `${f.name}: ${current.name.trim()}`,
+        current.company.trim() && `${f.company}: ${current.company.trim()}`,
+        `${f.email}: ${current.email.trim()}`,
+        current.phone.trim() && `${f.phone}: ${current.phone.trim()}`,
+        `${f.interest}: ${interestLabel}`,
+        "",
+        `${f.message}:`,
+        current.message.trim(),
+      ].filter((l) => l !== "");
+      const url = whatsappLink(lines.join("\n").replace(/\n{3,}/g, "\n\n"));
+      setWaUrl(url);
+      window.open(url, "_blank", "noopener");
+      setStatus("success");
+      setValues({ name: "", company: "", email: "", phone: "", interest: "", message: "", consent: false, website: "" });
+      setTouched({});
+      requestAnimationFrame(() => statusRef.current?.focus());
+      return;
+    }
+
     setStatus("sending");
     setServerError("");
     try {
@@ -112,12 +144,26 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
           <span aria-hidden className="grid h-12 w-12 place-items-center rounded-full bg-teal text-navy">
             <svg viewBox="0 0 20 20" width="20" height="20"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" strokeWidth="2" /></svg>
           </span>
-          <h3 className="t-h3">{f.successTitle}</h3>
+          <h3 className="t-h3">{waUrl ? f.waReadyTitle : f.successTitle}</h3>
         </div>
-        <p className="t-lead mt-5 max-w-[46ch] opacity-85">{f.successBody}</p>
-        <button type="button" className="btn btn-outline mt-8" onClick={() => setStatus("idle")}>
-          {f.sendAnother}
-        </button>
+        <p className="t-lead mt-5 max-w-[46ch] opacity-85">{waUrl ? f.waReadyBody : f.successBody}</p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          {waUrl && (
+            <a href={waUrl} target="_blank" rel="noopener noreferrer" className="btn">
+              {f.waOpenAgain}
+            </a>
+          )}
+          <button
+            type="button"
+            className="btn btn-outline"
+            onClick={() => {
+              setWaUrl("");
+              setStatus("idle");
+            }}
+          >
+            {f.sendAnother}
+          </button>
+        </div>
       </div>
     );
   }
@@ -227,8 +273,17 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
 
       <div className="mt-9 flex flex-wrap items-center gap-5">
         <button type="submit" className={`btn ${dark ? "btn-light" : ""}`} disabled={status === "sending"} aria-disabled={status === "sending"}>
-          {status === "sending" ? f.sending : f.submit}
-          {status !== "sending" && <Arrow />}
+          {site.quoteDelivery === "whatsapp" ? (
+            <>
+              <WhatsAppIcon size={18} />
+              {f.waSubmit}
+            </>
+          ) : (
+            <>
+              {status === "sending" ? f.sending : f.submit}
+              {status !== "sending" && <Arrow />}
+            </>
+          )}
         </button>
       </div>
     </form>

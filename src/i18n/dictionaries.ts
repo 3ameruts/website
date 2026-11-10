@@ -41,6 +41,8 @@ const en = {
     mapPlaceholder: "Map will appear here once the address is confirmed.",
     mapTitle: "Our location on the map",
     openMap: "Open in maps",
+    whatsappFloat: "Chat with us",
+    whatsappFloatLabel: "Chat with us on WhatsApp (opens in a new tab)",
   },
   gauge: {
     label: "Page sections",
@@ -90,6 +92,11 @@ const en = {
     orReach: "Prefer to talk?",
     whatsappCta: "Message us on WhatsApp",
     whatsappGreeting: "Hello, I would like to ask about your products and services.",
+    waIntro: "Hello, I would like to request a quotation.",
+    waReadyTitle: "Your request is ready in WhatsApp",
+    waReadyBody: "WhatsApp has opened with your request written out. Press Send to deliver it to our team.",
+    waOpenAgain: "Open WhatsApp again",
+    waSubmit: "Send via WhatsApp",
   },
   catalog: {
     search: "Search products",
@@ -179,6 +186,8 @@ const ar: Dictionary = {
     mapPlaceholder: "ستظهر الخريطة هنا بعد تأكيد العنوان.",
     mapTitle: "موقعنا على الخريطة",
     openMap: "افتح في الخرائط",
+    whatsappFloat: "تحدّث معنا",
+    whatsappFloatLabel: "تحدّث معنا عبر واتساب (يفتح في نافذة جديدة)",
   },
   gauge: {
     label: "أقسام الصفحة",
@@ -228,6 +237,11 @@ const ar: Dictionary = {
     orReach: "هل تفضّل التحدث إلينا مباشرة؟",
     whatsappCta: "راسلنا عبر واتساب",
     whatsappGreeting: "مرحبًا، أودّ الاستفسار عن منتجاتكم وخدماتكم.",
+    waIntro: "مرحبًا، أودّ طلب عرض سعر.",
+    waReadyTitle: "طلبك جاهز في واتساب",
+    waReadyBody: "فُتح واتساب وفيه طلبك مكتوبًا بالكامل. اضغط «إرسال» ليصل إلى فريقنا.",
+    waOpenAgain: "افتح واتساب مرة أخرى",
+    waSubmit: "أرسل عبر واتساب",
   },
   catalog: {
     search: "ابحث في المنتجات",

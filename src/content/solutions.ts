@@ -174,45 +174,45 @@ export const solutionById = Object.fromEntries(solutions.map((s) => [s.id, s])) 
  */
 export const commitments: { title: L; practice: L }[] = [
   {
-    title: { en: "Product quality", ar: "جودة المنتجات" },
+    title: { en: "Named, documented products", ar: "منتجات محددة وموثّقة" },
     practice: {
-      en: "Every item is quoted with its manufacturer, model, documentation and warranty terms stated in writing — nothing generic, nothing unnamed.",
-      ar: "يُسعَّر كل منتج مع ذكر الشركة المصنّعة والطراز والوثائق وشروط الضمان كتابيًا — لا منتجات مجهولة أو غير محددة.",
+      en: "Every quotation names the manufacturer and model, with documentation and warranty terms in writing. Nothing generic, nothing unnamed.",
+      ar: "يذكر كل عرض سعر الشركة المصنّعة والطراز، مع الوثائق وشروط الضمان كتابيًا. لا منتجات عامة، ولا أسماء مجهولة.",
     },
   },
   {
-    title: { en: "Technical expertise", ar: "الخبرة الفنية" },
+    title: { en: "Specialist review", ar: "مراجعة متخصصة" },
     practice: {
-      en: "A specialist reviews each request against your methods, sample volumes and standards before anything is quoted.",
-      ar: "يراجع أحد المختصين كل طلب وفق طرق العمل لديك وحجم العيّنات والمعايير المعتمدة قبل تقديم أي عرض سعر.",
+      en: "A specialist checks every request against your methods, volumes and standards before anything is priced.",
+      ar: "يراجع أحد المختصين كل طلب وفق طرق عملك وحجم العمل والمعايير المعتمدة، قبل تسعير أي شيء.",
     },
   },
   {
-    title: { en: "Professional support", ar: "الدعم المهني" },
+    title: { en: "Support built into the order", ar: "دعم جزء من الطلب" },
     practice: {
-      en: "Installation, user training and after-sales service are planned with the purchase, not arranged after delivery.",
-      ar: "يُخطَّط للتركيب وتدريب المستخدمين وخدمة ما بعد البيع مع عملية الشراء، لا بعد التسليم.",
+      en: "Installation, user training and after-sales service are planned with the purchase — not arranged once the boxes arrive.",
+      ar: "يُخطَّط للتركيب وتدريب المستخدمين وخدمة ما بعد البيع مع الشراء — لا بعد وصول الشحنة.",
     },
   },
   {
-    title: { en: "Complete laboratory solutions", ar: "حلول مخبرية متكاملة" },
+    title: { en: "One accountable team", ar: "فريق واحد مسؤول" },
     practice: {
-      en: "One team carries a project from layout drawings to commissioning: one point of contact, one schedule, one accountable partner.",
-      ar: "فريق واحد يتولى المشروع من المخططات حتى التشغيل: جهة تواصل واحدة، وجدول زمني واحد، وشريك واحد مسؤول.",
+      en: "From layout drawings to commissioning, one team, one schedule and one point of contact carry your project.",
+      ar: "من المخططات حتى التشغيل، يتولى مشروعك فريق واحد، بجدول زمني واحد، وجهة تواصل واحدة.",
     },
   },
   {
-    title: { en: "Reliable supply", ar: "توريد موثوق" },
+    title: { en: "Dependable supply", ar: "توريد يُعتمد عليه" },
     practice: {
-      en: "Lead times are confirmed in the quotation, and recurring consumables can be scheduled so your lab never runs short.",
-      ar: "تُؤكَّد مدد التوريد في عرض السعر، ويمكن جدولة المستهلكات الدورية حتى لا ينفد مخزون مختبرك.",
+      en: "Lead times are confirmed in every quotation, and recurring consumables can be scheduled so your work never pauses.",
+      ar: "تُؤكَّد مدد التوريد في كل عرض سعر، ويمكن جدولة المستهلكات الدورية حتى لا يتوقف عملك.",
     },
   },
   {
-    title: { en: "Customer-centred service", ar: "خدمة محورها العميل" },
+    title: { en: "Advice shaped around you", ar: "استشارة على مقاسك" },
     practice: {
-      en: "Recommendations start from your workflow, budget and procurement rules — and we explain the trade-offs between options.",
-      ar: "تنطلق توصياتنا من سير عملك وميزانيتك وأنظمة الشراء لديك — ونوضّح لك الفروق بين الخيارات المتاحة.",
+      en: "Recommendations start from your workflow, budget and procurement rules — with the trade-offs explained, so you decide with confidence.",
+      ar: "تنطلق توصياتنا من سير عملك وميزانيتك وأنظمة الشراء لديك — مع توضيح الفروق بين الخيارات، لتتخذ قرارك بثقة.",
     },
   },
 ];

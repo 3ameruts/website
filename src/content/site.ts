@@ -15,6 +15,13 @@ import type { L } from "@/i18n/config";
 export const site = {
   demoMode: false,
 
+  /**
+   * How quote requests are delivered:
+   * - "whatsapp": the form opens WhatsApp with the request pre-written (no server needed);
+   * - "api": POST to /api/quote → QUOTE_WEBHOOK_URL (e.g. email). Switch once the mailbox exists.
+   */
+  quoteDelivery: "whatsapp" as "whatsapp" | "api",
+
   /** REPLACE — production URL, used for canonical links, sitemap and Open Graph. */
   // Temporary Cloudflare address until the company domain is connected.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://jor-advanced.young-lake-be44.workers.dev",

@@ -9,18 +9,18 @@ export const home = {
       ar: "المستلزمات المخبرية وتجهيز المختبرات",
     },
     description: {
-      en: "Medical equipment, scientific instruments, consumables and laboratory furniture — specified, supplied and installed by one accountable team in Jordan.",
-      ar: "أجهزة طبية، وأجهزة علمية، ومستهلكات، وأثاث مخبري — نحدّد مواصفاتها ونورّدها ونركّبها بفريق واحد مسؤول في الأردن.",
+      en: "Laboratory glassware, equipment, consumables, reagents and furniture, and complete school, clinical and research laboratories — supplied, installed and supported in Jordan.",
+      ar: "زجاجيات وأجهزة ومستهلكات وكواشف وأثاث مخبري، وتجهيز مختبرات مدرسية وسريرية وبحثية متكاملة — توريد وتركيب ودعم في الأردن.",
     },
   },
   hero: {
     title: {
-      en: "Laboratories specified, supplied and installed by one accountable team.",
-      ar: "مختبرات نحدّد مواصفاتها، ونورّدها، ونركّبها — بفريق واحد مسؤول.",
+      en: "Laboratory supplies and complete laboratories, from one trusted partner.",
+      ar: "مستلزمات مخبرية ومختبرات متكاملة، من شريك واحد تثق به.",
     },
     body: {
-      en: "Medical equipment, scientific instruments, consumables and laboratory furniture for hospitals, universities, research centres and industry.",
-      ar: "أجهزة طبية، وأجهزة علمية، ومستهلكات، وأثاث مخبري للمستشفيات والجامعات ومراكز الأبحاث والقطاع الصناعي.",
+      en: "Glassware, equipment, consumables, reagents and furniture — and school, clinical and research laboratories designed, installed and maintained by one accountable team.",
+      ar: "زجاجيات وأجهزة ومستهلكات وكواشف وأثاث مخبري — ومختبرات مدرسية وسريرية وبحثية نصمّمها ونركّبها ونصونها بفريق واحد مسؤول.",
     },
   },
   intro: {
@@ -33,8 +33,8 @@ export const home = {
       {
         title: { en: "What we do", ar: "ماذا نقدّم" },
         body: {
-          en: "Medical and laboratory equipment, consumables and furniture, and the design and installation of complete laboratories.",
-          ar: "الأجهزة الطبية والمخبرية، والمستهلكات، والأثاث، وتصميم المختبرات المتكاملة وتركيبها.",
+          en: "Laboratory supplies across thirteen categories — and the design, installation and maintenance of complete laboratories.",
+          ar: "مستلزمات مخبرية ضمن ثلاث عشرة فئة — وتصميم المختبرات المتكاملة وتركيبها وصيانتها.",
         },
       },
       {
@@ -54,8 +54,8 @@ export const home = {
       {
         title: { en: "Who we serve", ar: "من نخدم" },
         body: {
-          en: "Hospitals and clinics, universities and schools, research centres, and industrial quality-control laboratories.",
-          ar: "المستشفيات والعيادات، والجامعات والمدارس، ومراكز الأبحاث، ومختبرات ضبط الجودة في القطاع الصناعي.",
+          en: "Schools and universities, hospitals and clinical laboratories, research centres and industrial quality control.",
+          ar: "المدارس والجامعات، والمستشفيات والمختبرات السريرية، ومراكز الأبحاث، ومختبرات ضبط الجودة في القطاع الصناعي.",
         },
       },
     ],
@@ -112,8 +112,8 @@ export const home = {
   commitments: {
     title: { en: "What you can expect from us", ar: "ما يمكنك أن تتوقعه منا" },
     body: {
-      en: "Not slogans — the way every request and project is handled.",
-      ar: "ليست شعارات — بل الطريقة التي نتعامل بها مع كل طلب ومشروع.",
+      en: "Six standards we hold ourselves to on every request, from a single order to a complete laboratory.",
+      ar: "ستة معايير نلتزم بها في كل طلب، من طلبية واحدة إلى مختبر متكامل.",
     },
     colCommitment: { en: "Commitment", ar: "الالتزام" },
     colPractice: { en: "In practice", ar: "على أرض الواقع" },
@@ -150,8 +150,8 @@ export const about = {
     // CONFIRM — replace with the company's own history, founding year and scale when available.
     paragraphs: [
       {
-        en: "Jordanian Advanced Laboratory Equipment supplies medical equipment, laboratory instruments, consumables and laboratory furniture, and designs and installs complete laboratories for healthcare, education, research and industry.",
-        ar: "تورّد الشركة الأردنية للتجهيزات المخبرية المتطورة الأجهزة الطبية، والأجهزة المخبرية، والمستهلكات، والأثاث المخبري، وتصمم المختبرات المتكاملة وتركّبها لقطاعات الرعاية الصحية والتعليم والبحث العلمي والصناعة.",
+        en: "Jordanian Advanced Laboratory Equipment supplies laboratory glassware, equipment, consumables, reagents, assay kits, cell culture media and furniture — and designs, installs and maintains complete laboratories for schools, universities, hospitals, research centres and industry.",
+        ar: "تورّد الشركة الأردنية للتجهيزات المخبرية المتطورة الزجاجيات والأجهزة والمستهلكات والكواشف وأطقم الفحوصات وأوساط زراعة الخلايا والأثاث المخبري، وتصمّم المختبرات المتكاملة وتركّبها وتصونها للمدارس والجامعات والمستشفيات ومراكز الأبحاث والقطاع الصناعي.",
       },
       {
         en: "Our work spans the full life of a laboratory: understanding how it will be used, planning the space and services, selecting the right equipment, installing and commissioning it, training the people who use it and supporting them afterwards.",
@@ -198,8 +198,8 @@ export const about = {
     title: { en: "Quality commitment", ar: "الالتزام بالجودة" },
     // CONFIRM — add certifications, registrations or quality-management standards only if the company holds them.
     body: {
-      en: "Every item we supply is identified by manufacturer and model, delivered with its documentation, installed according to the manufacturer's requirements and handed over with user training. Where certification or registration details apply, they will be listed here once confirmed.",
-      ar: "يُحدَّد كل منتج نورّده باسم الشركة المصنّعة والطراز، ويُورَّد مع وثائقه، ويُركَّب وفق متطلبات الشركة المصنّعة، ثم يُسلَّم مع تدريب المستخدمين. وستُدرج هنا تفاصيل الشهادات أو التسجيلات المعمول بها بعد تأكيدها.",
+      en: "Every item we supply is identified by manufacturer and model, delivered with its documentation, installed to the manufacturer's requirements and handed over with user training.",
+      ar: "يُحدَّد كل منتج نورّده باسم الشركة المصنّعة والطراز، ويُورَّد مع وثائقه، ويُركَّب وفق متطلبات الشركة المصنّعة، ثم يُسلَّم مع تدريب المستخدمين.",
     },
   },
   capabilities: {
