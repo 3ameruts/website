@@ -35,6 +35,8 @@ export const site = {
       en: "Jordanian Advanced Laboratory Equipment",
       ar: "الشركة الأردنية للتجهيزات المخبرية المتطورة",
     } satisfies L,
+    /** Short brand used at the end of page titles (search results show ~60 characters). */
+    shortName: "JorAdvanced",
     descriptor: {
       en: "Medical & laboratory equipment, consumables and complete laboratory fit-outs",
       ar: "أجهزة ومستهلكات طبية ومخبرية، وتجهيز المختبرات المتكاملة",

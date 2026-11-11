@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { locales, localeMeta, type L, type Locale } from "@/i18n/config";
 import { site } from "@/content/site";
 import { lp } from "./i18n";
+import { solutions } from "@/content/solutions";
 
 type MetaInput = {
   locale: Locale;
@@ -15,7 +16,7 @@ type MetaInput = {
 
 export function buildMetadata({ locale, path, title, description, image, absoluteTitle }: MetaInput): Metadata {
   const brand = site.brand.name[locale];
-  const fullTitle = absoluteTitle ? `${brand} — ${title[locale]}` : `${title[locale]} | ${brand}`;
+  const fullTitle = absoluteTitle ? `${brand} | ${title[locale]}` : `${title[locale]} | ${site.brand.shortName}`;
   const url = `${site.url}${lp(locale, path)}`;
   const languages = Object.fromEntries(locales.map((l) => [localeMeta[l].htmlLang, `${site.url}${lp(l, path)}`]));
   const ogImage = image ?? "/brand/og.jpg";
@@ -52,13 +53,18 @@ export function organizationJsonLd(locale: Locale) {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Organization",
+        // Organization + LocalBusiness: name, location, phone and map pin for local search.
+        "@type": ["Organization", "LocalBusiness"],
         "@id": `${site.url}/#organization`,
         name: site.brand.name.en,
         alternateName: site.brand.name.ar,
         url: site.url,
         logo: `${site.url}${site.brand.logo.full.src}`,
         description: site.brand.descriptor[locale],
+        image: `${site.url}/brand/og.jpg`,
+        areaServed: { "@type": "Country", name: "Jordan" },
+        knowsAbout: solutions.map((s) => s.title.en),
+        hasMap: site.contact.mapUrl ?? undefined,
         ...(site.contact.email ? { email: site.contact.email } : {}),
         telephone: site.contact.phoneHref,
         address: {

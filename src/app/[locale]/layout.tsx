@@ -47,6 +47,11 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
     metadataBase: new URL(site.url),
     applicationName: site.brand.name[locale],
     formatDetection: { telephone: false, email: false, address: false },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+    },
   };
 }
 

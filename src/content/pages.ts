@@ -5,12 +5,12 @@ import type { L } from "@/i18n/config";
 export const home = {
   meta: {
     title: {
-      en: "Laboratory supplies & fit-outs",
-      ar: "المستلزمات المخبرية وتجهيز المختبرات",
+      en: "Lab Equipment, Supplies & Setup in Jordan",
+      ar: "مستلزمات وتجهيز المختبرات في الأردن",
     },
     description: {
-      en: "Laboratory glassware, equipment, consumables, reagents and furniture, and complete school, clinical and research laboratories — supplied, installed and supported in Jordan.",
-      ar: "زجاجيات وأجهزة ومستهلكات وكواشف وأثاث مخبري، وتجهيز مختبرات مدرسية وسريرية وبحثية متكاملة — توريد وتركيب ودعم في الأردن.",
+      en: "Lab equipment, glassware, consumables, reagents and furniture in Jordan, plus complete lab design and installation for schools, hospitals and universities.",
+      ar: "أجهزة ومستلزمات مخبرية وزجاجيات وكواشف وأثاث في الأردن، مع تصميم وتجهيز مختبرات متكاملة للمدارس والمستشفيات والجامعات.",
     },
   },
   hero: {
@@ -129,10 +129,10 @@ export const home = {
 
 export const about = {
   meta: {
-    title: { en: "About us", ar: "من نحن" },
+    title: { en: "About Us — Laboratory Supply & Setup in Jordan", ar: "من نحن — توريد وتجهيز المختبرات في الأردن" },
     description: {
-      en: "Who we are, what we stand for and how we support medical and scientific institutions with equipment and complete laboratories.",
-      ar: "من نحن، وما نؤمن به، وكيف ندعم المؤسسات الطبية والعلمية بالأجهزة والمختبرات المتكاملة.",
+      en: "We supply laboratory products and design, install and maintain complete laboratories across Jordan. Discover our vision, values and capabilities.",
+      ar: "الشركة الأردنية للتجهيزات المخبرية المتطورة: توريد المستلزمات المخبرية وتصميم المختبرات وتجهيزها وصيانتها في الأردن. رؤيتنا وقيمنا وقدراتنا.",
     },
   },
   hero: {
@@ -217,10 +217,10 @@ export const about = {
 
 export const productsPage = {
   meta: {
-    title: { en: "Products & solutions", ar: "المنتجات والحلول" },
+    title: { en: "Laboratory Products & Supplies in Jordan", ar: "منتجات ومستلزمات المختبرات في الأردن" },
     description: {
-      en: "Laboratory glassware, equipment, consumables, furniture, reagents, assay kits, cell culture, school and clinical laboratories, robotics, safety and maintenance.",
-      ar: "الزجاجيات والأجهزة والمستهلكات والأثاث المخبري، ومختبرات العلوم المدرسية، وأوساط زراعة الخلايا، والدم والأنسجة، وأطقم الفحوصات، والكواشف، والمختبرات السريرية، والروبوتات، والسلامة، والصيانة.",
+      en: "Lab glassware, equipment, consumables, reagents, assay kits, cell culture media, furniture, safety kits, robotics and maintenance in Jordan. Request a quote.",
+      ar: "زجاجيات وأجهزة ومستهلكات وكواشف وأطقم فحوصات وأوساط زراعة خلايا وأثاث مخبري ومعدات سلامة وصيانة في الأردن. اطلب عرض سعر.",
     },
   },
   hero: {
@@ -239,10 +239,10 @@ export const productsPage = {
 
 export const labPage = {
   meta: {
-    title: { en: "Laboratory solutions", ar: "حلول المختبرات" },
+    title: { en: "Laboratory Design, Setup & Installation in Jordan", ar: "تصميم وتجهيز وتركيب المختبرات في الأردن" },
     description: {
-      en: "Complete laboratory planning, design, equipment selection, furniture, installation and commissioning — delivered by one team.",
-      ar: "تخطيط المختبرات المتكاملة وتصميمها، واختيار الأجهزة، والأثاث، والتركيب، والتشغيل — بفريق واحد.",
+      en: "Complete laboratory setup in Jordan: planning, design, equipment, furniture, installation and commissioning for school, clinical, research and QC labs.",
+      ar: "تجهيز المختبرات المتكاملة في الأردن: التخطيط والتصميم والأجهزة والأثاث والتركيب والتشغيل لمختبرات المدارس والمستشفيات والأبحاث.",
     },
   },
   hero: {
@@ -340,10 +340,10 @@ export const labPage = {
 
 export const contactPage = {
   meta: {
-    title: { en: "Contact & request a quote", ar: "تواصل معنا واطلب عرض سعر" },
+    title: { en: "Contact Us & Request a Quote", ar: "تواصل معنا واطلب عرض سعر" },
     description: {
-      en: "Request a quotation for medical or laboratory equipment, consumables, furniture or a complete laboratory. Contact us by form, email or WhatsApp.",
-      ar: "اطلب عرض سعر للأجهزة الطبية أو المخبرية، أو المستهلكات، أو الأثاث، أو مختبر متكامل. تواصل معنا عبر النموذج أو البريد الإلكتروني أو واتساب.",
+      en: "Request a quote for laboratory equipment, supplies or a complete lab in Jordan. Call or WhatsApp +962 7 8662 9939 — Fuheis, Amman.",
+      ar: "اطلب عرض سعر لأجهزة ومستلزمات المختبرات أو لمختبر متكامل في الأردن. اتصل أو راسلنا واتساب على 0786629939 — الفحيص، عمّان.",
     },
   },
   hero: {
