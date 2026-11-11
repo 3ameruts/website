@@ -26,30 +26,36 @@ const nextConfig: NextConfig = {
   /**
    * Locale routing without middleware (fully supported on every host, incl.
    * Cloudflare Workers): English by default; a visitor who chose Arabic
-   * (NEXT_LOCALE cookie) is sent to Arabic. Applies to "/" and to any path
-   * without a locale prefix.
+   * (NEXT_LOCALE cookie) is sent to Arabic.
    */
   async redirects() {
-    const localeLess = "/:path((?!en(?:/|$)|ar(?:/|$)|_next/|api/|media/|brand/|[^/]*\\.[^/]*$).*)";
+    const localeLess = "/:path((?!en(?:/|$)|ar(?:/|$)|_next/|api/|media/|brand/|[^/]*\\.[^/]*$).+)";
     type Redirects = Awaited<ReturnType<NonNullable<NextConfig["redirects"]>>>;
     const rules: Redirects = [
-      // One canonical host: JorAdvanced.com → www.JorAdvanced.com
+      // One canonical host for inner pages: JorAdvanced.com/... → www.JorAdvanced.com/...
+      // (the bare "/" is served directly, see rewrites — link previews need no redirect hops)
       {
-        source: "/:path*",
+        source: "/:path+",
         has: [{ type: "host", value: "joradvanced.com" }],
-        destination: "https://www.joradvanced.com/:path*",
+        destination: "https://www.joradvanced.com/:path+",
         permanent: true,
       },
+      // "/" for a visitor who chose Arabic
+      { source: "/", has: [{ type: "cookie", key: "NEXT_LOCALE", value: "ar" }], destination: "/ar", permanent: false },
     ];
-    for (const source of ["/", localeLess]) {
-      const dest = (l: string) => (source === "/" ? `/${l}` : `/${l}/:path`);
-      rules.push(
-        { source, has: [{ type: "cookie" as const, key: "NEXT_LOCALE", value: "ar" }], destination: dest("ar"), permanent: false },
-        { source, has: [{ type: "cookie" as const, key: "NEXT_LOCALE", value: "en" }], destination: dest("en"), permanent: false },
-        { source, destination: dest("en"), permanent: false },
-      );
-    }
+    // Paths without a locale prefix (e.g. /products)
+    rules.push(
+      { source: localeLess, has: [{ type: "cookie", key: "NEXT_LOCALE", value: "ar" }], destination: "/ar/:path", permanent: false },
+      { source: localeLess, destination: "/en/:path", permanent: false },
+    );
     return rules;
+  },
+  /**
+   * The bare domain serves the English home page directly (no redirect), so
+   * WhatsApp/social previews of "JorAdvanced.com" find the preview image at once.
+   */
+  async rewrites() {
+    return { beforeFiles: [{ source: "/", destination: "/en" }], afterFiles: [], fallback: [] };
   },
   async headers() {
     return [
