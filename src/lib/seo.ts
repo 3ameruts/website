@@ -36,13 +36,22 @@ export function buildMetadata({ locale, path, title, description, image, absolut
       description: description[locale],
       locale: localeMeta[locale].ogLocale,
       alternateLocale: locales.filter((l) => l !== locale).map((l) => localeMeta[l].ogLocale),
-      images: [{ url: ogImage, width: 1200, height: 630, alt: brand }],
+      images: [
+        {
+          url: ogImage,
+          secureUrl: ogImage.startsWith("http") ? ogImage : `${site.url}${ogImage}`,
+          type: "image/jpeg",
+          width: 1200,
+          height: 630,
+          alt: `${brand} — ${title[locale]}`,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description: description[locale],
-      images: [ogImage],
+      images: [{ url: ogImage, alt: `${brand} — ${title[locale]}` }],
     },
   };
 }
