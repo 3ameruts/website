@@ -70,7 +70,8 @@ Every string is `{ en, ar }` — TypeScript fails the build if a translation is 
 Everything below is a clearly marked placeholder. Nothing on the site invents clients, partners, certifications, statistics or product specifications.
 
 - [x] `site.ts` → phone / WhatsApp (+962 7 8662 9939 — temporary, to confirm), street address (Fuheis), map pin
-- [ ] `site.ts` → `email` / `salesEmail` (hidden while null), `hours` (hidden while null), `NEXT_PUBLIC_SITE_URL` once the domain is live
+- [x] Domain: www.JorAdvanced.com (client's Cloudflare account; JorAdvanced.com → www redirect in `next.config.ts`)
+- [ ] `site.ts` → `email` / `salesEmail` (hidden while null), `hours` (hidden while null)
 - [ ] Logo masters: replace `public/brand/logo-*.png` with the official vector files (same names) — current files were extracted from the brand sheet and repainted with the exact brand hex values
 - [ ] `solutions.ts` → confirm each "commitment" describes actual practice
 - [ ] `pages.ts` → `about.overview` / `about.quality`: add company history, registrations or certifications **only if held**

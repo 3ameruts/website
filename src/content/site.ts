@@ -23,8 +23,8 @@ export const site = {
   quoteDelivery: "whatsapp" as "whatsapp" | "api",
 
   /** REPLACE — production URL, used for canonical links, sitemap and Open Graph. */
-  // Temporary Cloudflare address until the company domain is connected.
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://jor-advanced.young-lake-be44.workers.dev",
+  /** Canonical address. Shown to people as "www.JorAdvanced.com" (domains are case-insensitive). */
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.joradvanced.com",
 
   /** Official brand colours (brand sheet). Mirrored as CSS tokens in globals.css. */
   colors: { navy: "#0B2D6B", teal: "#00A99D", gray: "#E6E9ED", white: "#FFFFFF" },

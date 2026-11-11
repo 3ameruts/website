@@ -31,7 +31,16 @@ const nextConfig: NextConfig = {
    */
   async redirects() {
     const localeLess = "/:path((?!en(?:/|$)|ar(?:/|$)|_next/|api/|media/|brand/|[^/]*\\.[^/]*$).*)";
-    const rules = [];
+    type Redirects = Awaited<ReturnType<NonNullable<NextConfig["redirects"]>>>;
+    const rules: Redirects = [
+      // One canonical host: JorAdvanced.com → www.JorAdvanced.com
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "joradvanced.com" }],
+        destination: "https://www.joradvanced.com/:path*",
+        permanent: true,
+      },
+    ];
     for (const source of ["/", localeLess]) {
       const dest = (l: string) => (source === "/" ? `/${l}` : `/${l}/:path`);
       rules.push(
