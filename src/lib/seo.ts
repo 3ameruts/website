@@ -19,7 +19,8 @@ export function buildMetadata({ locale, path, title, description, image, absolut
   const fullTitle = absoluteTitle ? `${brand} | ${title[locale]}` : `${title[locale]} | ${site.brand.shortName}`;
   const url = `${site.url}${lp(locale, path)}`;
   const languages = Object.fromEntries(locales.map((l) => [localeMeta[l].htmlLang, `${site.url}${lp(l, path)}`]));
-  const ogImage = image ?? "/brand/og.jpg";
+  // Link previews (WhatsApp, social): a designed card per language.
+  const ogImage = image ?? `/brand/og-${locale}.jpg`;
   return {
     title: { absolute: fullTitle },
     description: description[locale],
@@ -61,7 +62,7 @@ export function organizationJsonLd(locale: Locale) {
         url: site.url,
         logo: `${site.url}${site.brand.logo.full.src}`,
         description: site.brand.descriptor[locale],
-        image: `${site.url}/brand/og.jpg`,
+        image: `${site.url}/brand/og-en.jpg`,
         areaServed: { "@type": "Country", name: "Jordan" },
         knowsAbout: solutions.map((s) => s.title.en),
         hasMap: site.contact.mapUrl ?? undefined,
