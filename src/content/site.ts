@@ -56,9 +56,9 @@ export const site = {
 
   contact: {
     /** Phone numbers in E.164 for links. Temporary number — client will confirm. */
-    phoneDisplay: "+962 7 8662 9939",
-    phoneHref: "+962786629939",
-    whatsappNumber: "962786629939", // digits only, no "+"
+    phoneDisplay: "+962 77 096 1196",
+    phoneHref: "+962770961196",
+    whatsappNumber: "962770961196", // digits only, no "+"
     /** Set when the company mailboxes exist (e.g. "Info@JorAdvanced.com"). Hidden while null. */
     email: null as string | null,
     salesEmail: null as string | null,

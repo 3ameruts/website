@@ -342,8 +342,8 @@ export const contactPage = {
   meta: {
     title: { en: "Contact Us & Request a Quote", ar: "تواصل معنا واطلب عرض سعر" },
     description: {
-      en: "Request a quote for laboratory equipment, supplies or a complete lab in Jordan. Call or WhatsApp +962 7 8662 9939 — Fuheis, Amman.",
-      ar: "اطلب عرض سعر لأجهزة ومستلزمات المختبرات أو لمختبر متكامل في الأردن. اتصل أو راسلنا واتساب على 0786629939 — الفحيص، عمّان.",
+      en: "Request a quote for laboratory equipment, supplies or a complete lab in Jordan. Call or WhatsApp +962 77 096 1196 — Fuheis, Amman.",
+      ar: "اطلب عرض سعر لأجهزة ومستلزمات المختبرات أو لمختبر متكامل في الأردن. اتصل أو راسلنا واتساب على 0770961196 — الفحيص، عمّان.",
     },
   },
   hero: {
