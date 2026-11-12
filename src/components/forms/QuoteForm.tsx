@@ -26,6 +26,7 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
   const [status, setStatus] = useState<Status>("idle");
   const [serverError, setServerError] = useState<string>("");
   const [waUrl, setWaUrl] = useState<string>("");
+  const [fallbackUrl, setFallbackUrl] = useState<string>("");
 
   // Preselect the category from links such as /contact?interest=glassware#quote.
   useEffect(() => {
@@ -59,8 +60,7 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
       if (first) document.getElementById(id(first))?.focus();
       return;
     }
-    // WhatsApp delivery: compose the request and open the chat (synchronous → not blocked as a pop-up).
-    if (site.quoteDelivery === "whatsapp") {
+    const composeWhatsApp = () => {
       const interestLabel =
         current.interest === "other"
           ? f.other
@@ -79,7 +79,12 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
         `${f.message}:`,
         current.message.trim(),
       ].filter((l) => l !== "");
-      const url = whatsappLink(lines.join("\n").replace(/\n{3,}/g, "\n\n"));
+      return whatsappLink(lines.join("\n").replace(/\n{3,}/g, "\n\n"));
+    };
+
+    // WhatsApp-only delivery (site.quoteDelivery = "whatsapp").
+    if (site.quoteDelivery === "whatsapp") {
+      const url = composeWhatsApp();
       setWaUrl(url);
       window.open(url, "_blank", "noopener");
       setStatus("success");
@@ -102,6 +107,7 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.ok) {
+        setWaUrl("");
         setStatus("success");
         setValues({ name: "", company: "", email: "", phone: "", interest: "", message: "", consent: false, website: "" });
         setTouched({});
@@ -109,12 +115,15 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
         return;
       }
       setStatus("error");
-      setServerError(
-        data.error === "validation" ? f.errorBody : data.error === "not_configured" ? f.errorNotConfigured : f.errorNetwork,
-      );
+      if (data.error === "validation") setServerError(f.errorBody);
+      else {
+        setFallbackUrl(composeWhatsApp());
+        setServerError(f.errorSendFallback);
+      }
     } catch {
       setStatus("error");
-      setServerError(f.errorNetwork);
+      setFallbackUrl(composeWhatsApp());
+      setServerError(f.errorSendFallback);
     }
     requestAnimationFrame(() => statusRef.current?.focus());
   };
@@ -179,6 +188,12 @@ export function QuoteForm({ locale, tone = "light" }: { locale: Locale; tone?: "
           <div role="alert" className={`mb-8 border-s-4 p-4 ${dark ? "border-error-light bg-white/10" : "border-error bg-[#fdf1ef]"}`}>
             <p className="font-semibold">{f.errorTitle}</p>
             <p className="t-small mt-1">{serverError}</p>
+            {serverError === f.errorSendFallback && fallbackUrl && (
+              <a href={fallbackUrl} target="_blank" rel="noopener noreferrer" className="btn btn-sm mt-4">
+                <WhatsAppIcon size={16} />
+                {f.waSubmit}
+              </a>
+            )}
             {serverError !== f.errorBody && (
               <p className="t-small mt-3 flex flex-wrap gap-x-5 gap-y-1 font-semibold">
                 <a href={`tel:${site.contact.phoneHref}`} className="link tabular" dir="ltr">

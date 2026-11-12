@@ -3,6 +3,7 @@
 // not play <video> unless the server honours byte-range requests, and the
 // static-asset server returns the whole file instead.
 import openNext from "./.open-next/worker.js";
+import { WorkerMailer } from "worker-mailer";
 
 export * from "./.open-next/worker.js";
 
@@ -41,9 +42,58 @@ async function serveVideo(request, env) {
   return new Response(request.method === "HEAD" ? null : body.slice(start, end + 1), { status: 206, headers });
 }
 
+const json = (body, status = 200) =>
+  new Response(JSON.stringify(body), { status, headers: { "content-type": "application/json; charset=utf-8" } });
+
+/**
+ * Quote requests: the Next.js route validates the form and prepares the email
+ * (header x-quote-deliver). Here it is sent through the company's Zoho mailbox.
+ * Secret: ZOHO_SMTP_PASSWORD (set in Cloudflare → Worker → Settings → Variables and Secrets).
+ * Optional vars: SMTP_USER (default sales@joradvanced.com), SMTP_HOST, SMTP_PORT, QUOTE_TO.
+ */
+async function handleQuote(request, env, ctx) {
+  const res = await openNext.fetch(request, env, ctx);
+  if (res.headers.get("x-quote-deliver") !== "1") return res; // validation error, rate limit, etc.
+  const { deliver } = await res.json();
+  if (!env.ZOHO_SMTP_PASSWORD) return json({ ok: false, error: "not_configured" }, 503);
+
+  const user = env.SMTP_USER || "sales@joradvanced.com";
+  let mailer;
+  try {
+    mailer = await WorkerMailer.connect({
+      host: env.SMTP_HOST || "smtppro.zoho.com",
+      port: Number(env.SMTP_PORT || 465),
+      secure: true,
+      credentials: { username: user, password: env.ZOHO_SMTP_PASSWORD },
+      authType: "login",
+    });
+    await mailer.send({
+      from: { name: "Jordanian Advanced Laboratory Equipment — Website", email: user },
+      to: { email: env.QUOTE_TO || user },
+      reply: { name: deliver.replyName, email: deliver.replyEmail },
+      subject: deliver.subject,
+      text: deliver.text,
+      html: deliver.html,
+    });
+    return json({ ok: true, via: "email" });
+  } catch (err) {
+    console.error("[quote] email delivery failed", err && err.message);
+    return json({ ok: false, error: "delivery_failed" }, 502);
+  } finally {
+    try {
+      await mailer?.close();
+    } catch {
+      /* ignore */
+    }
+  }
+}
+
 const worker = {
   async fetch(request, env, ctx) {
     const { pathname } = new URL(request.url);
+    if (pathname === "/api/quote" && request.method === "POST") {
+      return handleQuote(request, env, ctx);
+    }
     if (pathname.startsWith(VIDEO_PREFIX) && (request.method === "GET" || request.method === "HEAD")) {
       return serveVideo(request, env);
     }

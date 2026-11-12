@@ -20,7 +20,7 @@ export const site = {
    * - "whatsapp": the form opens WhatsApp with the request pre-written (no server needed);
    * - "api": POST to /api/quote → QUOTE_WEBHOOK_URL (e.g. email). Switch once the mailbox exists.
    */
-  quoteDelivery: "whatsapp" as "whatsapp" | "api",
+  quoteDelivery: "api" as "whatsapp" | "api",
 
   /** REPLACE — production URL, used for canonical links, sitemap and Open Graph. */
   /** Canonical address. Shown to people as "www.JorAdvanced.com" (domains are case-insensitive). */
@@ -56,12 +56,13 @@ export const site = {
 
   contact: {
     /** Phone numbers in E.164 for links. Temporary number — client will confirm. */
-    phoneDisplay: "+962 77 096 1196",
-    phoneHref: "+962770961196",
+    /** Landline (calls). WhatsApp uses the mobile number below. */
+    phoneDisplay: "+962 6 438 8047",
+    phoneHref: "+96264388047",
     whatsappNumber: "962770961196", // digits only, no "+"
     /** Set when the company mailboxes exist (e.g. "Info@JorAdvanced.com"). Hidden while null. */
-    email: null as string | null,
-    salesEmail: null as string | null,
+    email: "Info@JorAdvanced.com" as string | null,
+    salesEmail: "Sales@JorAdvanced.com" as string | null,
     address: {
       en: "Prince Faisal Bin Al-Hussein Street, Fuheis, Amman, Jordan",
       ar: "شارع الأمير فيصل بن الحسين، الفحيص، عمّان، الأردن",

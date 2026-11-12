@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { toWesternDigits, validateQuote, type QuoteInput } from "@/lib/quote-validation";
+import { buildQuoteEmail } from "@/lib/quote-email";
 
 /**
  * Quote / contact submissions.
@@ -73,28 +74,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "validation", fields: Object.keys(errors) }, { status: 422 });
   }
 
-  const payload = { ...input, receivedAt: new Date().toISOString(), source: "website" };
-  const webhook = process.env.QUOTE_WEBHOOK_URL;
-
-  if (webhook) {
-    try {
-      const res = await fetch(webhook, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(payload),
-        signal: AbortSignal.timeout(8000),
-      });
-      if (!res.ok) throw new Error(`webhook ${res.status}`);
-      return NextResponse.json({ ok: true });
-    } catch (err) {
-      console.error("[quote] delivery failed", err);
-      return NextResponse.json({ ok: false, error: "delivery_failed" }, { status: 502 });
-    }
-  }
-
-  if (process.env.NODE_ENV !== "production") {
-    console.info("[quote] (dev, no QUOTE_WEBHOOK_URL) received:", JSON.stringify(payload));
-    return NextResponse.json({ ok: true, dev: true });
-  }
-  return NextResponse.json({ ok: false, error: "not_configured" }, { status: 503 });
+  // Email delivery happens in cf-worker.js (it holds the Zoho SMTP secret and
+  // Cloudflare TCP sockets). This response carries the prepared email to it;
+  // the worker replaces it with the final { ok } result for the browser.
+  return NextResponse.json({ ok: true, deliver: buildQuoteEmail(input) }, { headers: { "x-quote-deliver": "1" } });
 }

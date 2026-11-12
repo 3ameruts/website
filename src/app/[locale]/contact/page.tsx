@@ -18,11 +18,11 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/contact"
 export default async function ContactPage({ params }: PageProps<"/[locale]/contact">) {
   const locale = (await params).locale as Locale;
   const dict = getDictionary(locale);
-  const salesEmail = site.contact.salesEmail ?? site.contact.email;
+  const contactEmail = site.contact.email ?? site.contact.salesEmail;
   const channels = [
     { title: dict.common.whatsapp, value: dict.form.whatsappCta, href: whatsappLink(dict.form.whatsappGreeting), external: true, ltr: false },
     { title: dict.common.phone, value: site.contact.phoneDisplay, href: `tel:${site.contact.phoneHref}`, external: false, ltr: true },
-    ...(salesEmail ? [{ title: dict.common.email, value: salesEmail, href: `mailto:${salesEmail}`, external: false, ltr: true }] : []),
+    ...(contactEmail ? [{ title: dict.common.email, value: contactEmail, href: `mailto:${contactEmail}`, external: false, ltr: true }] : []),
   ];
   return (
     <>

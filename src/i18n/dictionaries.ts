@@ -71,7 +71,7 @@ const en = {
     submit: "Send request",
     sending: "Sending…",
     successTitle: "Request sent",
-    successBody: "Thank you. A specialist will review your request and reply with next steps.",
+    successBody: "Thank you. Your request has reached our sales team, and a specialist will reply with next steps.",
     sendAnother: "Send another request",
     errorTitle: "Your request was not sent",
     errorBody: "Check the highlighted fields and try again.",
@@ -97,6 +97,7 @@ const en = {
     waReadyBody: "WhatsApp has opened with your request written out. Press Send to deliver it to our team.",
     waOpenAgain: "Open WhatsApp again",
     waSubmit: "Send via WhatsApp",
+    errorSendFallback: "We could not send your request online just now. Send it via WhatsApp instead — your details are already written in.",
   },
   catalog: {
     search: "Search products",
@@ -216,7 +217,7 @@ const ar: Dictionary = {
     submit: "أرسل الطلب",
     sending: "جارٍ الإرسال…",
     successTitle: "تم إرسال طلبك",
-    successBody: "شكرًا لك. سيراجع أحد المختصين طلبك ويتواصل معك بالخطوات التالية.",
+    successBody: "شكرًا لك. وصل طلبك إلى فريق المبيعات، وسيتواصل معك أحد المختصين بالخطوات التالية.",
     sendAnother: "أرسل طلبًا آخر",
     errorTitle: "تعذّر إرسال طلبك",
     errorBody: "راجع الحقول المشار إليها ثم أعد المحاولة.",
@@ -242,6 +243,7 @@ const ar: Dictionary = {
     waReadyBody: "فُتح واتساب وفيه طلبك مكتوبًا بالكامل. اضغط «إرسال» ليصل إلى فريقنا.",
     waOpenAgain: "افتح واتساب مرة أخرى",
     waSubmit: "أرسل عبر واتساب",
+    errorSendFallback: "تعذّر إرسال طلبك عبر الموقع حاليًا. أرسله عبر واتساب بدلًا من ذلك — تفاصيلك مكتوبة مسبقًا.",
   },
   catalog: {
     search: "ابحث في المنتجات",
